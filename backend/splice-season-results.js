@@ -3,7 +3,6 @@ const removeLineBreaks = (string) => {
 };
 
 module.exports = (array) => {
-  console.log("array------------", array, typeof array);
   const season = array.indexOf("SEASON STATISTICS");
   return array
     .splice(season + 1)
