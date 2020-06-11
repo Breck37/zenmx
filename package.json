@@ -2,12 +2,20 @@
   "name": "zenmx",
   "version": "0.1.0",
   "private": true,
+  "main": "server.js",
+  "proxy": "http://localhost:3700",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crawler-request": "^1.2.2",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.4",
     "next": "9.4.4",
     "react": "16.13.1",
     "react-dom": "16.13.1"
