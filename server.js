@@ -1,9 +1,7 @@
 const express = require("express");
 const port = 3700;
-const axios = require("axios");
 const cors = require("cors");
 const crawler = require("crawler-request");
-var { createProxyMiddleware } = require("http-proxy-middleware");
 const {
   mapper,
   seasonMapper,

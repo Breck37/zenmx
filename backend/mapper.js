@@ -12,16 +12,56 @@ const object = {
   POINTS: [],
 };
 
-module.exports = (resultString) => {
+const manufacturers = [
+  "Suzuki",
+  "Honda",
+  "KTM",
+  "Yamaha",
+  "Kawasaki",
+  "Yamaha",
+];
+
+const parseRiderName = (name) => {
+  const splitName = name.split(" ");
+  let parsedName;
+  splitName.map((nameElement) => {
+    manufacturers.map((m) => {
+      const reg = new RegExp(m, "gi");
+      const replacedBike = nameElement.replace(reg, " ");
+      if (nameElement.length > replacedBike.length) {
+        parsedName = replacedBike;
+      }
+    });
+  });
+  return (splitName[0] += ` ${parsedName}`);
+};
+
+const splitRiderResults = (rider, overall) => {
+  return {
+    number: rider[0],
+    name: parseRiderName(rider[1]),
+    points: rider[2],
+    overall,
+  };
+};
+
+const identifyRiderRaceResults = (results) => {
   let currentRider = [];
   let riderResults = [];
 
-  resultString.map((c) => {
+  results.map((c, i) => {
     if (currentRider.length == 4) {
-      riderResults.push(currentRider);
+      riderResults.push(splitRiderResults(currentRider, i / 4));
+      currentRider = [];
+    } else if (i === results.length - 1) {
+      riderResults.push(splitRiderResults([...currentRider, c], (i + 1) / 4));
       currentRider = [];
     }
     currentRider.push(c);
   });
   return riderResults;
+};
+
+module.exports = (resultString) => {
+  return identifyRiderRaceResults(resultString);
 };
