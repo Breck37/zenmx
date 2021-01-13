@@ -22,7 +22,6 @@ export default function Home() {
   }, [raceResults]);
 
   console.log("RACE", raceResults);
-  console.log("Seaason", seasonResults);
   return (
     <div className="container">
       <Head>
