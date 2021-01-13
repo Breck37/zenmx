@@ -1,16 +1,37 @@
-import Head from 'next/head'
+import Head from "next/head";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+///// EXAMPLES ////
+// PDF:  .get("http://localhost:3700/pdf-results/20/20/1")
 
 export default function Home() {
+  const [raceResults, setResults] = useState([]);
+  const [seasonResults, setSeasonResults] = useState([]);
+
+  useEffect(() => {
+    if (!raceResults || !raceResults.length) {
+      axios
+        .get("http://localhost:3700/get-live-results")
+        .then(({ data }) => {
+          setResults(data.raceResults);
+        })
+        .catch((e) => console.log("E on Results", e));
+      return;
+    }
+  }, [raceResults]);
+
+  console.log("RACE", raceResults);
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>ZenMX</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="https://nextjs.org">ZenMx</a>
         </h1>
 
         <p className="description">
@@ -54,7 +75,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
       </footer>
@@ -205,5 +226,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
