@@ -13,7 +13,7 @@ const app = express();
 
 app.use(cors());
 
-app.get("/get-latest-results", (req, res) => {
+app.get("/get-live-results", (req, res) => {
   crawler("https://live.amasupercross.com/xml/sx/RaceResults.json")
     .then((response) => {
       if (response) {
