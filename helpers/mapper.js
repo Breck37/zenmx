@@ -63,6 +63,5 @@ const identifyRiderRaceResults = (results) => {
 };
 
 module.exports = (resultString) => {
-  console.log({ resultString })
-  // return identifyRiderRaceResults(resultString);
+  return identifyRiderRaceResults(resultString);
 };
