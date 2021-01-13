@@ -2,6 +2,9 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+///// EXAMPLES ////
+// PDF:  .get("http://localhost:3700/pdf-results/20/20/1")
+
 export default function Home() {
   const [raceResults, setResults] = useState([]);
   const [seasonResults, setSeasonResults] = useState([]);
@@ -11,9 +14,7 @@ export default function Home() {
       axios
         .get("http://localhost:3700/get-latest-results")
         .then(({ data }) => {
-          console.log("data------------", data.raceResults);
           setResults(data.raceResults);
-          setSeasonResults(data.seasonResults);
         })
         .catch((e) => console.log("E on Results", e));
       return;
