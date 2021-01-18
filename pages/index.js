@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
+import { Table } from "../components/Results";
+import hello from ".";
 
 ///// EXAMPLES ////
 // PDF:  .get("http://localhost:3700/pdf-results/20/20/1")
@@ -23,12 +25,10 @@ export default function Home() {
 
   console.log("RACE", raceResults);
   const fastestLaps = useMemo(() => {
-    console.log("MEMO", raceResults);
     if (!raceResults || !raceResults.length) return [];
     return raceResults
       .sort((a, b) => a.bestLap - b.bestLap)
       .reduce((a, c) => {
-        console.log("A", a, c);
         a.push({ rider: c.riderName, lap: c.bestLap });
         return a;
       }, []);
@@ -48,6 +48,8 @@ export default function Home() {
         </h1>
 
         <h1 className="title">{fastestLaps[0]?.rider}</h1>
+
+        <Table raceResults={raceResults} />
       </main>
 
       <footer>
