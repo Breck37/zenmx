@@ -44,7 +44,9 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">ZenMx</a>
         </h1>
 
-        <h1 className="title">{fastestLaps[0]?.rider}</h1>
+        <h1 className="title">
+          Fastest Lap: {fastestLaps[0]?.rider} {fastestLaps[0]?.lap}
+        </h1>
 
         <Table raceResults={raceResults} />
       </main>
