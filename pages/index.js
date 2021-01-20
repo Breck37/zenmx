@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { Table } from "../components/Results";
-import hello from ".";
 
 ///// EXAMPLES ////
 // PDF:  .get("http://localhost:3700/pdf-results/20/20/1")
@@ -23,7 +22,6 @@ export default function Home() {
     }
   }, [raceResults]);
 
-  console.log("RACE", raceResults);
   const fastestLaps = useMemo(() => {
     if (!raceResults || !raceResults.length) return [];
     return raceResults
@@ -34,7 +32,6 @@ export default function Home() {
       }, []);
   }, [raceResults]);
 
-  console.log(fastestLaps);
   return (
     <div className="container">
       <Head>
@@ -66,6 +63,7 @@ export default function Home() {
       <style jsx>{`
         .container {
           min-height: 100vh;
+          min-width: 100vw;
           padding: 0 0.5rem;
           display: flex;
           flex-direction: column;
@@ -74,8 +72,8 @@ export default function Home() {
         }
 
         main {
+          width: 75%;
           padding: 5rem 0;
-          flex: 1;
           display: flex;
           flex-direction: column;
           justify-content: center;
