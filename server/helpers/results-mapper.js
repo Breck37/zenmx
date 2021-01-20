@@ -6,7 +6,7 @@ const correctKeys = {
   L: "currentLap",
   LL: "lastLap",
   N: "number",
-  T: "Team",
+  T: "team",
   V: "bike",
 };
 
