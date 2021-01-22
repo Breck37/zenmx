@@ -2,6 +2,7 @@ const express = require("express");
 const port = 3700;
 const cors = require("cors");
 const crawler = require("crawler-request");
+const bodyParser = require("body-parser");
 const {
   mapper,
   seasonMapper,
@@ -11,6 +12,9 @@ const {
 } = require("./helpers");
 const app = express();
 
+const db = require("./db");
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.get("/get-live-results", (req, res) => {
@@ -43,5 +47,7 @@ app.get("/pdf-results/:season/:race/:bikeClass", (req, res) => {
     }
   });
 });
+
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.listen(port, () => console.log(`We be jammin on ${port}`));
