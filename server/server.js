@@ -11,10 +11,12 @@ const {
   resultsMapper,
 } = require("./helpers");
 const app = express();
+const pickRouter = require("./routes/pick-router");
 
 const db = require("./db");
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/get-live-results", (req, res) => {
@@ -47,6 +49,8 @@ app.get("/pdf-results/:season/:race/:bikeClass", (req, res) => {
     }
   });
 });
+
+app.use("/api/picks", pickRouter);
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 

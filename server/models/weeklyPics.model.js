@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const weeklyPick = new Schema(
   {
-    week: { type: Number, required: true },
+    week: { type: Number },
+    user: { type: String },
     picks: [
       {
         riderName: String,
@@ -14,4 +15,4 @@ const weeklyPick = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("weeklyPicks", weeklyPick);
+module.exports = mongoose.model("picks", weeklyPick);
