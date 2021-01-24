@@ -25,7 +25,6 @@ const Table = ({ raceResults }) => {
   };
 
   const handleCloseRider = () => {
-    console.log("HIT");
     setCurrentRider(null);
     setShowOverlay(false);
   };
