@@ -25,13 +25,21 @@ const Table = ({ raceResults }) => {
   };
 
   const handleCloseRider = () => {
+    console.log("HIT");
     setCurrentRider(null);
     setShowOverlay(false);
   };
 
   return (
-    <TableStyled raceResultsLength={raceResults.length}>
-      <Overlay showOverlay={showOverlay} currentRider={currentRider} />
+    <TableStyled
+      raceResultsLength={raceResults.length}
+      hasOverlay={showOverlay}
+    >
+      <Overlay
+        showOverlay={showOverlay}
+        currentRider={currentRider}
+        handleClick={handleCloseRider}
+      />
       <RiderRow rider={TableHeaderRow} row={0} />
       {raceResults
         .sort((a, b) => a.position - b.position)
