@@ -43,6 +43,13 @@ export default function Home() {
       }, []);
   }, [raceResults]);
 
+  const getCurrentStatus = () => {
+    axios
+      .get("http://localhost:3700/current-status")
+      .then((r) => console.log("RESPONSE IN CLIENT", r))
+      .catch((e) => console.log(e));
+  };
+
   return (
     <IndexStyled className="container">
       <Head>
@@ -71,6 +78,8 @@ export default function Home() {
         <h1 className="title">
           Fastest Lap: {fastestLaps[0]?.rider} {fastestLaps[0]?.lap}
         </h1>
+
+        <button onClick={getCurrentStatus}>Click for status</button>
 
         {raceResults && raceResults.length ? (
           <Table raceResults={raceResults} />

@@ -5,7 +5,13 @@ const weeklyPick = new Schema(
   {
     week: { type: Number },
     user: { type: String },
-    picks: [
+    smallBikePicks: [
+      {
+        riderName: String,
+        position: Number,
+      },
+    ],
+    bigBikePicks: [
       {
         riderName: String,
         position: Number,

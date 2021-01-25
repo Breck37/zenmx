@@ -22,7 +22,7 @@ app.use(cors());
 app.get("/get-live-results", (req, res) => {
   crawler("https://live.amasupercross.com/xml/sx/RaceResults.json")
     .then((response) => {
-      if (response) {
+      if (response && !response.error) {
         const formattedResponse = JSON.parse(response.text);
         const raceResults = resultsMapper(formattedResponse.B);
 
@@ -35,19 +35,38 @@ app.get("/get-live-results", (req, res) => {
 ////////// PDF Results UNFINISHED /////
 app.get("/pdf-results/:season/:race/:bikeClass", (req, res) => {
   const { season, bikeClass = 1, race } = req.params;
+  try {
+    crawler(
+      `https://archives.amasupercross.com/xml/SX/events/S${season}${race}/S${bikeClass}F1PRESS.pdf`
+    ).then((response) => {
+      if (response && !response.error) {
+        const formattedResponse = response.text.split("\n");
+        const raceResults = mapper(spliceResults([...formattedResponse], 14));
+        const seasonResults = seasonMapper(
+          spliceSeasonResults(formattedResponse)
+        );
+        res.status(200).send({ raceResults, seasonResults });
+      }
+    });
+  } catch (error) {}
+});
 
-  crawler(
-    `https://archives.amasupercross.com/xml/SX/events/S${season}${race}/S${bikeClass}F1PRESS.pdf`
-  ).then((response) => {
-    if (response) {
-      const formattedResponse = response.text.split("\n");
-      const raceResults = mapper(spliceResults([...formattedResponse], 14));
-      const seasonResults = seasonMapper(
-        spliceSeasonResults(formattedResponse)
-      );
-      res.status(200).send({ raceResults, seasonResults });
-    }
-  });
+app.get("/current-status", (req, res) => {
+  try {
+    crawler("https://live.amasupercross.com/xml/sx/RaceData.json").then(
+      (response) => {
+        if (response && !response.error) {
+          const formattedResponse = json.parse(response.text);
+          res.status(200).send(formattedResponse);
+        }
+      }
+    );
+  } catch (error) {
+    console.log("//////////////////////////////");
+    console.log("ERROR with /current-status", error);
+    console.log("//////////////////////////////");
+    res.status(420).send("Error getting status");
+  }
 });
 
 app.use("/api/picks", pickRouter);
