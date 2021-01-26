@@ -9,7 +9,7 @@
 import React from "react";
 import HeaderStyled from "./styles";
 
-const Header = ({ tabs }) => {
+const Header = ({ tabs = [] }) => {
   return (
     <HeaderStyled>
       <div className="logo-container">
@@ -17,7 +17,9 @@ const Header = ({ tabs }) => {
           <span>ModernMoto</span>
         </div>
       </div>
-      <div className="tabs"></div>
+      <div className="tabs">{tabs.map((tab) => {
+        return <div className="tab"></div>
+      })}</div>
     </HeaderStyled>
   );
 };

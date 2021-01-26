@@ -10,12 +10,14 @@ export default styled.div`
 
   .logo-container {
     width: 40%;
-    filter: drop-shadow(-1px 6px 3px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(10px 0px  5px rgba(0, 0, 0, 0.4));
     display: inherit;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    
+    animation: slide40 1.5s;
+    transition: all 1.5s linear;
+
     .logo-wrap {
       width: 100%;
       color: aqua;
@@ -35,8 +37,6 @@ export default styled.div`
           2px 2px 1px #009999, 2px 3px 1px #009999;
       }
     }
-
-    @media and (max-width)
   }
 
   .tabs {
@@ -49,5 +49,61 @@ export default styled.div`
     height: 96px;
     background-color: aqua;
     z-index: 1;
+    box-shadow: -1px 6px 3px rgba(0, 0, 0, 0.4)
   }
+
+    @keyframes slide40 {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 40%;
+      }
+    }
+    @keyframes slide50 {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 50%;
+      }
+    }
+    @keyframes slide60 {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 60%;
+      }
+    }
+    @keyframes slide100 {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 1300px) {
+      .logo-container {
+        width: 50%;
+        animation: slide50 1.5s;
+      }
+    }
+    @media (max-width: 1100px) {
+      .logo-container {
+        width: 60%;
+        animation: slide60 1.5s;
+      }
+    @media (max-width: 950px) {
+      .logo-container {
+        width: 100%;
+        animation: slide100 1.5s;
+      }
+      .logo-wrap {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+        justify-content: space-between;
+      }
+    }
 `;
