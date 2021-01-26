@@ -14,13 +14,13 @@ export default styled.div`
     display: inherit;
     align-items: center;
     justify-content: center;
-
+    z-index: 1000;
+    
     .logo-wrap {
       width: 100%;
       color: aqua;
       background-color: white;
       height: 96px;
-      z-index: 1000;
       display: inherit;
       align-items: center;
       justify-content: center;
@@ -30,11 +30,13 @@ export default styled.div`
 
       > span {
         margin-right: 32px;
-        text-shadow: 0 0 1px aqua, 0 1px 1px aqua, 0 2px 1px aqua,
-          1px 1px 1px aqua, 1px 2px 1px aqua, 1px 3px 1px aqua, 2px 1px 1px aqua,
-          2px 2px 1px aqua, 2px 3px 1px aqua;
+        text-shadow: 0 0 1px aqua, 0 1px 1px #009999, 0 2px 1px #009999,
+          1px 1px 1px #009999, 1px 2px 1px #009999, 1px 3px 1px #009999, 2px 1px 1px #009999,
+          2px 2px 1px #009999, 2px 3px 1px #009999;
       }
     }
+
+    @media and (max-width)
   }
 
   .tabs {
@@ -45,5 +47,7 @@ export default styled.div`
     bottom: 0;
     width: 100%;
     height: 96px;
+    background-color: aqua;
+    z-index: 1;
   }
 `;

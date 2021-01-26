@@ -14,7 +14,7 @@ const Header = ({ tabs }) => {
     <HeaderStyled>
       <div className="logo-container">
         <div className="logo-wrap">
-          <span>ZEN/MX</span>
+          <span>ModernMoto</span>
         </div>
       </div>
       <div className="tabs"></div>
