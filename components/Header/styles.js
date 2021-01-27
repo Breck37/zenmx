@@ -49,7 +49,10 @@ export default styled.div`
     height: 96px;
     background-color: aqua;
     z-index: 1;
-    box-shadow: -1px 6px 3px rgba(0, 0, 0, 0.4)
+    box-shadow: -1px 6px 3px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
     @keyframes slide40 {

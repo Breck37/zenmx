@@ -18,7 +18,7 @@ const Header = ({ tabs = [] }) => {
         </div>
       </div>
       <div className="tabs">{tabs.map((tab) => {
-        return <div className="tab"></div>
+        return <div className="tab">{tab.title}</div>
       })}</div>
     </HeaderStyled>
   );

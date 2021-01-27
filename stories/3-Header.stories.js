@@ -7,4 +7,19 @@ export default {
   component: Header,
 };
 
-export const Main = () => <Header />;
+const tabs = [
+  {
+    title: 'Picks'
+  },
+  {
+    title: 'Results'
+  },
+  {
+    title: 'Leagues'
+  },
+  {
+    title: 'Contact'
+  },
+];
+
+export const Main = () => <Header tabs={tabs} />;
