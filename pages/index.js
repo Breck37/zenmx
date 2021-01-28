@@ -53,7 +53,7 @@ export default function Home() {
   return (
     <IndexStyled className="container">
       <Head>
-        <title>ZenMX</title>
+        <title>ModernMotoFantasy</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
