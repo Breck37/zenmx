@@ -1,10 +1,7 @@
 import Head from "next/head";
 import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
-import { Table, Header } from "../components";
-import { IndexStyled } from './IndexStyled'
-      <Header tabs={defaultTabs} />
-import defaultTabs from '../constants/defaultTabs';
+import { IndexStyled } from "./styles";
 
 // SETUP POLLING
 // SETUP AUTHENTICATION
@@ -58,19 +55,19 @@ export default function Home() {
       </Head>
 
       <main>
-      {fastestLaps && fastestLaps.length > 0 ? (
-        <div className="marquee">
-          <div className="animation-container">
-            {fastestLaps.map(({ rider, lap }) => (
-              <div className="fast-lap">
-                <img src="" alt="" className="rider-image" />
-                <div>{rider}:</div>
-                <div>{lap}</div>
-              </div>
-            ))}
+        {fastestLaps && fastestLaps.length > 0 ? (
+          <div className="marquee">
+            <div className="animation-container">
+              {fastestLaps.map(({ rider, lap }) => (
+                <div className="fast-lap">
+                  <img src="" alt="" className="rider-image" />
+                  <div>{rider}:</div>
+                  <div>{lap}</div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      ) : null}
+        ) : null}
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Modern Moto Fantasy</a>
         </h1>
@@ -80,10 +77,6 @@ export default function Home() {
         </h1>
 
         <button onClick={getCurrentStatus}>Click for status</button>
-
-        {raceResults && raceResults.length ? (
-          <Table raceResults={raceResults} />
-        ) : null}
       </main>
 
       {/* <footer>

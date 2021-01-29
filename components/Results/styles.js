@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 export const TableStyled = styled.div`
   position: relative;
-  width: 75%;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(

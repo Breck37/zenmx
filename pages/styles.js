@@ -2,18 +2,14 @@ import styled from "styled-components";
 
 export const IndexStyled = styled.div`
   margin: 0;
-  min-height: 100vh;
-  min-width: 100vw;
+  width: 100vw;
   overflow: hidden;
 
   main {
     width: 75%;
     margin: 0 auto;
-    min-height: 100vh;
-    padding: 9.375rem 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
 
@@ -179,4 +175,17 @@ export const IndexStyled = styled.div`
       flex-direction: column;
     }
   }
+`;
+
+export const AppStyled = styled.div`
+  margin: 0;
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
+  padding: 9.375rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
