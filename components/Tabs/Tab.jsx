@@ -1,9 +1,10 @@
 import React from 'react'
 import TabStyled from './styles';
 
-const Tab = ({ title, onClick }) => {
+const Tab = ({ title, onClick, className }) => {
+    console.log({ title })
     return (
-        <TabStyled onClick={onClick}>
+        <TabStyled className={className} onClick={onClick}>
             {title}
         </TabStyled>
     )

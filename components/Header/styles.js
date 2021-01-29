@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export default styled.div`
-  width: 100vw;
+  max-width: 100vw;
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  display: flex;
+  display: flex;    
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,255,255,1) 75%);
 
   .logo-container {
     width: 40%;
@@ -19,6 +21,7 @@ export default styled.div`
     transition: all 1.5s linear;
 
     .logo-wrap {
+      cursor: pointer;
       width: 100%;
       color: aqua;
       background-color: white;
@@ -47,13 +50,20 @@ export default styled.div`
     bottom: 0;
     width: 100%;
     height: 96px;
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,255,255,1) 75%);
     z-index: 1;
-    box-shadow: -1px 6px 3px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    align-self: flex-end;
+    margin-left: 50%;
+    width: 45%;
+
+   > .tab:first-child {
+      border-left: solid 2px #000;
+    }
+   > .tab:last-child {
+      border-right: solid 2px #000;
+    }
   }
 
     @keyframes slide40 {
