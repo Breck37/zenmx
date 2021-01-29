@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Backend of zenmx app",
+  "description": "Backend of modernmotofantasy.com app",
   "main": "server.js",
   "author": "Breck37",
   "license": "MIT",
@@ -12,6 +12,7 @@
     "crawler-request": "^1.2.2",
     "express": "^4.17.1",
     "migrate-mongo": "^8.1.4",
+    "minimist": "^1.2.5",
     "mongoose": "^5.11.13"
   },
   "resolutions": {
