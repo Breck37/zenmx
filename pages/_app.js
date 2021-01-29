@@ -5,7 +5,6 @@ import defaultTabs from "../constants/defaultTabs";
 import { AppStyled } from "./styles";
 
 function MyApp({ Component, pageProps }) {
-  console.log("HIT MY APP", Component);
   return (
     <AppStyled>
       <Header tabs={defaultTabs} />

@@ -19,7 +19,6 @@ const Table = ({ raceResults }) => {
   const [currentRider, setCurrentRider] = useState(null);
 
   const handleClickedRider = (rider) => {
-    console.log("HEY", rider);
     setCurrentRider(rider);
     setShowOverlay(true);
   };

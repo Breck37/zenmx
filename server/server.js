@@ -62,10 +62,7 @@ app.get("/current-status", (req, res) => {
       }
     );
   } catch (error) {
-    console.log("//////////////////////////////");
-    console.log("ERROR with /current-status", error);
-    console.log("//////////////////////////////");
-    res.status(420).send("Error getting status");
+    res.status(420).send({ message: "Error getting status", error });
   }
 });
 
