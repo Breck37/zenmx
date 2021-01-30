@@ -10,6 +10,7 @@ import React from "react";
 import HeaderStyled from "./styles";
 import { Tab } from "../";
 import Router from "next/router";
+import Icon from "../../icons/Icon";
 
 const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
   const modeToSet = currentMode ? 0 : 1;
@@ -21,12 +22,13 @@ const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
     <HeaderStyled currentMode={currentMode}>
       <div className="mode-container">
         <button onClick={() => setCurrentMode(modeToSet)}>
-          Alter current mode
+          Go {currentMode ? "Dark" : "Bright"}
         </button>
       </div>
       <div className="logo-container">
-        <div className="logo-wrap" onClick={() => Router.push("/")}>
-          <span>ModernMoto</span>
+        <div className="logo-wrap">
+          <span onClick={() => Router.push("/")}>ModernMoto</span>
+          <Icon name="menu" color="#fff" size="32" />
         </div>
       </div>
       <div className="tabs">

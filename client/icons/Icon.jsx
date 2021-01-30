@@ -2,10 +2,12 @@ import React from "react";
 import clsx from "clsx";
 import IconStyled from "./styles";
 
-import close from "./Close/Close.svg";
+import close from "./close/close.svg";
+import menu from "./menu/menu.svg";
 
 export const icons = {
   close,
+  menu,
 };
 
 export default function Icon({ color, size, name }) {
