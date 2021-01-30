@@ -11,13 +11,19 @@ import HeaderStyled from "./styles";
 import { Tab } from "../";
 import Router from "next/router";
 
-const Header = ({ tabs = [] }) => {
+const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
+  const modeToSet = currentMode ? 0 : 1;
   const handleTabClick = (tabRoute) => {
     Router.push(tabRoute);
   };
 
   return (
-    <HeaderStyled>
+    <HeaderStyled currentMode={currentMode}>
+      <div className="mode-container">
+        <button onClick={() => setCurrentMode(modeToSet)}>
+          Alter current mode
+        </button>
+      </div>
       <div className="logo-container">
         <div className="logo-wrap" onClick={() => Router.push("/")}>
           <span>ModernMoto</span>

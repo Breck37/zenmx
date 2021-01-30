@@ -1,10 +1,10 @@
 import { createContext, useContext } from "react";
 
-const CurrentModeContext = createContext("light");
+const CurrentModeContext = createContext(1);
 
 export const useCurrentMode = () => {
   const currentMode = useContext(CurrentModeContext);
-  return currentMode;
+  return { currentMode };
 };
 
 export default CurrentModeContext;

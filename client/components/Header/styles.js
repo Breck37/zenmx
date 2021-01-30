@@ -6,9 +6,23 @@ export default styled.div`
   top: 0;
   right: 0;
   left: 0;
-  display: flex;    
+  display: flex; 
+  flex-direction: column;   
   background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,255,255,1) 75%);
+  background: ${({ currentMode }) =>
+    currentMode
+      ? "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,255,255,1) 75%)"
+      : "#282828"};
+
+  .mode-container {
+    height: 32px;
+    padding-right: 5%;
+    background-color: ${({ currentMode }) =>
+      currentMode ? "#fff" : "#282828"};
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
 
   .logo-container {
     width: 40%;
@@ -21,11 +35,13 @@ export default styled.div`
     transition: all 1.5s linear;
 
     .logo-wrap {
+      margin-top: -32px;
       cursor: pointer;
       width: 100%;
       color: aqua;
-      background-color: white;
-      height: 96px;
+      background-color: ${({ currentMode }) =>
+        currentMode ? "#fff" : "#282828"};
+      height: 128px;
       display: inherit;
       align-items: center;
       justify-content: center;
@@ -44,7 +60,7 @@ export default styled.div`
 
   .tabs {
     position: absolute;
-    top: 0;
+    top: 32px;
     right: 0;
     left: 0;
     bottom: 0;
@@ -59,10 +75,31 @@ export default styled.div`
     width: 45%;
 
    > .tab:first-child {
-      border-left: solid 2px #000;
+      border-left: solid 2px ${({ currentMode }) =>
+        currentMode ? "#282828" : "aqua"};;
     }
    > .tab:last-child {
-      border-right: solid 2px #000;
+      border-right: solid 2px ${({ currentMode }) =>
+        currentMode ? "#282828" : "aqua"};;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 8px 0;
+      border-left: solid 1px ${({ currentMode }) =>
+        currentMode ? "#282828" : "aqua"};;
+      border-right: solid 1px ${({ currentMode }) =>
+        currentMode ? "#282828" : "aqua"};;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, serif;
+      height: 50%;
+      color: ${({ currentMode }) => (currentMode ? "#282828" : "aqua")};
+
+      &:hover {
+        font-size: 24px;
+      }
     }
   }
 
