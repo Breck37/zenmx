@@ -1,19 +1,40 @@
 // import App from 'next/app'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
 import { AppStyled } from "./styles";
 import CurrentModeContext from "../hooks/darkMode";
 
 function MyApp({ Component, pageProps }) {
-  const [currentMode, setCurrentMode] = useState(1);
+  const [currentMode, setCurrentMode] = useState();
+
+  useEffect(() => {
+    const mode = localStorage.getItem("USER_CURRENT_MODE");
+
+    if (!mode && mode !== 0 && mode !== 1) {
+      localStorage.setItem("USER_CURRENT_MODE", 1);
+      setCurrentMode(1);
+    } else {
+      setCurrentMode(parseInt(localStorage.getItem("USER_CURRENT_MODE")));
+    }
+  }, []);
+
+  const handleCurrentModeUpdate = () => {
+    const currentMode = localStorage.getItem("USER_CURRENT_MODE");
+
+    const modeToSet = parseInt(currentMode) ? 0 : 1;
+
+    setCurrentMode(modeToSet);
+    localStorage.setItem("USER_CURRENT_MODE", modeToSet);
+  };
+
   return (
     <CurrentModeContext.Provider value={currentMode}>
       <AppStyled>
         <Header
           tabs={defaultTabs}
           currentMode={currentMode}
-          setCurrentMode={setCurrentMode}
+          setCurrentMode={handleCurrentModeUpdate}
         />
         <Component {...pageProps} />
       </AppStyled>
