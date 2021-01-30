@@ -1,4 +1,4 @@
-const weeklyPick = require("../models/weeklyPics.model");
+const WeeklyPick = require("../models/weeklyPicks.model");
 
 module.exports = {
   savePicks: (req, res) => {
@@ -11,7 +11,7 @@ module.exports = {
       });
     }
 
-    const picks = new weeklyPick(body);
+    const picks = new WeeklyPick(body);
 
     if (!picks) {
       return res.status(400).json({ success: false, error: err });
