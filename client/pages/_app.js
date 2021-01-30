@@ -1,10 +1,11 @@
 // import App from 'next/app'
-import React from "react";
+import React, { useState } from "react";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
 import { AppStyled } from "./styles";
 
 function MyApp({ Component, pageProps }) {
+  const [currentMode, setCurrentMode] = useState("light");
   return (
     <AppStyled>
       <Header tabs={defaultTabs} />
