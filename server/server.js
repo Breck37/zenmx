@@ -26,7 +26,15 @@ app.get("/get-live-results", (req, res) => {
         const formattedResponse = JSON.parse(response.text);
         const raceResults = resultsMapper(formattedResponse.B);
 
-        res.status(200).send({ raceResults });
+        res.status(200).send({
+          raceResults,
+          session: formattedResponse.S,
+          round: formattedResponse.T,
+          fastLapLeader: {
+            riderNumber: formattedResponse.MBY,
+            lapTime: formattedResponse.MLT,
+          },
+        });
       }
     })
     .catch((e) => console.error(e));
@@ -56,7 +64,7 @@ app.get("/current-status", (req, res) => {
     crawler("https://live.amasupercross.com/xml/sx/RaceData.json").then(
       (response) => {
         if (response && !response.error) {
-          const formattedResponse = json.parse(response.text);
+          const formattedResponse = JSON.parse(response.text);
           res.status(200).send(formattedResponse);
         }
       }
