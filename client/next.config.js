@@ -4,6 +4,14 @@ module.exports = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
+    config.module.rules.push({
+      test: /\.(png|jpe?g|gif)$/i,
+      use: [
+        {
+          loader: "file-loader",
+        },
+      ],
+    });
 
     return config;
   },
