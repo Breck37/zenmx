@@ -26,7 +26,11 @@ module.exports = (raceResults) => {
     })
     .filter((result) => result.bestLap !== "0.000")
     .reduce((a, c) => {
-      a.push({ rider: c.riderName.trim(), lap: c.bestLap });
+      a.push({
+        rider: c.riderName.trim(),
+        lap: c.bestLap,
+        bike: c.bike.split(" ")[0],
+      });
       return a;
     }, []);
 };
