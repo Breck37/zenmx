@@ -14,45 +14,45 @@ export const IndexStyled = styled.div`
   }
 
   .marquee {
-    height: 100px;
-    background-color: aqua;
-    width: 200%;
-    overflow: hidden;
+    position: relative;
+    padding: 0 32px;
     display: flex;
     align-items: center;
+    height: 100px;
   }
 
   .animation-container {
+    height: 100%;
+    width: 500%;
     display: flex;
     align-items: center;
-    // justify-content: space-between;
-    // animation: scroll 25s linear infinite;
-    width: 210%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: scroll 50s linear infinite;
+
+    > span {
+      width: 300px;
+      font-size: 36px;
+      font-family: Arial, serif;
+    }
   }
 
   @keyframes scroll {
     0% {
-      -moz-transform: translateX(100%);
-      -webkit-transform: translateX(100%);
-      transform: translateX(100%);
-    }
-    50% {
-      transform: translateX(0%);
+      left: 100%;
     }
     100% {
-      -moz-transform: translateX(-100%);
-      -webkit-transform: translateX(-100%);
-      transform: translateX(-100%);
+      left: -500%;
     }
   }
 
   .fast-lap {
-    // -moz-animation: scroll 600s linear infinite;
-    // -webkit-animation: scroll 600s linear infinite;
-    // animation: scroll 30s linear infinite;
     height: 65px;
-    width: 250px;
-    margin-right: 24px;
+    width: 350px;
+    max-width: 350px;
+    padding-right: 8px;
+    margin-right: 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
