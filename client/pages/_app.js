@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <CurrentModeContext.Provider value={currentMode}>
-      <AppStyled>
+      <AppStyled currentMode={currentMode}>
         <Header
           tabs={defaultTabs}
           currentMode={currentMode}

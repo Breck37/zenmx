@@ -23,7 +23,7 @@ export const IndexStyled = styled.div`
 
   .animation-container {
     height: 100%;
-    width: 500%;
+    width: 650%;
     display: flex;
     align-items: center;
     position: absolute;
@@ -43,7 +43,7 @@ export const IndexStyled = styled.div`
       left: 100%;
     }
     100% {
-      left: -500%;
+      left: -650%;
     }
   }
 
@@ -56,7 +56,10 @@ export const IndexStyled = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fff;
+    background-color: ${({ currentMode }) =>
+      currentMode ? "#fff" : "#282828"};
+    color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+    border: ${({ currentMode }) => (currentMode ? "#282828" : "aqua")} solid 1px;
   }
 
   .rider-image {
@@ -188,4 +191,5 @@ export const AppStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: ${({ currentMode }) => (currentMode ? "#fff" : "#282828")};
 `;

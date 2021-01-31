@@ -2,6 +2,17 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { IndexStyled } from "./styles";
+import { useCurrentMode } from "../hooks/darkMode";
+
+const bikeLogos = {
+  honda: "/logos/HondaLogo.jpeg",
+  kawasaki: "/logos/KawiLogo.jpeg",
+  husqvarna: "/logos/HuskieLogo.jpeg",
+  yamaha: "/logos/YamahaLogo.jpeg",
+  gasgas: "/logos/GasGasLogo.jpeg",
+  ktm: "/logos/KTMLogo.jpeg",
+  suzuki: "/logos/SuzukiLogo.jpeg",
+};
 
 ///// EXAMPLES ////
 // PDF:  .get("http://localhost:3700/pdf-results/20/20/1")
@@ -10,6 +21,7 @@ import { IndexStyled } from "./styles";
 export default function Home() {
   const [raceResults, setResults] = useState([]);
   const [fastestLaps, setFastestLaps] = useState([]);
+  const { currentMode } = useCurrentMode();
 
   useEffect(() => {
     if (!raceResults || !raceResults.length) {
@@ -18,6 +30,7 @@ export default function Home() {
         .then(({ data }) => {
           console.log({ data });
           setResults(data.raceResults);
+          setFastestLaps(data.fastestLaps);
         })
         .catch((e) => console.log("E on Results", e));
       return;
@@ -32,7 +45,7 @@ export default function Home() {
   };
 
   return (
-    <IndexStyled>
+    <IndexStyled currentMode={currentMode}>
       <Head>
         <title>ModernMotoFantasy</title>
         <link rel="icon" href="/favicon.ico" />
@@ -42,13 +55,19 @@ export default function Home() {
         <div className="marquee">
           <div className="animation-container">
             <span>FAST LAPS</span>
-            {fastestLaps.map(({ rider, lap }, index) => (
-              <div key={`${rider}-fast-lap`} className={`fast-lap ${index}`}>
-                <img src="" alt="" className="rider-image" />
-                <div>{rider}</div>
-                <div>{lap}</div>
-              </div>
-            ))}
+            {fastestLaps.map(({ rider, lap, bike }, index) => {
+              return (
+                <div key={`${rider}-fast-lap`} className={`fast-lap ${index}`}>
+                  <img
+                    src={bikeLogos[bike.toLowerCase()]}
+                    alt=""
+                    className="rider-image"
+                  />
+                  <div>{rider}</div>
+                  <div>{lap}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : null}
