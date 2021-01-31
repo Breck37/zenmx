@@ -9,6 +9,7 @@ const {
   spliceResults,
   spliceSeasonResults,
   resultsMapper,
+  lapsMapper,
 } = require("./helpers");
 const app = express();
 const pickRouter = require("./routes/pick-router");
@@ -25,9 +26,10 @@ app.get("/get-live-results", (req, res) => {
       if (response && !response.error) {
         const formattedResponse = JSON.parse(response.text);
         const raceResults = resultsMapper(formattedResponse.B);
-
+        const fastestLaps = lapsMapper(raceResults);
         res.status(200).send({
           raceResults,
+          fastestLaps,
           session: formattedResponse.S,
           round: formattedResponse.T,
           fastLapLeader: {
@@ -37,7 +39,7 @@ app.get("/get-live-results", (req, res) => {
         });
       }
     })
-    .catch((e) => console.error(e));
+    .catch((e) => console.error("/get-live-results", e));
 });
 
 ////////// PDF Results UNFINISHED /////
