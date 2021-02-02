@@ -8,12 +8,26 @@ Development in progress
 
 ## Getting Started
 
+#### Client Side
+
 First, run the development server:
 
 ```bash
-npm run dev
+client: npm run dev
 # or
-yarn dev
+client: yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+#### Server Side
+
+First, run the development server:
+
+```bash
+server: node server.js
+# or
+server: nodemon server.js
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
