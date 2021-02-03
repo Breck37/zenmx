@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
 import { AppStyled } from "./styles";
-import CurrentModeContext from "../hooks/darkMode";
+import { CurrentModeContext } from "../hooks";
+import { UserProvider } from "@auth0/nextjs-auth0";
 
 function MyApp({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
@@ -29,16 +30,18 @@ function MyApp({ Component, pageProps }) {
   };
 
   return (
-    <CurrentModeContext.Provider value={currentMode}>
-      <AppStyled currentMode={currentMode}>
-        <Header
-          tabs={defaultTabs}
-          currentMode={currentMode}
-          setCurrentMode={handleCurrentModeUpdate}
-        />
-        <Component {...pageProps} />
-      </AppStyled>
-    </CurrentModeContext.Provider>
+    <UserProvider>
+      <CurrentModeContext.Provider value={currentMode}>
+        <AppStyled currentMode={currentMode}>
+          <Header
+            tabs={defaultTabs}
+            currentMode={currentMode}
+            setCurrentMode={handleCurrentModeUpdate}
+          />
+          <Component {...pageProps} />
+        </AppStyled>
+      </CurrentModeContext.Provider>
+    </UserProvider>
   );
 }
 
