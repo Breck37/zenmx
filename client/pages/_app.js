@@ -1,13 +1,20 @@
 // import App from 'next/app'
 import React, { useState, useEffect } from "react";
+import { CurrentModeContext } from "../hooks";
+import { UserProvider, useUser } from "@auth0/nextjs-auth0";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
 import { AppStyled } from "./styles";
-import { CurrentModeContext } from "../hooks";
-import { UserProvider } from "@auth0/nextjs-auth0";
+import { Router } from "next/router";
 
-function MyApp({ Component, pageProps }) {
+function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
+  const { user, error, isLoading } = useUser();
+  console.log({
+    user,
+    error,
+    isLoading,
+  });
 
   useEffect(() => {
     const mode = localStorage.getItem("USER_CURRENT_MODE");
@@ -19,6 +26,8 @@ function MyApp({ Component, pageProps }) {
       setCurrentMode(parseInt(localStorage.getItem("USER_CURRENT_MODE")));
     }
   }, []);
+
+  if (!user) Router.push("/login");
 
   const handleCurrentModeUpdate = () => {
     const currentMode = localStorage.getItem("USER_CURRENT_MODE");
@@ -50,11 +59,11 @@ function MyApp({ Component, pageProps }) {
 // perform automatic static optimization, causing every page in your app to
 // be server-side rendered.
 //
-// MyApp.getInitialProps = async (appContext) => {
+// ModernMotoFantasy.getInitialProps = async (appContext) => {
 //   // calls page's `getInitialProps` and fills `appProps.pageProps`
 //   const appProps = await App.getInitialProps(appContext);
 //
 //   return { ...appProps }
 // }
 
-export default MyApp;
+export default ModernMotoFantasy;

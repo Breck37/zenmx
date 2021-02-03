@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { IndexStyled } from "./styles";
 import { useCurrentMode } from "../hooks/darkMode";
-
 const bikeLogos = {
   honda: "/logos/HondaLogo.jpeg",
   kawasaki: "/logos/KawiLogo.jpeg",
