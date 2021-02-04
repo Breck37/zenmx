@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const IndexStyled = styled.div`
   margin: 0;
   width: 100vw;
+  min-height: 100vh;
   overflow: hidden;
 
   main {
@@ -183,7 +184,6 @@ export const IndexStyled = styled.div`
 export const AppStyled = styled.div`
   margin: 0;
   margin: 0 auto;
-  min-height: 100vh;
   max-width: 100vw;
   overflow: hidden;
   padding: 9.375rem 0;

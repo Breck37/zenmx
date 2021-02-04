@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { IndexStyled } from "./styles";
 import { useCurrentMode } from "../hooks/darkMode";
+import { useUser } from "@auth0/nextjs-auth0";
+import { useRouter } from "next/router";
 const bikeLogos = {
   honda: "/logos/HondaLogo.jpeg",
   kawasaki: "/logos/KawiLogo.jpeg",
@@ -21,8 +23,13 @@ export default function Home() {
   const [raceResults, setResults] = useState([]);
   const [fastestLaps, setFastestLaps] = useState([]);
   const { currentMode } = useCurrentMode();
-
+  const { user } = useUser();
+  const router = useRouter();
   useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+
     if (!raceResults || !raceResults.length) {
       axios
         .get("/api/get-live-results")
