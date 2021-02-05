@@ -10,7 +10,6 @@ import axios from "axios";
 
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
-  const { user, error, isLoading } = useUser();
   const router = useRouter();
 
   const isLoginPage = useMemo(() => {
@@ -38,8 +37,8 @@ function ModernMotoFantasy({ Component, pageProps }) {
   };
 
   return (
-    <AppStyled currentMode={currentMode}>
-      <UserProvider>
+    <UserProvider>
+      <AppStyled currentMode={currentMode}>
         <CurrentModeContext.Provider value={currentMode}>
           {!isLoginPage && (
             <Header
@@ -50,8 +49,8 @@ function ModernMotoFantasy({ Component, pageProps }) {
           )}
           <Component {...pageProps} />
         </CurrentModeContext.Provider>
-      </UserProvider>
-    </AppStyled>
+      </AppStyled>
+    </UserProvider>
   );
 }
 

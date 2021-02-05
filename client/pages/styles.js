@@ -182,9 +182,12 @@ export const IndexStyled = styled.div`
 `;
 
 export const AppStyled = styled.div`
-  margin: 0;
-  margin: 0 auto;
-  max-width: 100vw;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
   overflow: hidden;
   padding: 9.375rem 0;
   display: flex;
