@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const IndexStyled = styled.div`
   margin: 0;
   width: 100vw;
-  min-height: 100vh;
   overflow: hidden;
 
   main {
@@ -189,7 +188,6 @@ export const AppStyled = styled.div`
   left: 0;
 
   overflow: hidden;
-  padding: 9.375rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
