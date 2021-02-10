@@ -1,4 +1,4 @@
-import { handleAuth, handleCallback } from "@auth0/nextjs-auth0";
+import { handleAuth, handleCallback, handleProfile } from "@auth0/nextjs-auth0";
 
 const afterCallback = (req, res, session, state) => {
   if (!session.user.isAdmin) {
@@ -10,9 +10,20 @@ const afterCallback = (req, res, session, state) => {
 export default handleAuth({
   async callback(req, res) {
     try {
-      await handleCallback(req, res, { redirectTo: "/" });
+      const result = await handleCallback(req, res, { redirectTo: "/" });
+      console.log("AUTHHHHHH!!!!", { result });
+      return result;
     } catch (error) {
       res.status(error.status || 500).end(error.message);
     }
   },
 });
+
+export async function me(req, res) {
+  try {
+    await handleProfile(req, res);
+  } catch (error) {
+    console.error(error);
+    res.status(error.status || 500).end(error.message);
+  }
+}

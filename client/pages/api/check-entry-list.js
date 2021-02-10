@@ -37,7 +37,6 @@ const collectEntryListData = (splicedEntryList) => {
 const spliceEntryList = (formattedResponse) => {
   const startingIndex = formattedResponse.indexOf("SPONSORS");
   const riderData = formattedResponse.splice(startingIndex + 1);
-  //   console.log({ riderData, startingIndex });
   return riderData;
 };
 
@@ -48,10 +47,9 @@ export default async (req, res) => {
     console.log(currentWeek);
     const entryListRequest = await crawler(currentWeek.entryList).then(
       (response) => {
-        //   console.log("SUH", response);
         if (response && !response.error) {
           const formattedResponse = response.text.split("\n");
-          //   spliceEntryList(formattedResponse);
+
           const data = riderMapper(
             collectEntryListData(spliceEntryList(formattedResponse))
           );
@@ -70,7 +68,6 @@ export default async (req, res) => {
       return res.status(200).send(entryListRequest);
     }
     return res.status(200).send(entryListRequest);
-    // return res.status(200).send(entryListRequest.data);
   } catch (error) {
     console.log("ERR", { error });
     res.status(404).send("Entry list not yet available.");

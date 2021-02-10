@@ -1,7 +1,7 @@
 // import App from 'next/app'
 import React, { useState, useEffect, useMemo } from "react";
-import { CurrentModeContext } from "../hooks";
-import { UserProvider, useUser } from "@auth0/nextjs-auth0";
+import { CurrentModeContext, CurrentUserContext } from "../hooks";
+import { UserProvider } from "@auth0/nextjs-auth0";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
 import { AppStyled } from "./styles";
@@ -11,6 +11,7 @@ import axios from "axios";
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
   const router = useRouter();
+  const { user } = pageProps;
 
   const isLoginPage = useMemo(() => {
     return router.pathname === "/login";
@@ -37,7 +38,7 @@ function ModernMotoFantasy({ Component, pageProps }) {
   };
 
   return (
-    <UserProvider>
+    <UserProvider user={user}>
       <AppStyled currentMode={currentMode}>
         <CurrentModeContext.Provider value={currentMode}>
           {!isLoginPage && (

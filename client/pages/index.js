@@ -5,6 +5,7 @@ import { IndexStyled } from "./styles";
 import { useCurrentMode } from "../hooks/darkMode";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
+
 const bikeLogos = {
   honda: "/logos/HondaLogo.jpeg",
   kawasaki: "/logos/KawiLogo.jpeg",
@@ -25,6 +26,7 @@ export default function Home() {
   const { currentMode } = useCurrentMode();
   const { user } = useUser();
   const router = useRouter();
+
   useEffect(() => {
     if (!user) {
       router.push("/login");
@@ -47,6 +49,15 @@ export default function Home() {
     axios
       .get("http://localhost:3700/current-status")
       .then((r) => console.log("RESPONSE IN CLIENT", r))
+      .catch((e) => console.log(e));
+  };
+
+  const getUser = () => {
+    axios
+      .get(`/api/get-user/${user?.email}`)
+      .then((res) => {
+        console.log("GET USER ", res);
+      })
       .catch((e) => console.log(e));
   };
 
@@ -81,23 +92,22 @@ export default function Home() {
         <h1 className="title"></h1>
 
         <button onClick={getCurrentStatus}>Click for status</button>
+        <button onClick={getUser}>getUser</button>
       </main>
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
     </IndexStyled>
   );
 }
 
-<style jsx global>{``}</style>;
+<style jsx global>{`
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+`}</style>;
