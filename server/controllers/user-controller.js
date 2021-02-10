@@ -36,7 +36,6 @@ module.exports = {
   },
   getUser: async (req, res) => {
     const { email } = req.params;
-    console.log({ email, query: req.query, param: req.params });
 
     const user = await User.findOne({ email });
 
