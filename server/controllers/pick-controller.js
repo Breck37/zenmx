@@ -14,7 +14,7 @@ module.exports = {
     const picks = new WeeklyPick(body);
 
     if (!picks) {
-      return res.status(400).json({ success: false, error: err });
+      return res.status(400).json({ success: false, error: "No model" });
     }
 
     picks

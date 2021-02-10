@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 //   .connect(process.env.MONGO_LOCAL, {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
+//     useCreateIndex: true,
 //   })
 //   .catch((e) => {
 //     console.error("Connection error", e.message);
@@ -15,6 +16,7 @@ mongoose
   .connect(process.env.MONGO_QA, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   })
   .catch((e) => {
     console.error("Connection error", e.message);

@@ -13,6 +13,7 @@ const {
 } = require("./helpers");
 const app = express();
 const pickRouter = require("./routes/pick-router");
+const userRouter = require("./routes/user-router");
 
 const db = require("./db");
 
@@ -75,6 +76,8 @@ app.get("/current-status", (req, res) => {
     res.status(420).send({ message: "Error getting status", error });
   }
 });
+
+app.use("/api/users", userRouter);
 
 app.use("/api/picks", pickRouter);
 
