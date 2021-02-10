@@ -5,7 +5,6 @@ import TeamStyled from "./TeamStyled";
 
 const Team = () => {
   const { currentMode } = useCurrentMode();
-  console.log(currentMode);
 
   const getEntryList = () => {
     axios.get("/api/check-entry-list?week=six").then((res) => console.log(res));
