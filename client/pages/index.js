@@ -33,24 +33,24 @@ export default function Home() {
       return;
     }
 
-    if (user && (!raceResults || !raceResults.length)) {
-      axios
-        .all([
-          axios.get(`/api/get-user/${user?.email}`),
-          axios.get("/api/get-live-results"),
-        ])
-        .then(
-          axios.spread(({ data: userData }, { data }) => {
-            if (userData.success === false) {
-              router.push("/login");
-            }
-            setResults(data.raceResults);
-            setFastestLaps(data.fastestLaps);
-          })
-        )
-        .catch((e) => console.log("E on Results", e));
-      return;
-    }
+    // if (user && (!raceResults || !raceResults.length)) {
+    //   axios
+    //     .all([
+    //       axios.get(`/api/get-user/${user?.email}`),
+    //       axios.get("/api/get-live-results"),
+    //     ])
+    //     .then(
+    //       axios.spread(({ data: userData }, { data }) => {
+    //         if (userData.success === false) {
+    //           router.push("/login");
+    //         }
+    //         setResults(data.raceResults);
+    //         setFastestLaps(data.fastestLaps);
+    //       })
+    //     )
+    //     .catch((e) => console.log("E on Results", e));
+    //   return;
+    // }
   }, [raceResults]);
 
   const getCurrentStatus = () => {
