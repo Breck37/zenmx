@@ -1,12 +1,11 @@
 // import App from 'next/app'
 import React, { useState, useEffect, useMemo } from "react";
-import { CurrentModeContext, CurrentUserContext } from "../hooks";
+import { CurrentModeContext } from "../hooks";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
-import { AppStyled } from "./styles";
-import { Router, useRouter } from "next/router";
-import axios from "axios";
+import { AppStyled } from "../styles/AppStyles";
+import { useRouter } from "next/router";
 
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();

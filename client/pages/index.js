@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { IndexStyled } from "./styles";
+import { IndexStyled } from "../styles/AppStyles";
 import { useCurrentMode } from "../hooks/darkMode";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
@@ -30,16 +30,24 @@ export default function Home() {
   useEffect(() => {
     if (!user) {
       router.push("/login");
+      return;
     }
 
-    if (!raceResults || !raceResults.length) {
+    if (user && (!raceResults || !raceResults.length)) {
       axios
-        .get("/api/get-live-results")
-        .then(({ data }) => {
-          console.log({ data });
-          setResults(data.raceResults);
-          setFastestLaps(data.fastestLaps);
-        })
+        .all([
+          axios.get(`/api/get-user/${user?.email}`),
+          axios.get("/api/get-live-results"),
+        ])
+        .then(
+          axios.spread(({ data: userData }, { data }) => {
+            if (userData.success === false) {
+              router.push("/login");
+            }
+            setResults(data.raceResults);
+            setFastestLaps(data.fastestLaps);
+          })
+        )
         .catch((e) => console.log("E on Results", e));
       return;
     }
@@ -49,15 +57,6 @@ export default function Home() {
     axios
       .get("http://localhost:3700/current-status")
       .then((r) => console.log("RESPONSE IN CLIENT", r))
-      .catch((e) => console.log(e));
-  };
-
-  const getUser = () => {
-    axios
-      .get(`/api/get-user/${user?.email}`)
-      .then((res) => {
-        console.log("GET USER ", res);
-      })
       .catch((e) => console.log(e));
   };
 
@@ -92,7 +91,6 @@ export default function Home() {
         <h1 className="title"></h1>
 
         <button onClick={getCurrentStatus}>Click for status</button>
-        <button onClick={getUser}>getUser</button>
       </main>
     </IndexStyled>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useCurrentMode } from "../../hooks/darkMode";
-import TeamStyled from "./TeamStyled";
+import { TeamStyled } from "../../styles/TeamStyled";
 
 const Team = () => {
   const { currentMode } = useCurrentMode();

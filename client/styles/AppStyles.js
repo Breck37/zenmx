@@ -4,8 +4,11 @@ export const IndexStyled = styled.div`
   margin: 0;
   width: 100vw;
   overflow: hidden;
+  height: calc(100vh - 128px);
+  margin-top: 128px;
 
   main {
+    margin-top: 128px;
     width: 75%;
     margin: 0 auto;
     display: flex;
@@ -30,6 +33,7 @@ export const IndexStyled = styled.div`
     left: 0;
     top: 0;
     animation: scroll 50s linear infinite;
+    color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
 
     > span {
       width: 300px;
@@ -177,6 +181,19 @@ export const IndexStyled = styled.div`
       width: 100%;
       flex-direction: column;
     }
+    .animation-container {
+      width: 2000%;
+      animation: scrollPhone 50s linear infinite;
+    }
+  }
+
+  @keyframes scrollPhone {
+    0% {
+      left: 100%;
+    }
+    100% {
+      left: -2000%;
+    }
   }
 `;
 
@@ -188,5 +205,6 @@ export const AppStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   background-color: ${({ currentMode }) => (currentMode ? "#fff" : "#282828")};
 `;

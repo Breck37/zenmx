@@ -2,8 +2,8 @@ import React from "react";
 import clsx from "clsx";
 import IconStyled from "./styles";
 
-import close from "./close/close.svg";
-import menu from "./menu/menu.svg";
+import close from "./close/close.js";
+import menu from "./menu/menu.js";
 
 export const icons = {
   close,

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default styled.div`
+export const TeamStyled = styled.div`
   margin: 0;
   width: 100vw;
   min-height: 100%;

@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Leagues = () => {
-    return (
-        <div>
-            Leagues
-        </div>
-    )
-}
+  return <div>Leagues</div>;
+};
 
 export default Leagues;

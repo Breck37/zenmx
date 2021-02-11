@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default styled.div`
+export const LoginStyled = styled.div`
   position: absolute;
   right: 0;
   left: 0;
