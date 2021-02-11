@@ -68,6 +68,10 @@ export default styled.div`
           2px 1px 1px #009999, 2px 2px 1px #009999, 2px 3px 1px #009999;
       }
     }
+
+    .icon-wrap {
+      background-color: ${({ currentMode }) => (currentMode ? "#fff" : "#FFF")};
+    }
   }
 
   .tabs {
@@ -167,7 +171,31 @@ export default styled.div`
       animation: slide100 1.5s;
     }
     .tabs {
-      display: none;
+      display: ${({ showMobileTabs }) => (showMobileTabs ? "block" : "none")};
+      flex-direction: column;
+      width: 200px;
+      z-index: 10000;
+      margin-left: 0;
+      left: calc(100% - 200px);
+      top: 128px;
+      background-color: aqua;      
+      height: 220px;      
+      filter: drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.3));
+      animation: unveil 2.4s;
+      transition: all 2.4s linear;
+      border-bottom-right-radius: 4px;
+      border-bottom-left-radius: 8px;
+      overflow: hidden;
+
+      > .tab {
+        height: 48px;
+        opacity: 1;
+        color: #282828;
+        border: none !important;
+        padding: 4px 0;
+        animation: showTabs 2.4s;
+        transition: height: 2.4s linear;
+      }
     }
     .logo-wrap {
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
@@ -182,13 +210,38 @@ export default styled.div`
       position: absolute;
       right: 24px;
       top: 41%;
-      color: ${({ currentMode }) => (currentMode ? "#282828" : "aqua")};
+      color: ${({ currentMode }) => (currentMode ? "aqua" : "#282828")};
     }
   }
 
   @media (max-width: 500px) {
     .logo-wrap {
       font-size: 36px !important;
+    }
+    .tabs {
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  @keyframes unveil {
+    0% {
+      display: none;
+      height: 0;
+    }
+    100 {
+      display: block;
+      height: 220px;
+    }
+  }
+  @keyframes showTabs {
+    0% {
+      opacity: 0;
+      height: 0;
+    }
+    100 {
+      opacity: 1;
+      height: 48px;
     }
   }
 `;
