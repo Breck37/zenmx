@@ -9,10 +9,8 @@ export default styled.div`
   display: flex;
   flex-direction: column;
   background: rgb(2, 0, 36);
-  background: ${({ currentMode }) =>
-    currentMode
-      ? "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,255,255,1) 75%)"
-      : "#282828"};
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,255,255,1) 75%);
+
 
   .mode-container {
     height: 32px;
@@ -92,12 +90,10 @@ export default styled.div`
     width: 45%;
 
     > .tab:first-child {
-      border-left: solid 2px
-        ${({ currentMode }) => (currentMode ? "#282828" : "aqua")};
+      border-left: solid 2px #282828;
     }
     > .tab:last-child {
-      border-right: solid 2px
-        ${({ currentMode }) => (currentMode ? "#282828" : "aqua")};
+      border-right: solid 2px #282828;
     }
 
     .tab {
@@ -105,16 +101,14 @@ export default styled.div`
       padding: 8px 0;
       letter-spacing: 1px;
       text-transform: uppercase;
-      border-left: solid 1px
-        ${({ currentMode }) => (currentMode ? "#282828" : "aqua")};
-      border-right: solid 1px
-        ${({ currentMode }) => (currentMode ? "#282828" : "aqua")};
+      border-left: solid 1px #282828;
+      border-right: solid 1px #282828;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: Arial, serif;
       height: 50%;
-      color: ${({ currentMode }) => (currentMode ? "#282828" : "aqua")};
+      color: "#282828";
 
       &:hover {
         font-size: 24px;
