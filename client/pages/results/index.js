@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Table } from "../../components";
-import { ResultsStyled } from "../../styles/ResultsStyled";
+import { ResultsStyled } from "../../styles";
 
 const Results = () => {
   const [raceResults, setResults] = useState([]);

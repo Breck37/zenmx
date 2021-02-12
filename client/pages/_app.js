@@ -4,7 +4,7 @@ import { CurrentModeContext } from "../hooks";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
-import { AppStyled } from "../styles/AppStyles";
+import { AppStyled } from "../styles";
 import { useRouter } from "next/router";
 
 function ModernMotoFantasy({ Component, pageProps }) {
