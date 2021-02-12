@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ResultsStyled = styled.div`
+export default styled.div`
   width: 85%;
   height: 100%;
   margin-top: 200px;
