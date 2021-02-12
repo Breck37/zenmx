@@ -43,6 +43,7 @@ export default styled.div`
     justify-content: center;
     z-index: 1000;
     animation: slide40 1.5s;
+    animation-delay: 4s;
     transition: all 1.5s linear;
 
     .logo-wrap {
