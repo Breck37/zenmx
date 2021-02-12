@@ -46,12 +46,12 @@ export default function Home() {
     //         }
     //         setResults(data.raceResults);
     //         setFastestLaps(data.fastestLaps);
-    //         setTimeout(() => setLoading(false), 4300);
     //       })
     //     )
     //     .catch((e) => console.log("E on Results", e));
     //   return;
     // }
+    setTimeout(() => setLoading(false), 4300);
   }, [raceResults]);
 
   if (loading) {
@@ -104,7 +104,7 @@ export default function Home() {
       <main>
         <h1 className="title"></h1>
 
-        <button onClick={getCurrentStatus}>Click for status</button>
+        {/* <button onClick={getCurrentStatus}>Click for status</button> */}
       </main>
     </IndexStyled>
   );
