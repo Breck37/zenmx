@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { IndexStyled } from "../styles/AppStyles";
+import { IndexStyled, LoadingStyled } from "../styles";
 import { useCurrentMode } from "../hooks/darkMode";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
@@ -23,6 +23,7 @@ const bikeLogos = {
 export default function Home() {
   const [raceResults, setResults] = useState([]);
   const [fastestLaps, setFastestLaps] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { currentMode } = useCurrentMode();
   const { user } = useUser();
   const router = useRouter();
@@ -32,26 +33,39 @@ export default function Home() {
       router.push("/login");
       return;
     }
-
-    // if (user && (!raceResults || !raceResults.length)) {
-    //   axios
-    //     .all([
-    //       axios.get(`/api/get-user/${user?.email}`),
-    //       axios.get("/api/get-live-results"),
-    //     ])
-    //     .then(
-    //       axios.spread(({ data: userData }, { data }) => {
-    //         if (userData.success === false) {
-    //           router.push("/login");
-    //         }
-    //         setResults(data.raceResults);
-    //         setFastestLaps(data.fastestLaps);
-    //       })
-    //     )
-    //     .catch((e) => console.log("E on Results", e));
-    //   return;
-    // }
+    if (user && (!raceResults || !raceResults.length)) {
+      axios
+        .all([
+          axios.get(`/api/get-user/${user?.email}`),
+          axios.get("/api/get-live-results"),
+        ])
+        .then(
+          axios.spread(({ data: userData }, { data }) => {
+            if (userData.success === false) {
+              router.push("/login");
+            }
+            setResults(data.raceResults);
+            setFastestLaps(data.fastestLaps);
+            setTimeout(() => setLoading(false), 4300);
+          })
+        )
+        .catch((e) => console.log("E on Results", e));
+      return;
+    }
   }, [raceResults]);
+
+  if (loading) {
+    return (
+      <LoadingStyled>
+        <div className="top">
+          <span>Modern</span>
+        </div>
+        <div className="bottom">
+          <span className="backwards">Moto</span>
+        </div>
+      </LoadingStyled>
+    );
+  }
 
   const getCurrentStatus = () => {
     axios
