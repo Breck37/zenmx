@@ -3,7 +3,7 @@ import axios from "axios";
 export default (req, res) => {
   const { email } = req.query;
   return axios
-    .get(`http://localhost:3700/api/users/get-user/${email}`)
+    .get(`${process.env.API_URL}/get-user?email=${email}`)
     .then((response) => {
       res.status(200).json(response.data);
       return response.data;
