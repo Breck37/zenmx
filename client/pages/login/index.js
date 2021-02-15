@@ -17,7 +17,16 @@ const Login = () => {
 
   return (
     <LoginStyled isDarkMode={currentMode}>
-      <a href="/api/auth/login">Login</a>
+      <div className="title">
+        <span>Modern</span>
+        <span>Moto</span>
+      </div>
+      <div className="tagline">
+        <i>The</i> MX fantasy app
+      </div>
+      <a className="login-button" href="/api/auth/login">
+        Login
+      </a>
     </LoginStyled>
   );
 };
