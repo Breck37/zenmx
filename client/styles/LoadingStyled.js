@@ -6,6 +6,7 @@ export default styled.div`
   width: 100vw;
   height: 100vh;
   font-family: Chalkduster, fantasy;
+
   .top {
     height: 50%;
     width: 100%;
@@ -90,6 +91,21 @@ export default styled.div`
       height: 100%;
       width: 100%;
       clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .top {
+      span {
+        font-size: 32px;
+        right: 55%;
+      }
+    }
+
+    .bottom {
+      .backwards {
+        font-size: 32px;
+      }
     }
   }
 `;
