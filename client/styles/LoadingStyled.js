@@ -97,14 +97,14 @@ export default styled.div`
   @media (max-width: 500px) {
     .top {
       span {
-        font-size: 32px;
+        font-size: 36px;
         right: 55%;
       }
     }
 
     .bottom {
       .backwards {
-        font-size: 32px;
+        font-size: 36px;
       }
     }
   }
