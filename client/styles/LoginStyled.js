@@ -7,11 +7,12 @@ export default styled.div`
   left: 0;
   top: 0;
   bottom: 0;
-  background: linear-gradient(
-    90deg,
-    ${MODERN_PURPLE} 0%,
-    rgba(0, 255, 255) 75%
-  );
+  background-color: ${MODERN_GREY};
+  // background: linear-gradient(
+  //   90deg,
+  //   ${MODERN_PURPLE} 0%,
+  //   rgba(0, 255, 255) 75%
+  // );
 
   display: flex;
   align-items: center;
@@ -66,5 +67,14 @@ export default styled.div`
         padding: 0 !important;
       }
     }
-  } ;
+  }
+
+  @keyframes text-animate {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
