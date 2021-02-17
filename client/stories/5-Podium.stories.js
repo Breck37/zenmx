@@ -22,7 +22,3 @@ const mockProps = {
 export const DesktopPodium = () => (
   <Podium title="Desktop" onClick={action("clicked Desktop")} {...mockProps} />
 );
-
-export const ResponsivePodium = () => (
-  <Podium title="Responsive" onClick={action("clicked Responsive")} />
-);
