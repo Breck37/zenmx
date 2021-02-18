@@ -24,7 +24,7 @@ export default styled.div`
   .section.one {
     grid-row: 7 / span 4;
     grid-column: 2;
-    background-color: ${MODERN_PURPLE};
+    background-color: #daa520;
   }
 
   .second-user {
@@ -34,7 +34,7 @@ export default styled.div`
 
   .section.two {
     grid-column: 1;
-    background-color: ${MODERN_PURPLE};
+    background-color: silver;
     grid-row: 8 / span 3;
   }
 
@@ -45,7 +45,7 @@ export default styled.div`
 
   .section.three {
     grid-column: 3;
-    background-color: ${MODERN_PURPLE};
+    background-color: #cd7f32 ;
     grid-row 9 / span 2;
   }
 
