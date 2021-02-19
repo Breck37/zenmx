@@ -4,6 +4,7 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import "../../styles/fonts.css";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -41,6 +42,7 @@ const RiderSelect = ({ options, selectLabel, onChange, riderPosition }) => {
         id="select"
         value={riderName}
         onChange={handleRiderSelection}
+        className="roboto"
       >
         {options.map((riderOption) => {
           return (
@@ -48,6 +50,7 @@ const RiderSelect = ({ options, selectLabel, onChange, riderPosition }) => {
               key={riderOption.name}
               style={getStyles(riderOption.name, riderName, theme)}
               value={riderOption.name}
+              className="roboto"
             >
               {riderOption.name}
             </MenuItem>
