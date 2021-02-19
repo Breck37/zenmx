@@ -6,7 +6,7 @@ import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
 import { AppStyled } from "../styles";
 import { useRouter } from "next/router";
-import "../../styles/fonts.css";
+import "../styles/fonts.css";
 
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
