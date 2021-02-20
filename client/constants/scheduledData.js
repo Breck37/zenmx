@@ -26,13 +26,22 @@ module.exports = {
         "https://results.amasupercross.com/xml/sx/events/S2130/S1ENTRYLIST.PDF",
     },
     seven: {
-      city: "Indianapolis",
+      city: "Orlando",
       state: "IN",
-      number: 6 * 5 + "",
+      number: 7 * 5 + "",
       year: "2021",
       season: "S1",
       entryList:
         "https://results.amasupercross.com/xml/sx/events/S2135/S1ENTRYLIST.PDF",
+    },
+    eight: {
+      city: "Orlando",
+      state: "FL",
+      number: 8 * 5 + "",
+      year: "2021",
+      season: "S1",
+      entryList:
+        "https://results.amasupercross.com/xml/sx/events/S2140/S1ENTRYLIST.PDF",
     },
   },
 };
