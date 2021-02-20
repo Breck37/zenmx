@@ -44,7 +44,7 @@ export default async (req, res) => {
   try {
     const { week } = req.query;
     const currentWeek = scheduledData.rounds[week];
-    console.log(currentWeek);
+
     const entryListRequest = await crawler(currentWeek.entryList).then(
       (response) => {
         if (response && !response.error) {

@@ -39,6 +39,7 @@ const RiderSelect = ({
   riderPosition,
   value,
 }) => {
+  if (!options) return null;
   const [riderName, setRiderName] = useState("");
   const classes = useStyles();
   const theme = useTheme();
@@ -52,7 +53,7 @@ const RiderSelect = ({
     setRiderName(riderName);
     onChange(riderName, riderPosition);
   };
-  console.log(value);
+
   return (
     <FormControl className={classes.formControl} error={value?.error}>
       <InputLabel id={selectLabel}>{selectLabel}</InputLabel>
