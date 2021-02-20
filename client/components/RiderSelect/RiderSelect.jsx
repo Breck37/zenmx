@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
+import {
+  Select,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  FormHelperText,
+  Typography,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -14,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getStyles(name, personName, theme) {
+  if (!name || !personName) {
+    return {
+      fontWeight: theme.typography.fontWeightMedium,
+      fontStyle: "italics",
+    };
+  }
   return {
     fontWeight:
       personName.indexOf(name) === -1
@@ -22,18 +32,29 @@ function getStyles(name, personName, theme) {
   };
 }
 
-const RiderSelect = ({ options, selectLabel, onChange, riderPosition }) => {
+const RiderSelect = ({
+  options,
+  selectLabel,
+  onChange,
+  riderPosition,
+  value,
+}) => {
   const [riderName, setRiderName] = useState("");
   const classes = useStyles();
   const theme = useTheme();
 
   const handleRiderSelection = (riderEvent) => {
     const riderName = riderEvent.target.value;
+    if (!riderName) {
+      setRiderName("");
+      onChange("", riderPosition);
+    }
     setRiderName(riderName);
     onChange(riderName, riderPosition);
   };
+  console.log(value);
   return (
-    <FormControl className={classes.formControl}>
+    <FormControl className={classes.formControl} error={value?.error}>
       <InputLabel id={selectLabel}>{selectLabel}</InputLabel>
       <Select
         labelId={selectLabel}
@@ -43,6 +64,9 @@ const RiderSelect = ({ options, selectLabel, onChange, riderPosition }) => {
         onChange={handleRiderSelection}
         className="roboto"
       >
+        <MenuItem className="italic-item" value={null}>
+          Clear Selection
+        </MenuItem>
         {options.map((riderOption) => {
           return (
             <MenuItem
@@ -50,12 +74,14 @@ const RiderSelect = ({ options, selectLabel, onChange, riderPosition }) => {
               style={getStyles(riderOption.name, riderName, theme)}
               value={riderOption.name}
               className="roboto"
+              disabled={riderName === riderOption.name}
             >
-              {riderOption.name}
+              {`#${riderOption.number} - ${riderOption.name}`}
             </MenuItem>
           );
         })}
       </Select>
+      {value?.error && <FormHelperText>{value?.error}</FormHelperText>}
     </FormControl>
   );
 };
