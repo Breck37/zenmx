@@ -29,7 +29,7 @@ export default styled.div`
     position: absolute;
     bottom: 0;
     background-color: aqua;
-    animation: bottomSlide 5s ease-in-out infinite;
+    animation: bottomSlide 5s ease-in-out;
 
     span {
       position: absolute;
@@ -43,19 +43,6 @@ export default styled.div`
       font-family: Arial, sans-serif;
       font-size: 100px;
       font-style: bold;
-      // transition: all 0.9s;
-      // // -moz-transform: scale(-1, -1);
-      // // -webkit-transform: scale(-1, -1);
-      // // -o-transform: scale(-1, -1);
-      // // -ms-transform: scale(-1, -1);
-      // // transform: scale(-1, -1);
-      // transform: scale(1, -1);
-      // -moz-transform: scale(1, -1);
-      // -webkit-transform: scale(1, -1);
-      // -o-transform: scale(1, -1);
-      // -ms-transform: scale(1, -1);
-      // // transform: scale(1, -1);
-      // // transform: rotateY(-180deg);
     }
   }
 

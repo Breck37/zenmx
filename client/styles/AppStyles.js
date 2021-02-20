@@ -26,13 +26,13 @@ export const IndexStyled = styled.div`
 
   .animation-container {
     height: 100%;
-    width: 650%;
+    width: 350%;
     display: flex;
     align-items: center;
     position: absolute;
     left: 0;
     top: 0;
-    animation: scroll 50s linear infinite;
+    animation: scroll 75s linear infinite;
     color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
 
     > span {
@@ -47,7 +47,7 @@ export const IndexStyled = styled.div`
       left: 100%;
     }
     100% {
-      left: -650%;
+      left: -350%;
     }
   }
 
