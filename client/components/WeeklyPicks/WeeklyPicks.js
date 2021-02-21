@@ -31,7 +31,7 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
 
     return {
       selected: selectedCopy.filter((rider) => rider.position !== position),
-      sanitizedRider: { riderName, position },
+      sanitizedRider: { riderName, position, points: 0 },
     };
   };
 
@@ -48,7 +48,6 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
 
   return (
     <PicksStyled>
-      Weekly Picks
       <RiderSelect
         onChange={handleRiderSelection}
         options={riders}

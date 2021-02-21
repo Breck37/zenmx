@@ -6,6 +6,8 @@ import { useCurrentMode } from "../../hooks/darkMode";
 import { TeamStyled } from "../../styles";
 import { Button, WeeklyPicks } from "../../components";
 
+const CURRENT_ROUND = 8;
+
 const Team = () => {
   const { currentMode } = useCurrentMode();
   const [entries, setEntries] = useState([]);
@@ -16,10 +18,13 @@ const Team = () => {
   useEffect(() => {
     if (entries.length) return;
 
-    axios.get("/api/check-entry-list?week=eight").then((res) => {
-      setLoading(false);
-      setEntries(res.data.data);
-    });
+    axios
+      .get("/api/check-entry-list?week=eight")
+      .then((res) => {
+        setLoading(false);
+        setEntries(res.data.data);
+      })
+      .catch((err) => console.err(err));
   });
 
   const selectedRidersWithErrors = useMemo(() => {
@@ -38,10 +43,40 @@ const Team = () => {
     });
   }).sort((a, b) => a.position - b.position);
 
+  const hasPickErrors = useMemo(() => {
+    if (selectedRidersWithErrors.length !== 7) return true;
+    return selectedRidersWithErrors.reduce(
+      (result, currentRider) => (currentRider.error ? true : false),
+      false
+    );
+  });
+
   if (loading) {
     return <CircularProgress />;
   }
 
+  const removeErrors = (riders) => {
+    return riders.map(({ error, ...rest }) => ({ ...rest }));
+  };
+
+  const saveUserPicks = () => {
+    const params = JSON.stringify({
+      email: user.email,
+      bigBikePicks: removeErrors(selectedRiders),
+      week: CURRENT_ROUND,
+      totalPoints: 0,
+    });
+
+    axios
+      .post("/api/save-picks", params, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => res.data)
+      .catch((err) => console.error(err));
+  };
+  console.log(user);
   return (
     <TeamStyled currentMode={currentMode}>
       <WeeklyPicks
@@ -49,7 +84,11 @@ const Team = () => {
         selectedRiders={selectedRidersWithErrors}
         setSelectedRiders={setSelectedRiders}
       />
-      <Button label="Save Team" onClick={() => null} />
+      <Button
+        label="Save Team"
+        onClick={saveUserPicks}
+        disabled={hasPickErrors}
+      />
     </TeamStyled>
   );
 };
