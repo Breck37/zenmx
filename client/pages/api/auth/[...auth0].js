@@ -11,7 +11,6 @@ export default handleAuth({
   async callback(req, res) {
     try {
       const result = await handleCallback(req, res, { redirectTo: "/" });
-      console.log("AUTHHHHHH!!!!", { result });
       return result;
     } catch (error) {
       res.status(error.status || 500).end(error.message);
