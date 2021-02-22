@@ -43,7 +43,7 @@ const spliceEntryList = (formattedResponse) => {
 export default async (req, res) => {
   try {
     const { week } = req.query;
-    const currentWeek = scheduledData.rounds[week];
+    const currentWeek = scheduledData.supercross.rounds[week];
 
     const entryListRequest = await crawler(currentWeek.entryList).then(
       (response) => {
