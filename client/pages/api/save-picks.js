@@ -4,14 +4,13 @@ export default (req, res) => {
   const { email, bigBikePicks, week, totalPoints } = req.body;
   const userPick = JSON.stringify({
     week,
-    year: new Date().getFullYear(),
     email,
     bigBikePicks,
     totalPoints,
   });
   console.log(userPick);
   return axios
-    .post(`${process.env.API_URL}/save-picks`, params, {
+    .post(`${process.env.API_URL}/save-picks`, userPick, {
       headers: {
         "Content-Type": "application/json",
       },
