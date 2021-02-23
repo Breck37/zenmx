@@ -26,7 +26,7 @@ export const IndexStyled = styled.div`
 
   .animation-container {
     height: 100%;
-    width: 350%;
+    width: 450%;
     display: flex;
     align-items: center;
     position: absolute;
@@ -47,7 +47,7 @@ export const IndexStyled = styled.div`
       left: 100%;
     }
     100% {
-      left: -350%;
+      left: -450%;
     }
   }
 
