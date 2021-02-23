@@ -5,20 +5,20 @@ export default (req, res) => {
   const userPick = JSON.stringify({
     week,
     year: new Date().getFullYear(),
-    user: email,
+    email,
     bigBikePicks,
     totalPoints,
   });
   console.log(userPick);
-  //   return axios
-  //     .post(`${process.env.API_URL}/save-picks`, params, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //     .then((response) => {
-  //       res.status(200).json(response.data);
-  //       return response.data;
-  //     })
-  //     .catch((error) => console.error("/get-user error", error));
+  return axios
+    .post(`${process.env.API_URL}/save-picks`, params, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      res.status(200).json(response.data);
+      return response.data;
+    })
+    .catch((error) => console.error("/get-user error", error));
 };

@@ -6,12 +6,13 @@ import { useCurrentMode } from "../../hooks/darkMode";
 import { TeamStyled } from "../../styles";
 import { Button, WeeklyPicks } from "../../components";
 
-const CURRENT_ROUND = 8;
+const CURRENT_ROUND = 2;
 
 const Team = () => {
   const { currentMode } = useCurrentMode();
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState("");
   const [selectedRiders, setSelectedRiders] = useState([]);
   const { user } = useUser();
 
@@ -60,9 +61,11 @@ const Team = () => {
   };
 
   const saveUserPicks = () => {
+    const cleanseSelectedRiders = removeErrors(selectedRiders);
+
     const params = JSON.stringify({
       email: user.email,
-      bigBikePicks: removeErrors(selectedRiders),
+      bigBikePicks: cleanseSelectedRiders,
       week: CURRENT_ROUND,
       totalPoints: 0,
     });
@@ -73,10 +76,14 @@ const Team = () => {
           "Content-Type": "application/json",
         },
       })
-      .then((res) => res.data)
+      .then((res) => {
+        setSuccess("Saved picks successfully!");
+        console.log(res.data);
+      })
       .catch((err) => console.error(err));
   };
   console.log(user);
+
   return (
     <TeamStyled currentMode={currentMode}>
       <WeeklyPicks
@@ -84,6 +91,11 @@ const Team = () => {
         selectedRiders={selectedRidersWithErrors}
         setSelectedRiders={setSelectedRiders}
       />
+      {success && (
+        <div style={{ height: 24, fontSize: 18, color: "green" }}>
+          {success}
+        </div>
+      )}
       <Button
         label="Save Team"
         onClick={saveUserPicks}
