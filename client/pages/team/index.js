@@ -6,7 +6,7 @@ import { useCurrentMode } from "../../hooks/darkMode";
 import { TeamStyled } from "../../styles";
 import { Button, WeeklyPicks } from "../../components";
 
-const CURRENT_ROUND = 2;
+const CURRENT_ROUND = 1;
 
 const Team = () => {
   const { currentMode } = useCurrentMode();
@@ -64,7 +64,8 @@ const Team = () => {
     const cleanseSelectedRiders = removeErrors(selectedRiders);
 
     const params = JSON.stringify({
-      email: user.email,
+      email: "tdmonk1@asu.edu",
+      // email: user.email,
       bigBikePicks: cleanseSelectedRiders,
       week: CURRENT_ROUND,
       totalPoints: 0,
