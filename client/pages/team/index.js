@@ -64,8 +64,7 @@ const Team = () => {
     const cleanseSelectedRiders = removeErrors(selectedRiders);
 
     const params = JSON.stringify({
-      email: "tdmonk1@asu.edu",
-      // email: user.email,
+      email: user.email,
       bigBikePicks: cleanseSelectedRiders,
       week: CURRENT_ROUND,
       totalPoints: 0,
