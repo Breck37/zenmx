@@ -13,7 +13,7 @@
     "express": "^4.17.1",
     "migrate-mongo": "^8.1.4",
     "minimist": "^1.2.5",
-    "mongoose": "^5.11.16",
+    "mongoose": "^5.11.17",
     "socket.io": "^3.1.1"
   },
   "resolutions": {

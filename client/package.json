@@ -23,7 +23,7 @@
     "http-proxy-middleware": "^1.0.6",
     "immer": "^8.0.1",
     "minimist": "^1.2.5",
-    "next": "10.0.5",
+    "next": "10.0.7",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "socket.io": "^3.1.1",
@@ -31,10 +31,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
-    "@storybook/addon-actions": "^6.1.18",
-    "@storybook/addon-links": "^6.1.18",
+    "@storybook/addon-actions": "^6.1.20",
+    "@storybook/addon-links": "^6.1.20",
     "@storybook/addons": "^6.1.16",
-    "@storybook/react": "^6.1.18",
+    "@storybook/react": "^6.1.20",
     "babel-loader": "^8.1.0"
   },
   "resolutions": {
