@@ -17,7 +17,6 @@ const bikeLogos = {
 };
 
 ///// EXAMPLES ////
-// PDF:  .get("http://localhost:3700/pdf-results/20/20/1")
 /// NEED TO LOOK AT https://live.amasupercross.com/xml/sx/RaceData.json WHILE RACE IS HAPPENING
 
 export default function Home() {
@@ -47,12 +46,12 @@ export default function Home() {
             }
             setResults(data.raceResults);
             setFastestLaps(data.fastestLaps);
+            setTimeout(() => setLoading(false), 4300);
           })
         )
         .catch((e) => console.log("E on Results", e));
       return;
     }
-    setTimeout(() => setLoading(false), 4300);
   }, [raceResults]);
 
   if (loading) {
