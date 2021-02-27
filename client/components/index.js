@@ -6,3 +6,4 @@ export { default as RiderSelect } from "./RiderSelect/RiderSelect";
 export { default as Button } from "./Button/Button";
 export { default as WeeklyPicks } from "./WeeklyPicks/WeeklyPicks";
 export { default as Dashboard } from "./Dashboard/Dashboard";
+export { default as RiderRow } from "./RiderRow/RiderRow";
