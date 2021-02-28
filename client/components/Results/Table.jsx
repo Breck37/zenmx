@@ -1,56 +1,32 @@
-import React, { useState } from "react";
-import RiderRow from "./RiderRow";
+import React, { useState, useEffect } from "react";
 import { Overlay } from "../Overlay";
 import { TableStyled } from "./styles";
 
-const TableHeaderRow = {
-  position: "Pos",
-  riderName: "Rider Name",
-  team: "Team",
-  bestLap: "Best Lap",
-  lastLap: "Last Lap",
-  number: "#",
-  currentLap: "Lap",
-  bike: "Bike",
-};
-
-const Table = ({ raceResults }) => {
+const Table = ({ rows, children, hasOverlay, currentRow, setCurrentRow }) => {
   const [showOverlay, setShowOverlay] = useState(false);
-  const [currentRider, setCurrentRider] = useState(null);
 
-  const handleClickedRider = (rider) => {
-    setCurrentRider(rider);
-    setShowOverlay(true);
-  };
+  console.log(currentRow, showOverlay);
+  useEffect(() => {
+    if (currentRow && !showOverlay) {
+      setShowOverlay(true);
+    }
+  }, [currentRow, showOverlay]);
 
-  const handleCloseRider = () => {
-    setCurrentRider(null);
+  const handleCloseOverlay = () => {
+    setCurrentRow();
     setShowOverlay(false);
   };
 
   return (
-    <TableStyled
-      raceResultsLength={raceResults.length}
-      hasOverlay={showOverlay}
-    >
-      <Overlay
-        showOverlay={showOverlay}
-        currentRider={currentRider}
-        handleClick={handleCloseRider}
-      />
-      <RiderRow rider={TableHeaderRow} row={0} />
-      {raceResults
-        .sort((a, b) => a.position - b.position)
-        .map((riderResult, row) => {
-          return (
-            <RiderRow
-              key={`${riderResult.position}-${riderResult.number}`}
-              rider={riderResult}
-              row={(row += 2)}
-              onClick={() => handleClickedRider(riderResult)}
-            />
-          );
-        })}
+    <TableStyled raceResultsLength={rows.length} hasOverlay={showOverlay}>
+      {hasOverlay && (
+        <Overlay
+          showOverlay={showOverlay}
+          currentRider={currentRow}
+          handleClick={handleCloseOverlay}
+        />
+      )}
+      <>{children}</>
     </TableStyled>
   );
 };

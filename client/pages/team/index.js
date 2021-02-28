@@ -79,6 +79,7 @@ const Team = () => {
       .then((res) => {
         setSuccess("Saved picks successfully!");
         console.log(res.data);
+        setSelectedRiders([]);
       })
       .catch((err) => console.error(err));
   };
