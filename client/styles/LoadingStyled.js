@@ -11,7 +11,7 @@ export default styled.div`
     height: 50%;
     width: 100%;
     background-color: #fff;
-    animation: topSlide 5s ease-in-out infinite;
+    animation: topSlide 5s ease-in-out;
 
     span {
       position: absolute;
