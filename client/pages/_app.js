@@ -53,7 +53,7 @@ function ModernMotoFantasy({ Component, pageProps }) {
               setCurrentMode={handleCurrentModeUpdate}
             />
           )}
-          <Component {...pageProps} />
+          <Component {...pageProps} setCurrentMode={handleCurrentModeUpdate} />
         </CurrentModeContext.Provider>
       </AppStyled>
     </UserProvider>
