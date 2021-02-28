@@ -1,7 +1,7 @@
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useCurrentMode } from "../../hooks/darkMode";
+import { useCurrentMode } from "../../hooks/currentMode";
 import { LoginStyled } from "../../styles";
 
 const Login = () => {
