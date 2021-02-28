@@ -1,4 +1,4 @@
-import { useCurrentMode } from "./darkMode";
+import { useCurrentMode } from "./currentMode";
 import { createContext, useContext, useEffect } from "react";
 
 const CurrentUserContext = createContext({});

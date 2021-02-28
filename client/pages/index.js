@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { IndexStyled, LoadingStyled } from "../styles";
-import { useCurrentMode } from "../hooks/darkMode";
+import { useCurrentMode } from "../hooks/currentMode";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 
