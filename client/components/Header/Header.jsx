@@ -14,7 +14,8 @@ import Icon from "../../icons/Icon";
 
 const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
   const [mobileTabsVisibility, setMobileTabsVisibility] = useState(false);
-  const modeToSet = currentMode ? 0 : 1;
+  const modeToSet = currentMode ? false : true;
+
   const handleTabClick = (tabRoute) => {
     Router.push(tabRoute);
   };
@@ -35,7 +36,7 @@ const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
       </div>
       <div className="logo-container">
         <div className="logo-wrap">
-          <span onClick={() => Router.push("/")}>ModernMoto</span>
+          <span onClick={() => Router.push("/home")}>ModernMoto</span>
           <span className="icon-wrap" onClick={handleSetVisibility}>
             <Icon
               name="menu"
