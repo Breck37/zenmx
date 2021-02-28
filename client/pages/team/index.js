@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { useUser } from "@auth0/nextjs-auth0";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { useCurrentMode } from "../../hooks/darkMode";
+import { useCurrentMode } from "../../hooks/currentMode";
 import { TeamStyled } from "../../styles";
 import { Button, WeeklyPicks } from "../../components";
 
