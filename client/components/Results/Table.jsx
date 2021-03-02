@@ -5,7 +5,6 @@ import { TableStyled } from "./styles";
 const Table = ({ rows, children, hasOverlay, currentRow, setCurrentRow }) => {
   const [showOverlay, setShowOverlay] = useState(false);
 
-  console.log(currentRow, showOverlay);
   useEffect(() => {
     if (currentRow && !showOverlay) {
       setShowOverlay(true);

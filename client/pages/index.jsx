@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -10,15 +10,20 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 /// NEED TO LOOK AT https://live.amasupercross.com/xml/sx/RaceData.json WHILE RACE IS HAPPENING
 
 export default function LandingPage({ setCurrentMode }) {
-  const [loading, setLoading] = useState(true);
   const { currentMode } = useCurrentMode();
   const { user } = useUser();
   const router = useRouter();
-
+  console.log(user);
   if (user) {
     router.push("/home");
     return null;
   }
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  });
 
   const getCurrentStatus = () => {
     axios
@@ -34,19 +39,7 @@ export default function LandingPage({ setCurrentMode }) {
           Go {currentMode ? "Dark" : "Bright"}
         </button>
       </div>
-
-      <LoginStyled isDarkMode={currentMode}>
-        <div className="title">
-          <span>Modern</span>
-          <span>Moto</span>
-        </div>
-        <div className="tagline">
-          <i>The</i> MX fantasy app
-        </div>
-        <a className="login-button" href="/api/auth/login">
-          Login
-        </a>
-      </LoginStyled>
+      <CircularProgress />
     </IndexStyled>
   );
 }

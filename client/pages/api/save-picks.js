@@ -8,7 +8,7 @@ export default (req, res) => {
     bigBikePicks,
     totalPoints,
   });
-  console.log(userPick);
+
   return axios
     .post(`${process.env.API_URL}/save-picks`, userPick, {
       headers: {
