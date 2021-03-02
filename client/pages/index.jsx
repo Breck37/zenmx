@@ -10,7 +10,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 /// NEED TO LOOK AT https://live.amasupercross.com/xml/sx/RaceData.json WHILE RACE IS HAPPENING
 
 export default function LandingPage({ setCurrentMode }) {
-  const [loading, setLoading] = useState(true);
   const { currentMode } = useCurrentMode();
   const { user } = useUser();
   const router = useRouter();
@@ -34,19 +33,7 @@ export default function LandingPage({ setCurrentMode }) {
           Go {currentMode ? "Dark" : "Bright"}
         </button>
       </div>
-
-      <LoginStyled isDarkMode={currentMode}>
-        <div className="title">
-          <span>Modern</span>
-          <span>Moto</span>
-        </div>
-        <div className="tagline">
-          <i>The</i> MX fantasy app
-        </div>
-        <a className="login-button" href="/api/auth/login">
-          Login
-        </a>
-      </LoginStyled>
+      <CircularProgress />
     </IndexStyled>
   );
 }

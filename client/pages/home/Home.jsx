@@ -23,7 +23,8 @@ const Home = () => {
   const { currentMode } = useCurrentMode();
   const { user } = useUser();
   const router = useRouter();
-  console.log(router, user);
+  let isMounted = false;
+
   useEffect(() => {
     if (!user && router) {
       router.push("/login");
@@ -38,27 +39,22 @@ const Home = () => {
         ])
         .then(
           axios.spread(({ data: userData }, { data }) => {
-            console.log(userData);
-            router.query = {};
-            if (userData.success === false) {
-              router.push("/login");
-            }
             setResults(data.raceResults);
             setFastestLaps(data.fastestLaps);
             setTimeout(() => {
               setLoading(false);
-              // router.query = {};
-            }, 4000);
+            }, 200);
           })
         )
         .catch((e) => console.log("E on Results", e));
       return;
     }
-  }, [raceResults, user]);
+    return () => {
+      isMounted = true;
+    };
+  }, [raceResults, user, isMounted]);
 
-  console.log({ user, raceResults });
-
-  if (!user) {
+  if ((!user || loading) && isMounted) {
     return <CircularProgress />;
   }
 

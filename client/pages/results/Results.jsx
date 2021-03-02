@@ -12,7 +12,6 @@ const Results = () => {
       axios
         .get("/api/get-live-results")
         .then(({ data }) => {
-          console.log(data);
           setResults(data.raceResults);
         })
         .catch((e) => console.log("E on Results", e));
@@ -34,7 +33,7 @@ const Results = () => {
     currentLap: "Lap",
     bike: "Bike",
   };
-  console.log(currentRider);
+
   return (
     <ResultsStyled style={{ backgroundColor: "purple" }}>
       <main>

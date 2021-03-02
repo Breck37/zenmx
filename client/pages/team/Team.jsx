@@ -32,7 +32,6 @@ const Team = () => {
     const riderNames = [];
     return selectedRiders.map((rider) => {
       const indexOfRiderName = riderNames.indexOf(rider.riderName);
-      console.log(indexOfRiderName);
       if (rider.position === 100 || indexOfRiderName === -1) {
         riderNames.push(rider.riderName);
         return { ...rider, error: "" };
@@ -78,12 +77,10 @@ const Team = () => {
       })
       .then((res) => {
         setSuccess("Saved picks successfully!");
-        console.log(res.data);
         setSelectedRiders([]);
       })
       .catch((err) => console.error(err));
   };
-  console.log(user);
 
   return (
     <TeamStyled currentMode={currentMode}>
