@@ -15,10 +15,6 @@ export default function LandingPage({ setCurrentMode }) {
   const { user } = useUser();
   const router = useRouter();
 
-  if (!user) {
-    return <CircularProgress />;
-  }
-
   if (user) {
     router.push("/home");
     return null;
