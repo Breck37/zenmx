@@ -1,12 +1,4 @@
 module.exports = {
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: "/api/:path*",
-  //       destination: "http://localhost:3000/api/:path*",
-  //     },
-  //   ];
-  // },
   env: {
     AUTH0_SECRET: process.env.AUTH0_SECRET,
     AUTH0_BASE_URL: process.env.AUTH0_BASE_URL,

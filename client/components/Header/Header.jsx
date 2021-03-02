@@ -7,7 +7,7 @@
 // Tabs with animations
 
 import React, { useState } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import HeaderStyled from "./styles";
 import { Tab } from "../";
 import Icon from "../../icons/Icon";
@@ -15,9 +15,10 @@ import Icon from "../../icons/Icon";
 const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
   const [mobileTabsVisibility, setMobileTabsVisibility] = useState(false);
   const modeToSet = currentMode ? false : true;
+  const router = useRouter();
 
   const handleTabClick = (tabRoute) => {
-    Router.push(tabRoute);
+    router.push(tabRoute);
   };
 
   const handleSetVisibility = () => {
