@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -13,11 +13,17 @@ export default function LandingPage({ setCurrentMode }) {
   const { currentMode } = useCurrentMode();
   const { user } = useUser();
   const router = useRouter();
-
+  console.log(user);
   if (user) {
     router.push("/home");
     return null;
   }
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  });
 
   const getCurrentStatus = () => {
     axios
