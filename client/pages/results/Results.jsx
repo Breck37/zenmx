@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useUser } from "@auth0/nextjs-auth0";
 import { Table, RiderRow } from "../../components";
 import { ResultsStyled } from "../../styles";
+import { useRouter } from "next/router";
+import { CircularProgress } from "@material-ui/core";
 
 const Results = () => {
   const [raceResults, setResults] = useState([]);
   const [currentRider, setCurrentRider] = useState(null);
+  const { user, isLoading } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
+    if (!isLoading && !user) {
+      router.push("/login");
+      return;
+    }
     if (!raceResults || !raceResults.length) {
       axios
         .get("/api/get-live-results")
@@ -33,6 +42,10 @@ const Results = () => {
     currentLap: "Lap",
     bike: "Bike",
   };
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
 
   return (
     <ResultsStyled style={{ backgroundColor: "purple" }}>

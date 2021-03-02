@@ -37,7 +37,7 @@ const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
       </div>
       <div className="logo-container">
         <div className="logo-wrap">
-          <span onClick={() => Router.push("/home")}>ModernMoto</span>
+          <span onClick={() => router.push("/home")}>ModernMoto</span>
           <span className="icon-wrap" onClick={handleSetVisibility}>
             <Icon
               name="menu"

@@ -12,7 +12,6 @@ import "../styles/fonts.css";
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
   const router = useRouter();
-  const { user } = pageProps;
 
   const isLoginOrLandingPage = useMemo(() => {
     return Boolean(router.pathname === "/login" || router.pathname === "/");
@@ -39,7 +38,7 @@ function ModernMotoFantasy({ Component, pageProps }) {
   };
 
   return (
-    <UserProvider user={user}>
+    <UserProvider>
       <AppStyled currentMode={currentMode}>
         <Head>
           <title>ModernMotoFantasy</title>

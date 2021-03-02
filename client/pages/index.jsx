@@ -11,19 +11,18 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function LandingPage({ setCurrentMode }) {
   const { currentMode } = useCurrentMode();
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
   const router = useRouter();
-  console.log(user);
-  if (user) {
-    router.push("/home");
-    return null;
-  }
 
   useEffect(() => {
-    if (!user) {
+    if (!isLoading && !user) {
       router.push("/login");
     }
-  });
+
+    if (!isLoading && user) {
+      router.push("/home");
+    }
+  }, [isLoading]);
 
   const getCurrentStatus = () => {
     axios

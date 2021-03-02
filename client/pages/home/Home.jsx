@@ -21,12 +21,12 @@ const Home = () => {
   const [raceResults, setResults] = useState([]);
   const [fastestLaps, setFastestLaps] = useState([]);
   const { currentMode } = useCurrentMode();
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
   const router = useRouter();
   let isMounted = false;
 
   useEffect(() => {
-    if (!user && router) {
+    if (!user && !isLoading) {
       router.push("/login");
       return null;
     }
@@ -54,7 +54,7 @@ const Home = () => {
     };
   }, [raceResults, user, isMounted]);
 
-  if ((!user || loading) && isMounted) {
+  if (loading || isLoading) {
     return <CircularProgress />;
   }
 

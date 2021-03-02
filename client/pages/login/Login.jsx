@@ -8,27 +8,11 @@ import { LoginStyled } from "../../styles";
 const Login = () => {
   const [loading, setLoading] = useState(true);
   const { currentMode } = useCurrentMode();
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
   const router = useRouter();
-  let isMounted = false;
 
-  useEffect(() => {
-    if (user && isMounted) {
-      router.push("/home");
-    }
-    return () => {
-      isMounted = true;
-    };
-  }, [isMounted]);
-
-  if (!isMounted) {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }
-
-  if (loading) {
-    return <CircularProgress />;
+  if (!isLoading && user) {
+    router.push("/home");
   }
 
   return (
