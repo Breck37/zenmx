@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useUser } from "@auth0/nextjs-auth0";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useCurrentMode } from "../../hooks/currentMode";
 import { TeamStyled } from "../../styles";
 import { Button, WeeklyPicks } from "../../components";
+import { useIsMountedRef } from "../../hooks";
 
 const CURRENT_ROUND = 1;
 
@@ -14,16 +16,25 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState("");
   const [selectedRiders, setSelectedRiders] = useState([]);
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
+  const router = useRouter();
+  const isMounted = useIsMountedRef();
 
   useEffect(() => {
+    if (!isMounted.current) return;
     if (entries.length) return;
+    if (!isLoading && !user) {
+      router.push("/login");
+      return;
+    }
 
     axios
-      .get("/api/check-entry-list?week=eight")
+      .get("/api/check-entry-list?week=nine")
       .then((res) => {
-        setLoading(false);
-        setEntries(res.data.data);
+        if (isMounted.current) {
+          setLoading(false);
+          setEntries(res.data.data);
+        }
       })
       .catch((err) => console.err(err));
   });
