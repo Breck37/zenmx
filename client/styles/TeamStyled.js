@@ -11,4 +11,6 @@ export default styled.div`
   align-items: center;
   justify-content: center;
   color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+
+  .team-save-button: margin-top: 8px;
 `;

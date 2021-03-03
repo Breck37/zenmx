@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   Select,
@@ -43,6 +43,12 @@ const RiderSelect = ({
   const [riderName, setRiderName] = useState("");
   const classes = useStyles();
   const theme = useTheme();
+
+  useEffect(() => {
+    if (!value && riderName) {
+      setRiderName("");
+    }
+  }, [value]);
 
   const handleRiderSelection = (riderEvent) => {
     const riderName = riderEvent.target.value;

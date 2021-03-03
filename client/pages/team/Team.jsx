@@ -21,6 +21,9 @@ const Team = () => {
   const isMounted = useIsMountedRef();
 
   useEffect(() => {
+    if (success) {
+      setTimeout(() => setSuccess(""), 1500);
+    }
     if (!isMounted.current) return;
     if (entries.length) return;
     if (!isLoading && !user) {
@@ -101,15 +104,12 @@ const Team = () => {
         selectedRiders={selectedRidersWithErrors}
         setSelectedRiders={setSelectedRiders}
       />
-      {success && (
-        <div style={{ height: 24, fontSize: 18, color: "green" }}>
-          {success}
-        </div>
-      )}
+      <div style={{ height: 24, fontSize: 18, color: "green" }}>{success}</div>
       <Button
         label="Save Team"
         onClick={saveUserPicks}
         disabled={hasPickErrors}
+        className="team-save-button"
       />
     </TeamStyled>
   );
