@@ -11,4 +11,14 @@ export default styled.div`
   align-items: center;
   justify-content: center;
   color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+
+  .team-submit-success {
+    height: 24;
+    font-ize: 18;
+    color: limegreen;
+  }
+
+  .team-save-button: {
+    margin-top: 8px;
+  }
 `;
