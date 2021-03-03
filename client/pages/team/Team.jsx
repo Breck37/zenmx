@@ -8,7 +8,7 @@ import { TeamStyled } from "../../styles";
 import { Button, WeeklyPicks } from "../../components";
 import { useIsMountedRef } from "../../hooks";
 
-const CURRENT_ROUND = 1;
+const CURRENT_ROUND = 2;
 
 const Team = () => {
   const { currentMode } = useCurrentMode();
@@ -40,6 +40,7 @@ const Team = () => {
   });
 
   const selectedRidersWithErrors = useMemo(() => {
+    if (!selectedRiders || !selectedRiders?.length) return [];
     const riderNames = [];
     return selectedRiders.map((rider) => {
       const indexOfRiderName = riderNames.indexOf(rider.riderName);
@@ -52,7 +53,7 @@ const Team = () => {
         error: `Please change pick #${indexOfRiderName + 1}`,
       };
     });
-  }).sort((a, b) => a.position - b.position);
+  }, [selectedRiders]).sort((a, b) => a.position - b.position);
 
   const hasPickErrors = useMemo(() => {
     if (selectedRidersWithErrors.length !== 7) return true;
