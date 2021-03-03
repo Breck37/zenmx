@@ -104,7 +104,7 @@ const Team = () => {
         selectedRiders={selectedRidersWithErrors}
         setSelectedRiders={setSelectedRiders}
       />
-      <div style={{ height: 24, fontSize: 18, color: "green" }}>{success}</div>
+      <div className="team-submit-success">{success}</div>
       <Button
         label="Save Team"
         onClick={saveUserPicks}

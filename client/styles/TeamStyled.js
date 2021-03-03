@@ -12,5 +12,13 @@ export default styled.div`
   justify-content: center;
   color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
 
-  .team-save-button: margin-top: 8px;
+  .team-submit-success {
+    height: 24;
+    font-ize: 18;
+    color: limegreen;
+  }
+
+  .team-save-button: {
+    margin-top: 8px;
+  }
 `;
