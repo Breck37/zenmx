@@ -13,8 +13,8 @@ export default styled.div`
   color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
 
   .team-submit-success {
-    height: 24;
-    font-ize: 18;
+    height: 24px;
+    font-ize: 18px;
     color: limegreen;
   }
 
