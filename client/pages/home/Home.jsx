@@ -5,16 +5,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import { useCurrentMode } from "../../hooks/currentMode";
 import { HomeStyled } from "../../styles";
-
-const bikeLogos = {
-  honda: "/logos/HondaLogo.jpeg",
-  kawasaki: "/logos/KawiLogo.jpeg",
-  husqvarna: "/logos/HuskieLogo.jpeg",
-  yamaha: "/logos/YamahaLogo.jpeg",
-  gasgas: "/logos/GasGasLogo.jpeg",
-  ktm: "/logos/KTMLogo.jpeg",
-  suzuki: "/logos/SuzukiLogo.jpeg",
-};
+import { manufacturers } from "../../constants";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -68,7 +59,7 @@ const Home = () => {
               return (
                 <div key={`${rider}-fast-lap`} className={`fast-lap ${index}`}>
                   <img
-                    src={bikeLogos[bike.toLowerCase()]}
+                    src={manufacturers[bike.toLowerCase()].image}
                     alt=""
                     className="rider-image"
                   />
