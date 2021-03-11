@@ -11,7 +11,7 @@
     "cors": "^2.8.5",
     "crawler-request": "^1.2.2",
     "express": "^4.17.1",
-    "migrate-mongo": "^8.1.4",
+    "migrate-mongo": "^8.2.2",
     "minimist": "^1.2.5",
     "mongoose": "^5.11.19",
     "socket.io": "^3.1.2"
