@@ -7,8 +7,7 @@ import { useCurrentMode } from "../../hooks/currentMode";
 import { TeamStyled } from "../../styles";
 import { Button, WeeklyPicks } from "../../components";
 import { useIsMountedRef } from "../../hooks";
-
-const CURRENT_ROUND = 2;
+import { roundData } from "../../constants";
 
 const Team = () => {
   const { currentMode } = useCurrentMode();
@@ -31,8 +30,9 @@ const Team = () => {
       return;
     }
 
+    // WEEKLY UPDATE: change entry list week
     axios
-      .get("/api/check-entry-list?week=nine")
+      .get("/api/check-entry-list?week=three")
       .then((res) => {
         if (isMounted.current) {
           setLoading(false);
@@ -80,7 +80,7 @@ const Team = () => {
     const params = JSON.stringify({
       email: user.email,
       bigBikePicks: cleanseSelectedRiders,
-      week: CURRENT_ROUND,
+      week: roundData.currentRound,
       totalPoints: 0,
     });
 
