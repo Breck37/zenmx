@@ -18,6 +18,7 @@ module.exports = {
   supercross: {
     rounds: {
       one: {
+        week: 1,
         title: "Houston 1",
         city: "Houston",
         state: "TX",
@@ -30,6 +31,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2105/S1F1PRESS.pdf",
       },
       two: {
+        week: 2,
         title: "Houston 2",
         city: "Houston",
         state: "TX",
@@ -42,6 +44,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2110/S1F1PRESS.pdf",
       },
       three: {
+        week: 3,
         title: "Houston 3",
         city: "Houston",
         state: "TX",
@@ -54,6 +57,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2115/S1F1PRESS.pdf",
       },
       four: {
+        week: 4,
         title: "Indianapolis 1",
         city: "Indianapolis",
         state: "IN",
@@ -66,6 +70,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2120/S1F1PRESS.pdf",
       },
       five: {
+        week: 5,
         title: "Indianapolis 2",
         city: "Indianapolis",
         state: "IN",
@@ -78,6 +83,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2125/S1F1PRESS.pdf",
       },
       six: {
+        week: 6,
         title: "Indianapolis 3",
         city: "Indianapolis",
         state: "IN",
@@ -90,6 +96,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2130/S1F1PRESS.pdf",
       },
       seven: {
+        week: 7,
         title: "Orlando 1",
         city: "Orlando",
         state: "IN",
@@ -102,6 +109,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2135/S1F1PRESS.pdf",
       },
       eight: {
+        week: 8,
         title: "Orlando 2",
         city: "Orlando",
         state: "FL",
@@ -114,6 +122,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2140/S1F1PRESS.pdf",
       },
       nine: {
+        week: 9,
         title: "Daytona",
         city: "Daytona",
         state: "FL",
@@ -126,6 +135,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2145/S1F1PRESS.pdf",
       },
       ten: {
+        week: 10,
         title: "Arlington 1",
         city: "Arlington",
         state: "TX",
@@ -138,6 +148,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2150/S1F1PRESS.pdf",
       },
       eleven: {
+        week: 11,
         title: "Arlington 2",
         city: "Arlington",
         state: "TX",
@@ -150,6 +161,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2155/S1F1PRESS.pdf",
       },
       twelve: {
+        week: 12,
         title: "Arlington 3",
         city: "Arlington",
         state: "TX",
@@ -162,6 +174,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2160/S1F1PRESS.pdf",
       },
       thirteen: {
+        week: 13,
         title: "Atlanta 1",
         city: "Atlanta",
         state: "GA",
@@ -174,6 +187,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2165/S1F1PRESS.pdf",
       },
       fourteen: {
+        week: 14,
         title: "Atlanta 2",
         city: "Atlanta",
         state: "GA",
@@ -186,6 +200,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2170/S1F1PRESS.pdf",
       },
       fifteen: {
+        week: 15,
         title: "Atlanta 3",
         city: "Atlanta",
         state: "GA",
@@ -198,6 +213,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2175/S1F1PRESS.pdf",
       },
       sixteen: {
+        week: 16,
         title: "Salt Lake City 1",
         city: "Salt Lake City",
         state: "UT",
@@ -210,6 +226,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2180/S1F1PRESS.pdf",
       },
       seventeen: {
+        week: 17,
         title: "Salt Lake City 2",
         city: "Salt Lake City",
         state: "UT",
