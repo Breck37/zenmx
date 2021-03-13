@@ -13,11 +13,13 @@ const Home = () => {
   const [fastestLaps, setFastestLaps] = useState([]);
   const { currentMode } = useCurrentMode();
   const { user, isLoading } = useUser();
+  const [userWithPicks, setUserWithPicks] = useState(null);
   const router = useRouter();
   let isMounted = false;
 
   useEffect(() => {
     if (!user && !isLoading) {
+      setUserWithPicks(null);
       router.push("/login");
       return null;
     }
@@ -30,6 +32,8 @@ const Home = () => {
         ])
         .then(
           axios.spread(({ data: userData }, { data }) => {
+            if (userData.success) setUserWithPicks(userData.user);
+            console.log(data);
             setResults(data.raceResults);
             setFastestLaps(data.fastestLaps);
             setTimeout(() => {
@@ -48,7 +52,7 @@ const Home = () => {
   if (loading || isLoading) {
     return <CircularProgress />;
   }
-
+  console.log(user, userWithPicks);
   return (
     <HomeStyled currentMode={currentMode}>
       {fastestLaps && fastestLaps.length > 0 ? (
