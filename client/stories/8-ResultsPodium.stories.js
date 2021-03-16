@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { TopFive } from "../components";
+import { ResultsPodium } from "../components";
 
 export default {
-  title: "TopFive",
-  component: TopFive,
+  title: "ResultsPodium",
+  component: ResultsPodium,
 };
 
-const mockTopFive = [
+const mockResultsPodium = [
   {
     name: "Bruce Pizza",
     number: 22,
@@ -33,20 +33,31 @@ const mockTopFive = [
     number: 51,
     position: 2,
   },
+  {
+    name: "Bruce Pizza",
+    number: 22,
+    position: 100,
+  },
+  {
+    name: "Pablo Taco",
+    number: "69",
+    position: 10,
+  },
 ];
 
-export const DesktopTopFive = () => {
-  return <TopFive riders={mockTopFive} />;
+export const DesktopResultsPodium = () => {
+  console.log(ResultsPodium);
+  return <ResultsPodium riders={mockResultsPodium} />;
 };
 
 const MobileContainer = styled.div`
   width: 350px;
 `;
 
-export const MobileTopFive = () => {
+export const MobileResultsPodium = () => {
   return (
     <MobileContainer>
-      <TopFive riders={mockTopFive} />
+      <ResultsPodium riders={mockResultsPodium} />
     </MobileContainer>
   );
 };

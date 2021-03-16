@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import TopFiveStyled from "./styles";
 
-export default function TopFive({ riders }) {
+export default function ResultsPodium({ riders }) {
   const ridersToDisplay = riders
     .sort((riderA, riderB) => riderA.position - riderB.position)
     .reverse();
-
+  console.log({ riders });
   return (
     <TopFiveStyled>
-      <h1>Top Five</h1>
+      <h1>Results Podium</h1>
 
-      <section className="podium-container">
+      <section className="podium-container-top">
         {ridersToDisplay.map((rider) => (
-          <div key={rider.number} className={rider.position}>
+          <div
+            key={`${rider.number}-${rider.position}`}
+            className={rider.position}
+          >
             {rider.name}
           </div>
         ))}
@@ -23,6 +26,8 @@ export default function TopFive({ riders }) {
         <div className="position three">3</div>
         <div className="position two">2</div>
         <div className="position one">1</div>
+        <div className="position six">*</div>
+        <div className="position seven">10</div>
       </section>
     </TopFiveStyled>
   );
