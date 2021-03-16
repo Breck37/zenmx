@@ -8,3 +8,4 @@ export { default as WeeklyPicks } from "./WeeklyPicks/WeeklyPicks";
 export { default as Dashboard } from "./Dashboard/Dashboard";
 export { default as RiderRow } from "./RiderRow/RiderRow";
 export { default as ResultsPodium } from "./ResultsPodium/ResultsPodium";
+export { default as FrontPlate } from "./FrontPlate/FrontPlate";
