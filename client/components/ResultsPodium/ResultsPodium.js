@@ -1,22 +1,35 @@
 import React, { useState } from "react";
-import TopFiveStyled from "./styles";
+import ResultsPodiumStyled from "./styles";
+import FrontPlate from "../FrontPlate/FrontPlate";
+import FrontPlateSmall from "../FrontPlate/FrontPlateSmall";
+import { useCurrentMode } from "../../hooks/currentMode";
 
-export default function ResultsPodium({ riders }) {
+export default function ResultsPodium({ riders, small = false }) {
+  const { currentMode } = useCurrentMode();
+  let shouldShowSmallPlate = false;
   const ridersToDisplay = riders
     .sort((riderA, riderB) => riderA.position - riderB.position)
     .reverse();
   console.log({ riders });
-  return (
-    <TopFiveStyled>
-      <h1>Results Podium</h1>
 
+  if (window.screen.width <= 500 || small) {
+    /* conditional statements */
+    shouldShowSmallPlate = true;
+  }
+  const DisplayPlate = shouldShowSmallPlate ? FrontPlateSmall : FrontPlate;
+
+  return (
+    <ResultsPodiumStyled
+      currentMode={currentMode}
+      shouldShowSmallPlate={shouldShowSmallPlate}
+    >
       <section className="podium-container-top">
         {ridersToDisplay.map((rider) => (
           <div
             key={`${rider.number}-${rider.position}`}
             className={rider.position}
           >
-            {rider.name}
+            <DisplayPlate rider={rider} />
           </div>
         ))}
       </section>
@@ -29,6 +42,6 @@ export default function ResultsPodium({ riders }) {
         <div className="position six">*</div>
         <div className="position seven">10</div>
       </section>
-    </TopFiveStyled>
+    </ResultsPodiumStyled>
   );
 }
