@@ -1,11 +1,18 @@
 import React from "react";
-import FrontPlateIcon from "./FrontPlate.inline.svg";
+import FrontPlateIcon from "./FrontPlate.svg";
+import { FrontPlateStyled } from "./styles";
+import manufacturers from "../../constants/manufacturers";
 
-const FrontPlate = ({ fill = "red" }) => {
+const FrontPlate = ({ fill = "red", height = 150, width = 150, rider }) => {
   return (
-    <div>
+    <FrontPlateStyled
+      height={height}
+      width={width}
+      color={manufacturers[rider.bike.toLowerCase()].color}
+    >
       <FrontPlateIcon fill={fill} />
-    </div>
+      <div className="number-wrap">1</div>
+    </FrontPlateStyled>
   );
 };
 
