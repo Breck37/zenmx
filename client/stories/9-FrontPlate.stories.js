@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { ResultsPodium } from "../components";
+import { FrontPlate, FrontPlateSmall } from "../components";
 
 export default {
-  title: "ResultsPodium",
-  component: ResultsPodium,
+  title: "FrontPlate",
+  component: FrontPlate,
 };
 
-const mockResultsPodium = [
+const mockFrontPlateRiders = [
   {
     name: "Bruce Pizza",
     number: 22,
@@ -46,25 +46,42 @@ const mockResultsPodium = [
   },
   {
     name: "Pablo Taco",
-    number: "690",
+    number: "69",
     position: 10,
     bike: "KTM",
   },
 ];
 
-export const DesktopResultsPodium = () => {
-  console.log(ResultsPodium);
-  return <ResultsPodium riders={mockResultsPodium} />;
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
+export const DesktopFrontPlate = () => {
+  console.log(FrontPlate);
+  return (
+    <Container>
+      {mockFrontPlateRiders.map((rider) => (
+        <FrontPlate rider={rider} />
+      ))}
+    </Container>
+  );
 };
 
 const MobileContainer = styled.div`
   width: 350px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
-export const MobileResultsPodium = () => {
+export const MobileFrontPlate = () => {
   return (
     <MobileContainer>
-      <ResultsPodium riders={mockResultsPodium} small />
+      {mockFrontPlateRiders.map((rider) => (
+        <FrontPlateSmall rider={rider} small />
+      ))}
     </MobileContainer>
   );
 };

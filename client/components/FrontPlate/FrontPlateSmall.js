@@ -3,7 +3,7 @@ import FrontPlateSmallIcon from "./FrontPlateSmall.svg";
 import { FrontPlateSmallStyled } from "./styles";
 import manufacturers from "../../constants/manufacturers";
 
-const FrontPlateSmall = ({ fill = "red", height = 32, width = 32, rider }) => {
+const FrontPlateSmall = ({ height = 32, width = 32, rider }) => {
   return (
     <FrontPlateSmallStyled height={height} width={width}>
       <FrontPlateSmallIcon
