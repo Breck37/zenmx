@@ -10,4 +10,5 @@ export default styled.div`
   align-items: center;
   box-sizing: border-box;
   background-color: ${({ currentMode }) => (currentMode ? "#fff" : "#282828")};
+  font-family: Chalkduster, fantasy;
 `;

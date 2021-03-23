@@ -3,31 +3,41 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useUser } from "@auth0/nextjs-auth0";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { useCurrentMode } from "../../hooks/currentMode";
-import { TeamStyled } from "../../styles";
 import { Button, WeeklyPicks } from "../../components";
 import { useIsMountedRef } from "../../hooks";
-import { roundData } from "../../constants";
+import { useCurrentMode } from "../../hooks/currentMode";
+import { useCurrentRound } from "../../hooks/currentRound";
+import { currentRound } from "../../constants";
+import { TeamStyled } from "../../styles";
 
 // TODO create league select
 
 const Team = () => {
+  const router = useRouter();
+
+  // hooks
+  const { user, isLoading } = useUser();
+  const isMounted = useIsMountedRef();
+  const { activeRound } = useCurrentRound();
   const { currentMode } = useCurrentMode();
+
+  // state
   const [league, setLeague] = useState("");
+  const [selectedRiders, setSelectedRiders] = useState([]);
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState("");
-  const [selectedRiders, setSelectedRiders] = useState([]);
-  const { user, isLoading } = useUser();
-  const router = useRouter();
-  const isMounted = useIsMountedRef();
+
+  console.log(activeRound, currentRound);
+
+  const picksUnavailable = activeRound.submissionEnd < new Date();
 
   useEffect(() => {
     if (success) {
       setTimeout(() => setSuccess(""), 1500);
     }
     if (!isMounted.current) return;
-    if (entries.length) return;
+    if (entries && entries.length) return;
     if (!isLoading && !user) {
       router.push("/login");
       return;
@@ -35,14 +45,15 @@ const Team = () => {
 
     // WEEKLY UPDATE: change entry list week
     axios
-      .get("/api/check-entry-list?week=three")
+      .get(`/api/check-entry-list?week=${currentRound}`)
       .then((res) => {
+        console.log("RES", res);
         if (isMounted.current) {
           setLoading(false);
           setEntries(res.data.data);
         }
       })
-      .catch((err) => console.err(err));
+      .catch((err) => console.error(err));
   });
 
   const selectedRidersWithErrors = useMemo(() => {
@@ -68,10 +79,6 @@ const Team = () => {
       false
     );
   });
-
-  if (loading) {
-    return <CircularProgress />;
-  }
 
   const removeErrors = (riders) => {
     return riders.map(({ error, ...rest }) => ({ ...rest }));
@@ -101,20 +108,27 @@ const Team = () => {
       .catch((err) => console.error(err));
   };
 
+  if (loading) {
+    return <CircularProgress />;
+  }
+
   return (
     <TeamStyled currentMode={currentMode}>
       <WeeklyPicks
         riders={entries}
         selectedRiders={selectedRidersWithErrors}
         setSelectedRiders={setSelectedRiders}
+        picksUnavailable={picksUnavailable}
       />
       <div className="team-submit-success">{success}</div>
-      <Button
-        label="Save Team"
-        onClick={saveUserPicks}
-        disabled={hasPickErrors}
-        className="team-save-button"
-      />
+      {!picksUnavailable && (
+        <Button
+          label="Save Team"
+          onClick={saveUserPicks}
+          disabled={hasPickErrors}
+          className="team-save-button"
+        />
+      )}
     </TeamStyled>
   );
 };

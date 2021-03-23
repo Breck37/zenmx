@@ -1,13 +1,14 @@
 // import App from 'next/app'
 import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
-import { CurrentModeContext } from "../hooks";
+import { CurrentModeContext, CurrentRoundContextProvider } from "../hooks";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
 import { AppStyled } from "../styles";
 import { useRouter } from "next/router";
 import "../styles/fonts.css";
+import { currentRound } from "../constants";
 
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
@@ -52,23 +53,16 @@ function ModernMotoFantasy({ Component, pageProps }) {
               setCurrentMode={handleCurrentModeUpdate}
             />
           )}
-          <Component {...pageProps} setCurrentMode={handleCurrentModeUpdate} />
+          <CurrentRoundContextProvider currentRound={currentRound}>
+            <Component
+              {...pageProps}
+              setCurrentMode={handleCurrentModeUpdate}
+            />
+          </CurrentRoundContextProvider>
         </CurrentModeContext.Provider>
       </AppStyled>
     </UserProvider>
   );
 }
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// ModernMotoFantasy.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
 
 export default ModernMotoFantasy;

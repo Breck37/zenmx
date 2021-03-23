@@ -2,7 +2,12 @@ import React, { useMemo } from "react";
 import PicksStyled from "./PicksStyled";
 import RiderSelect from "../RiderSelect/RiderSelect";
 
-const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
+const WeeklyPicks = ({
+  riders,
+  selectedRiders,
+  setSelectedRiders,
+  picksUnavailable,
+}) => {
   const riderPositions = useMemo(() => {
     return {
       first: selectedRiders.find((rider) => rider.position === 1),
@@ -45,6 +50,14 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
     const sortedSelectedRiders = [...selected, sanitizedRider];
     setSelectedRiders(sortedSelectedRiders);
   };
+
+  if (picksUnavailable) {
+    return (
+      <PicksStyled>
+        <div className="unavailable">Window to make picks has closed</div>
+      </PicksStyled>
+    );
+  }
 
   return (
     <PicksStyled>
