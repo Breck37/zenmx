@@ -1,13 +1,18 @@
+function sortMinuteTimes(aTime, bTime) {
+  if (aTime.length === 2 && bTime.length === 2) {
+    return parseFloat(bTime[1] + 60) - parseFloat(aTime[1] + 60);
+  }
+  if (aTime.length === 2) parseFloat(aTime[1] + 60) - parseFloat(bTime);
+  return parseFloat(bTime[1] + 60) - parseFloat(aTime);
+}
+
 module.exports = (raceResults) => {
   if (!raceResults || !raceResults.length) return [];
 
   return raceResults
     .sort((a, b) => {
-      if (a.bestLap.includes(":") && b.bestLap.includes(":")) {
-        return (
-          parseFloat(a.bestLap.split(":")[1]) -
-          parseFloat(b.bestLap.split(":")[1])
-        );
+      if (a.bestLap.includes(":") || b.bestLap.includes(":")) {
+        return sortMinuteTimes(a.bestLap.split(":"), b.bestLap.split(":"));
       }
 
       if (a === b) {

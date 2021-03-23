@@ -48,7 +48,7 @@ const Results = () => {
   }
 
   return (
-    <ResultsStyled style={{ backgroundColor: "purple" }}>
+    <ResultsStyled>
       <main>
         {raceResults && raceResults.length ? (
           <Table
