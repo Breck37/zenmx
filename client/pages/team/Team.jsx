@@ -30,8 +30,6 @@ const Team = () => {
 
   console.log(activeRound, currentRound);
 
-  const picksUnavailable = activeRound.submissionEnd < new Date();
-
   const picksUnavailable =
     activeRound.submissionEnd < new Date() ||
     activeRound.submissionStart > new Date();
