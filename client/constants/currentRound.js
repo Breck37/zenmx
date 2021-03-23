@@ -1,3 +1,1 @@
-module.exports = {
-  currentRound: 4,
-};
+module.exports = "s11";
