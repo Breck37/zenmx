@@ -52,7 +52,7 @@ const Home = () => {
   if (loading || isLoading) {
     return <CircularProgress />;
   }
-  console.log(user, userWithPicks);
+
   return (
     <HomeStyled currentMode={currentMode}>
       {fastestLaps && fastestLaps.length > 0 ? (
