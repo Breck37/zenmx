@@ -39,7 +39,6 @@ const RiderSelect = ({
   riderPosition,
   value,
 }) => {
-  if (!options) return null;
   const [riderName, setRiderName] = useState("");
   const classes = useStyles();
   const theme = useTheme();

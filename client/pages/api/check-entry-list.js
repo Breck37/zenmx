@@ -43,31 +43,25 @@ const spliceEntryList = (formattedResponse) => {
 export default async (req, res) => {
   try {
     const { week } = req.query;
-    const currentWeek = scheduledData.supercross.rounds[week];
+    const currentWeek = scheduledData[week];
 
-    const entryListRequest = await crawler(currentWeek.entryList).then(
-      (response) => {
-        if (response && !response.error) {
-          const formattedResponse = response.text.split("\n");
+    await crawler(currentWeek.entryList).then((response) => {
+      if (response && !response.error) {
+        const formattedResponse = response.text.split("\n");
 
-          const data = riderMapper(
-            collectEntryListData(spliceEntryList(formattedResponse))
-          );
-          return {
-            data,
-            success: true,
-          };
-        }
-        return {
-          data: response.error,
-          success: false,
-        };
+        const riders = riderMapper(
+          collectEntryListData(spliceEntryList(formattedResponse))
+        );
+        return res.status(200).send({
+          riders,
+          success: true,
+        });
       }
-    );
-    if (!entryListRequest.success) {
-      return res.status(200).send(entryListRequest);
-    }
-    return res.status(200).send(entryListRequest);
+      return res.status(200).send({
+        data: response.error,
+        success: false,
+      });
+    });
   } catch (error) {
     console.log("ERR", { error });
     res.status(404).send("Entry list not yet available.");

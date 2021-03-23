@@ -30,20 +30,26 @@ const Team = () => {
 
   console.log(activeRound, currentRound);
 
-  const picksUnavailable = activeRound.submissionEnd < new Date();
+  const picksUnavailable =
+    activeRound.submissionEnd < new Date() ||
+    activeRound.submissionStart > new Date();
 
   useEffect(() => {
-    if (success) {
-      setTimeout(() => setSuccess(""), 1500);
-    }
     if (!isMounted.current) return;
     if (entries && entries.length) return;
     if (!isLoading && !user) {
       router.push("/login");
       return;
     }
+    if (picksUnavailable) {
+      setLoading(false);
+      return;
+    }
 
-    // WEEKLY UPDATE: change entry list week
+    if (success) {
+      setTimeout(() => setSuccess(""), 1500);
+    }
+
     axios
       .get(`/api/check-entry-list?week=${currentRound}`)
       .then((res) => {
@@ -110,6 +116,20 @@ const Team = () => {
 
   if (loading) {
     return <CircularProgress />;
+  }
+
+  if (picksUnavailable) {
+    const beginningText =
+      activeRound.submissionStart > new Date()
+        ? "Window to make picks is not yet open"
+        : null;
+    return (
+      <TeamStyled currentMode={currentMode}>
+        <div className="unavailable">
+          {beginningText || "Window to make picks has closed"}
+        </div>
+      </TeamStyled>
+    );
   }
 
   return (
