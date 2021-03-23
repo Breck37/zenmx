@@ -8,6 +8,8 @@ const WeeklyPicks = ({
   setSelectedRiders,
   picksUnavailable,
 }) => {
+  if (riders || riders.length) return null;
+
   const riderPositions = useMemo(() => {
     return {
       first: selectedRiders.find((rider) => rider.position === 1),

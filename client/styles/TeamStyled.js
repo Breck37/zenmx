@@ -21,4 +21,11 @@ export default styled.div`
   .team-save-button: {
     margin-top: 8px;
   }
+
+  .unavailable {
+    background-color: ${({ currentMode }) =>
+      currentMode ? "#fff" : "#282828"};
+    text-align: center;
+    color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+  }
 `;
