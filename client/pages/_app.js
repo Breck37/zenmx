@@ -1,7 +1,11 @@
 // import App from 'next/app'
 import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
-import { CurrentModeContext, CurrentRoundContextProvider } from "../hooks";
+import {
+  CurrentModeContext,
+  CurrentRoundContextProvider,
+  CurrentUserContextProvider,
+} from "../hooks";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
@@ -45,24 +49,34 @@ function ModernMotoFantasy({ Component, pageProps }) {
           <title>ModernMotoFantasy</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <CurrentModeContext.Provider value={currentMode}>
-          {!isLoginOrLandingPage && (
-            <Header
-              tabs={defaultTabs}
-              currentMode={currentMode}
-              setCurrentMode={handleCurrentModeUpdate}
-            />
-          )}
-          <CurrentRoundContextProvider currentRound={currentRound}>
-            <Component
-              {...pageProps}
-              setCurrentMode={handleCurrentModeUpdate}
-            />
-          </CurrentRoundContextProvider>
-        </CurrentModeContext.Provider>
+        <CurrentUserContextProvider>
+          <CurrentModeContext.Provider value={currentMode}>
+            {!isLoginOrLandingPage && (
+              <Header
+                tabs={defaultTabs}
+                currentMode={currentMode}
+                setCurrentMode={handleCurrentModeUpdate}
+              />
+            )}
+            <CurrentRoundContextProvider currentRound={currentRound}>
+              <Component
+                {...pageProps}
+                setCurrentMode={handleCurrentModeUpdate}
+              />
+            </CurrentRoundContextProvider>
+          </CurrentModeContext.Provider>
+        </CurrentUserContextProvider>
       </AppStyled>
     </UserProvider>
   );
 }
+
+ModernMotoFantasy.getInitialProps = async ({ Component, ctx }) => {
+  const pageProps = Component.getInitialProps
+    ? await Component.getInitialProps(ctx)
+    : {};
+
+  return { pageProps };
+};
 
 export default ModernMotoFantasy;

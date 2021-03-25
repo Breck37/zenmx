@@ -1,16 +1,36 @@
 import { useCurrentMode } from "./currentMode";
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const CurrentUserContext = createContext({});
 
-export const useCurrentUser = () => {
-  const user = useContext(CurrentUserContext);
+export const useCurrentUser = (user) => {
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {
-    if (!user) {
+    if (!currentUser && user) {
+      axios
+        .get(`/api/get-user/${user}`)
+        .then(({ data }) => {
+          if (data.success) {
+            setCurrentUser(data.user);
+          }
+        })
+        .catch((err) => console.log({ err }));
     }
-  }, [input]);
-  return [user];
+  });
+
+  return { currentUser };
 };
 
-export default CurrentUserContext;
+const CurrentUserContextProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState();
+
+  return (
+    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+      {children}
+    </CurrentUserContext.Provider>
+  );
+};
+
+export default CurrentUserContextProvider;
