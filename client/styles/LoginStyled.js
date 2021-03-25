@@ -14,6 +14,10 @@ export default styled.div`
   justify-content: center;
   flex-direction: column;
 
+  .svg {
+    display: none;
+  }
+
   .title {
     color: #fff;
     font-size: 56px;
