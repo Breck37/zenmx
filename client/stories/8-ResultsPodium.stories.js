@@ -53,7 +53,6 @@ const mockResultsPodium = [
 ];
 
 export const DesktopResultsPodium = () => {
-  console.log(ResultsPodium);
   return <ResultsPodium riders={mockResultsPodium} />;
 };
 
