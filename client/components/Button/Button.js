@@ -3,7 +3,7 @@ import ButtonStyled from "./ButtonStyled";
 import { Button } from "@material-ui/core";
 const ModernButton = ({ label, onClick, disabled }) => {
   return (
-    <ButtonStyled onClick={onClick}>
+    <ButtonStyled disabled={disabled} onClick={onClick}>
       <Button disabled={disabled}>{label}</Button>
     </ButtonStyled>
   );
