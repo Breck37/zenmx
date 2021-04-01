@@ -2,11 +2,17 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useUser } from "@auth0/nextjs-auth0";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import {
+  CircularProgress,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@material-ui/core";
 import { Button, WeeklyPicks } from "../../components";
 import { useIsMountedRef } from "../../hooks";
 import { useCurrentMode } from "../../hooks/currentMode";
 import { useCurrentRound } from "../../hooks/currentRound";
+import { useCurrentUser } from "../../hooks/currentUser";
 import { currentRound } from "../../constants";
 import { TeamStyled } from "../../styles";
 
@@ -20,6 +26,7 @@ const Team = () => {
   const isMounted = useIsMountedRef();
   const { activeRound } = useCurrentRound();
   const { currentMode } = useCurrentMode();
+  const { currentUser } = useCurrentUser(user?.email);
 
   // state
   const [league, setLeague] = useState("");
@@ -27,8 +34,6 @@ const Team = () => {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState("");
-
-  console.log(activeRound, currentRound);
 
   const picksUnavailable =
     activeRound.submissionEnd < new Date() ||
@@ -41,25 +46,23 @@ const Team = () => {
       router.push("/login");
       return;
     }
-    if (picksUnavailable) {
-      setLoading(false);
-      return;
-    }
+    // if (picksUnavailable) {
+    //   setLoading(false);
+    //   return;
+    // }
 
     if (success) {
       setTimeout(() => setSuccess(""), 1500);
     }
 
     axios
-      .get(`/api/check-entry-list?week=${currentRound}`)
+      .get(`/api/check-entry-list?week=${currentRound.round}`)
       .then((res) => {
-        console.log("RES", res);
-        if (isMounted.current) {
-          setLoading(false);
-          setEntries(res.data.data);
-        }
+        console.log(res);
+        setLoading(false);
+        setEntries(res.data.riders);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("ENTRY ERROR", err));
   });
 
   const selectedRidersWithErrors = useMemo(() => {
@@ -96,7 +99,7 @@ const Team = () => {
     const params = JSON.stringify({
       email: user.email,
       bigBikePicks: cleanseSelectedRiders,
-      week: roundData.currentRound,
+      week: currentRound,
       totalPoints: 0,
       league,
     });
@@ -118,37 +121,76 @@ const Team = () => {
     return <CircularProgress />;
   }
 
-  if (picksUnavailable) {
-    const beginningText =
-      activeRound.submissionStart > new Date()
-        ? "Window to make picks is not yet open"
-        : null;
-    return (
-      <TeamStyled currentMode={currentMode}>
-        <div className="unavailable">
-          {beginningText || "Window to make picks has closed"}
-        </div>
-      </TeamStyled>
-    );
-  }
+  // if (picksUnavailable) {
+  //   const beginningText =
+  //     activeRound.submissionStart > new Date()
+  //       ? "Window to make picks is not yet open"
+  //       : null;
+  //   return (
+  //     <TeamStyled currentMode={currentMode}>
+  //       <div className="unavailable">
+  //         {beginningText || "Window to make picks has closed"}
+  //       </div>
+  //     </TeamStyled>
+  //   );
+  // }
 
   return (
     <TeamStyled currentMode={currentMode}>
-      <WeeklyPicks
-        riders={entries}
-        selectedRiders={selectedRidersWithErrors}
-        setSelectedRiders={setSelectedRiders}
-        picksUnavailable={picksUnavailable}
-      />
-      <div className="team-submit-success">{success}</div>
-      {!picksUnavailable && (
-        <Button
-          label="Save Team"
-          onClick={saveUserPicks}
-          disabled={hasPickErrors}
-          className="team-save-button"
+      <div className="team-container">
+        <div className="select-container">
+          {currentUser &&
+          Array.isArray(currentUser.leagues) &&
+          currentUser.leagues.length ? (
+            <>
+              <InputLabel id="League">League:</InputLabel>
+              <Select
+                labelId="League"
+                name="League"
+                label="League:"
+                id="league-select"
+                value={league}
+                onChange={(evt) => {
+                  setLeague(evt.target.value);
+                }}
+                className="roboto"
+              >
+                {currentUser.leagues.map((leagueToPick) => {
+                  return (
+                    <MenuItem
+                      key={leagueToPick}
+                      // style={getStyles(leagueToPick, riderName, theme)}
+                      value={leagueToPick}
+                      className="roboto"
+                      disabled={league === leagueToPick}
+                    >
+                      {`${leagueToPick}`}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+              {/* {!picksUnavailable && ( */}
+              <div className="button-container">
+                <Button
+                  label="Save Team"
+                  onClick={saveUserPicks}
+                  disabled={hasPickErrors}
+                  className="team-save-button"
+                />
+                <div className="team-submit-success">{success}</div>
+              </div>
+              {/* )} */}
+            </>
+          ) : (
+            <div>Loading Leagues...</div>
+          )}
+        </div>
+        <WeeklyPicks
+          riders={entries}
+          selectedRiders={selectedRidersWithErrors}
+          setSelectedRiders={setSelectedRiders}
         />
-      )}
+      </div>
     </TeamStyled>
   );
 };
