@@ -59,7 +59,6 @@ const Container = styled.div`
 `;
 
 export const DesktopFrontPlate = () => {
-  console.log(FrontPlate);
   return (
     <Container>
       {mockFrontPlateRiders.map((rider) => (
