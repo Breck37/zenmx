@@ -15,7 +15,7 @@ export default function CurrentRoundContextProvider({
   currentRound,
 }) {
   return (
-    <CurrentRoundContext.Provider value={currentRound}>
+    <CurrentRoundContext.Provider value={currentRound.round}>
       {children}
     </CurrentRoundContext.Provider>
   );
