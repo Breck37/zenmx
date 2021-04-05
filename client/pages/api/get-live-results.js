@@ -14,7 +14,9 @@ export default (req, res) => {
       if (response && !response.error) {
         const formattedResponse = JSON.parse(response.text);
         const raceResults = resultsMapper(formattedResponse.B);
-        const fastestLaps = lapsMapper(raceResults);
+
+        const fastestLaps = lapsMapper([...raceResults]);
+
         res.status(200).send({
           raceResults,
           fastestLaps,
