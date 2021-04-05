@@ -1,4 +1,9 @@
 import styled from "styled-components";
+/* Font Rules */
+/* font-family: 'Alfa Slab One', cursive; font-family: 'Bangers',
+cursive; font-family: 'Cinzel', serif; font-family: 'Kaushan Script',
+cursive; font-family: 'Permanent Marker', cursive; font-family:
+'Righteous', cursive; */
 
 export default styled.div`
   margin: -8px;
