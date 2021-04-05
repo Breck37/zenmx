@@ -11,18 +11,22 @@ const correctKeys = {
 };
 
 module.exports = (riderArray) => {
-  return riderArray.map((riderObject) => {
-    return Object.entries(riderObject).reduce((acc, curr) => {
-      if (correctKeys[curr[0]]) {
-        const key = correctKeys[curr[0]];
-        return {
-          ...acc,
-          [key]: curr[1],
-        };
-      }
-      return acc;
-    }, {});
-  });
+  return riderArray
+    .map((riderObject) => {
+      return Object.entries(riderObject).reduce((acc, curr) => {
+        if (correctKeys[curr[0]]) {
+          const key = correctKeys[curr[0]];
+          return {
+            ...acc,
+            [key]: curr[1],
+          };
+        }
+        return acc;
+      }, {});
+    })
+    .sort((a, b) => {
+      return a.position - b.position;
+    });
 };
 
 ////////// EXAMPLE RESPONSE //////////////////////
