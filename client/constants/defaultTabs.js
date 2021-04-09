@@ -7,12 +7,12 @@ module.exports = [
     title: "Results",
     route: "/results",
   },
-  {
-    title: "Leagues",
-    route: "/leagues",
-  },
-  {
-    title: "Contact",
-    route: "/contact",
-  },
+  // {
+  //   title: "Leagues",
+  //   route: "/leagues",
+  // },
+  // {
+  //   title: "Contact",
+  //   route: "/contact",
+  // },
 ];

@@ -22,10 +22,7 @@ export default (req, res) => {
           fastestLaps,
           session: formattedResponse.S,
           round: formattedResponse.T,
-          fastLapLeader: {
-            riderNumber: formattedResponse.MBY,
-            lapTime: formattedResponse.MLT,
-          },
+          fastLapLeader: fastestLaps ? fastestLaps[0] : null,
         });
       }
     })
