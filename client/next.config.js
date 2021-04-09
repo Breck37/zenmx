@@ -5,6 +5,8 @@ module.exports = {
     AUTH0_ISSUER_BASE_URL: process.env.AUTH0_ISSUER_BASE_URL,
     AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
     AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET,
+    API_URL: process.env.API_URL,
+    ADMIN_USER: process.env.ADMIN_USER,
   },
   webpack(config) {
     config.module.rules.push({
