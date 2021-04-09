@@ -16,7 +16,6 @@ const Home = () => {
   const { user, isLoading } = useUser();
   const [userWithPicks, setUserWithPicks] = useState(null);
   const router = useRouter();
-  let isMounted = false;
 
   useEffect(() => {
     if (!user && !isLoading) {
@@ -28,26 +27,18 @@ const Home = () => {
     if (user && !userWithPicks) {
       axios
         .get(`/api/get-user/${user?.email}`)
-        .then(
-          axios.spread(({ data: userData }, { data: lapData }) => {
-            console.log({ lapData });
-            if (userData.success) {
-              setUserWithPicks(userData.user);
-            }
-
-            setFastestLaps(lapData.fastestLaps);
-            setTimeout(() => {
-              setLoading(false);
-            }, 200);
-          })
-        )
+        .then(({ data: userData }) => {
+          if (userData.success) {
+            setUserWithPicks(userData.user);
+          }
+          setTimeout(() => {
+            setLoading(false);
+          }, 200);
+        })
         .catch((e) => console.log("E on Results", e));
       return;
     }
-    return () => {
-      isMounted = true;
-    };
-  }, [raceResults, user, isMounted]);
+  }, [user]);
 
   if (loading || isLoading) {
     return <CircularProgress />;
