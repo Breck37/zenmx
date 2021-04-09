@@ -4,8 +4,9 @@ import { useRouter } from "next/router";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import { useCurrentMode } from "../../hooks/currentMode";
+import { Button } from "../../components";
 import { HomeStyled } from "../../styles";
-import { manufacturers } from "../../constants";
+import { manufacturers, currentRound } from "../../constants";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -31,11 +32,12 @@ const Home = () => {
           axios.get("/api/get-live-results"),
         ])
         .then(
-          axios.spread(({ data: userData }, { data }) => {
-            if (userData.success) setUserWithPicks(userData.user);
-            console.log(data);
-            setResults(data.raceResults);
-            setFastestLaps(data.fastestLaps);
+          axios.spread(({ data: userData }, { data: lapData }) => {
+            if (userData.success) {
+              setUserWithPicks(userData.user);
+            }
+            setResults(lapData.raceResults);
+            setFastestLaps(lapData.fastestLaps);
             setTimeout(() => {
               setLoading(false);
             }, 200);
@@ -53,8 +55,21 @@ const Home = () => {
     return <CircularProgress />;
   }
 
+  const testAssignPoints = () => {
+    console.log(raceResults);
+    axios
+      .post(`/api/assign-points?week=${currentRound.week}`, { raceResults })
+      .then((res) => {
+        console.log({ res: res.data });
+      })
+      .catch((e) => console.warn("ERROR", { e }));
+  };
+
   return (
     <HomeStyled currentMode={currentMode}>
+      {user.name === process.env.ADMIN_USER && (
+        <Button label="Test Points" onClick={testAssignPoints} />
+      )}
       {fastestLaps && fastestLaps.length > 0 ? (
         <div className="marquee">
           <div className="animation-container">
