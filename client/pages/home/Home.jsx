@@ -4,19 +4,18 @@ import { useRouter } from "next/router";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import { useCurrentMode } from "../../hooks/currentMode";
+import { useRaceResults } from "../../hooks/raceResults";
 import { Button } from "../../components";
 import { HomeStyled } from "../../styles";
 import { manufacturers, currentRound } from "../../constants";
 
 const Home = () => {
-  const [loading, setLoading] = useState(true);
-  const [raceResults, setResults] = useState([]);
-  const [fastestLaps, setFastestLaps] = useState([]);
   const { currentMode } = useCurrentMode();
+  const { raceResults, fastestLaps } = useRaceResults();
+  const [loading, setLoading] = useState(true);
   const { user, isLoading } = useUser();
   const [userWithPicks, setUserWithPicks] = useState(null);
   const router = useRouter();
-  let isMounted = false;
 
   useEffect(() => {
     if (!user && !isLoading) {
@@ -25,31 +24,21 @@ const Home = () => {
       return null;
     }
 
-    if (user && (!raceResults || !raceResults.length)) {
+    if (user && !userWithPicks) {
       axios
-        .all([
-          axios.get(`/api/get-user/${user?.email}`),
-          axios.get("/api/get-live-results"),
-        ])
-        .then(
-          axios.spread(({ data: userData }, { data: lapData }) => {
-            if (userData.success) {
-              setUserWithPicks(userData.user);
-            }
-            setResults(lapData.raceResults);
-            setFastestLaps(lapData.fastestLaps);
-            setTimeout(() => {
-              setLoading(false);
-            }, 200);
-          })
-        )
+        .get(`/api/get-user/${user?.email}`)
+        .then(({ data: userData }) => {
+          if (userData.success) {
+            setUserWithPicks(userData.user);
+          }
+          setTimeout(() => {
+            setLoading(false);
+          }, 200);
+        })
         .catch((e) => console.log("E on Results", e));
       return;
     }
-    return () => {
-      isMounted = true;
-    };
-  }, [raceResults, user, isMounted]);
+  }, [user]);
 
   if (loading || isLoading) {
     return <CircularProgress />;

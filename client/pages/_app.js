@@ -1,12 +1,14 @@
 // import App from 'next/app'
 import React, { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
+import { UserProvider } from "@auth0/nextjs-auth0";
+import axios from "axios";
 import {
   CurrentModeContext,
   CurrentRoundContextProvider,
   CurrentUserContextProvider,
+  CurrentRaceResultsProvider,
 } from "../hooks";
-import { UserProvider } from "@auth0/nextjs-auth0";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
 import { AppStyled } from "../styles";
@@ -16,6 +18,7 @@ import { currentRound } from "../constants";
 
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
+  const [raceResults, setRaceResults] = useState();
   const router = useRouter();
 
   const isLoginOrLandingPage = useMemo(() => {
@@ -32,6 +35,17 @@ function ModernMotoFantasy({ Component, pageProps }) {
       setCurrentMode(parseInt(localStorage.getItem("USER_CURRENT_MODE")));
     }
   }, []);
+
+  useEffect(() => {
+    if (!raceResults) {
+      axios
+        .get("/api/get-live-results")
+        .then(({ data }) => {
+          setRaceResults(data);
+        })
+        .catch((err) => console.log("Live Results Error: ", err));
+    }
+  }, [raceResults]);
 
   const handleCurrentModeUpdate = () => {
     const currentMode = localStorage.getItem("USER_CURRENT_MODE");
@@ -64,10 +78,12 @@ function ModernMotoFantasy({ Component, pageProps }) {
               />
             )}
             <CurrentRoundContextProvider currentRound={currentRound}>
-              <Component
-                {...pageProps}
-                setCurrentMode={handleCurrentModeUpdate}
-              />
+              <CurrentRaceResultsProvider raceResults={raceResults}>
+                <Component
+                  {...pageProps}
+                  setCurrentMode={handleCurrentModeUpdate}
+                />
+              </CurrentRaceResultsProvider>
             </CurrentRoundContextProvider>
           </CurrentModeContext.Provider>
         </CurrentUserContextProvider>
