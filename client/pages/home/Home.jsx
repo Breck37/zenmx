@@ -55,7 +55,7 @@ const Home = () => {
     return <CircularProgress />;
   }
 
-  const testAssignPoints = () => {
+  const assignPoints = () => {
     console.log(raceResults);
     axios
       .post(`/api/assign-points?week=${currentRound.week}`, { raceResults })
@@ -68,7 +68,7 @@ const Home = () => {
   return (
     <HomeStyled currentMode={currentMode}>
       {user.name === process.env.ADMIN_USER && (
-        <Button label="Test Points" onClick={testAssignPoints} />
+        <Button label="Assign Points" onClick={assignPoints} />
       )}
       {fastestLaps && fastestLaps.length > 0 ? (
         <div className="marquee">
