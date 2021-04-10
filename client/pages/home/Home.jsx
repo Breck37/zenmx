@@ -11,7 +11,7 @@ import { manufacturers, currentRound } from "../../constants";
 
 const Home = () => {
   const { currentMode } = useCurrentMode();
-  const raceResults = useRaceResults();
+  const currentWeekWithLiveResults = useRaceResults();
   const [loading, setLoading] = useState(true);
   const { user, isLoading } = useUser();
   const [userWithPicks, setUserWithPicks] = useState(null);
@@ -54,35 +54,45 @@ const Home = () => {
     return 0;
   }, [userWithPicks, userWithPicks?.picks]);
 
-  if (loading || isLoading) {
+  if (loading || isLoading || !currentWeekWithLiveResults) {
     return <CircularProgress />;
+  }
+
+  if (currentWeekWithLiveResults.message) {
+    return (
+      <HomeStyled currentMode={currentMode}>
+        <div className="user-details">{currentWeekWithLiveResults.message}</div>
+      </HomeStyled>
+    );
   }
 
   const assignPoints = () => {
     axios
-      .post(`/api/assign-points?week=${currentRound.week}`, { raceResults })
+      .post(`/api/assign-points?week=${currentRound.week}`, {
+        raceResults: currentWeekWithLiveResults,
+      })
       .then((res) => {
         console.log({ res: res.data });
       })
       .catch((e) => console.warn("ERROR", { e }));
   };
-  console.log({ userWithPicks, raceResults, window });
+  console.log({ userWithPicks, currentWeekWithLiveResults, window });
   return (
     <HomeStyled currentMode={currentMode}>
       {user.name === process.env.ADMIN_USER && (
         <Button label="Assign Points" onClick={assignPoints} />
       )}
       <div className="user-details">
-        <h1>{`Current Round: ${raceResults.week}`}</h1>
+        <h1>{`Current Round: ${currentWeekWithLiveResults.week}`}</h1>
         <h2>{`Last Round Score: ${lastRoundScore}`}</h2>
       </div>
-      {raceResults.liveResults.fastestLaps &&
-      raceResults.liveResults.fastestLaps.length > 0 ? (
+      {currentWeekWithLiveResults.liveResults.fastestLaps &&
+      currentWeekWithLiveResults.liveResults.fastestLaps.length > 0 ? (
         <>
           <div className="marquee">
             <div className="animation-container">
               <span>FAST LAPS</span>
-              {raceResults.liveResults.fastestLaps.map(
+              {currentWeekWithLiveResults.liveResults.fastestLaps.map(
                 ({ rider, lap, bike }, index) => {
                   return (
                     <div
@@ -104,7 +114,7 @@ const Home = () => {
           </div>
           <div className="mobile-fast-laps">
             <h3>Top 3 LapTimes</h3>
-            {raceResults.liveResults.fastestLaps
+            {currentWeekWithLiveResults.liveResults.fastestLaps
               .slice(0, 3)
               .map(({ rider, lap, bike }, index) => {
                 return (

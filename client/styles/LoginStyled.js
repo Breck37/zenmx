@@ -68,6 +68,20 @@ export default styled.div`
     }
   }
 
+  @media (max-width: 500px) {
+    .title {
+      // flex-direction: row;
+      // justify-content: center;
+
+      span:first-child {
+        padding-left: 0;
+      }
+      span:last-child {
+        padding-left: 0;
+      }
+    }
+  }
+
   @keyframes text-animate {
     0% {
       opacity: 0;

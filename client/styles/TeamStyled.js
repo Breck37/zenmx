@@ -39,13 +39,23 @@ export default styled.div`
     width: 100%;
   }
 
+  .MuiInput-root {
+    min-width: 100%;
+  }
+
+  .team-submit-success {
+    position: absolute;
+    right: 16px;
+    bottom: 0px;
+    height: 24px;
+    font-size: 18px;
+    color: limegreen;
+    z-index: 10000;
+  }
+
   @media (max-width: 500px) {
     .MuiButton-root {
       width: 100%;
-    }
-
-    .MuiInput-root {
-      min-width: 100%;
     }
 
     .team-container {
@@ -72,10 +82,11 @@ export default styled.div`
     .team-submit-success {
       position: absolute;
       right: 16px;
-      bottom: 32px;
+      bottom: 16px;
       height: 24px;
-      font-ize: 18px;
+      font-size: 18px;
       color: limegreen;
+      z-index: 10000;
     }
   }
 `;

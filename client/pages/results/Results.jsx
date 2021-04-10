@@ -42,6 +42,14 @@ const Results = () => {
   if (isLoading || !raceResults) {
     return <CircularProgress />;
   }
+
+  if (raceResults.message) {
+    return (
+      <ResultsStyled currentMode={currentMode}>
+        <div className="round-details">{raceResults.message}</div>
+      </ResultsStyled>
+    );
+  }
   console.log({ raceResults, isLive });
   return (
     <ResultsStyled
@@ -55,7 +63,7 @@ const Results = () => {
         <div className="round-details">
           <h1>{raceResults.liveResults.round}</h1>
           <h2>{`Week: ${raceResults.week}`}</h2>
-          <h3>{raceResults.liveResults.session.split(" - ")[0]}</h3>
+          <h4>{raceResults.liveResults.session.split(" - ")[0]}</h4>
         </div>
         <div className="fastest-key">
           <div className="color-sample" />
