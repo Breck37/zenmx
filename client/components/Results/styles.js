@@ -59,4 +59,8 @@ export const TableStyled = styled.div`
       bottom: 24px;
     }
   }
+
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(3, 1fr);
+  } ;
 `;

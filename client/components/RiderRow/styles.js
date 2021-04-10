@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const RiderRowStyled = styled.div`
-  border: solid 1px #000;
+  border: solid 1px ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
   border-bottom: none;
   grid-column: 1 / 8;
   grid-row: ${({ row }) => row};
@@ -9,13 +9,23 @@ export const RiderRowStyled = styled.div`
   align-items: center;
   height: 48px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 8px rgba(0, 0, 0, 0.08);
+  background-color: ${({ highlight }) =>
+    highlight ? `rgba(${highlight}, 1)` : "transparent"};
+  color: ${({ currentMode, highlight }) =>
+    currentMode || highlight ? "#282828" : "#fff"};
 
   &:last-child {
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid
+      ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
   }
 
   &:hover {
-    background-color: ${({ onClick }) => onClick && "rgba(0, 0, 0, 0.4)"};
+    background-color: ${({ onClick, highlight }) =>
+      onClick && !highlight
+        ? "rgba(0, 0, 0, 0.4)"
+        : onClick && highlight
+        ? `rgba(${highlight}, 0.4)`
+        : "transparent"};
   }
 
   > div {
@@ -67,5 +77,23 @@ export const RiderRowStyled = styled.div`
   .currentLap {
     grid-column: 7 / 1;
     flex: 0.25;
+  }
+
+  @media (max-width: 500px) {
+    .team {
+      display: none;
+    }
+
+    .bestLap {
+      display: none;
+    }
+
+    .lastLap {
+      display: none;
+    }
+
+    .currentLap {
+      display: none;
+    }
   }
 `;
