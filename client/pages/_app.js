@@ -39,7 +39,7 @@ function ModernMotoFantasy({ Component, pageProps }) {
   useEffect(() => {
     if (!raceResults) {
       axios
-        .get("/api/get-live-results")
+        .get("/api/get-weeks-results")
         .then(({ data }) => {
           setRaceResults(data);
         })

@@ -10,7 +10,6 @@ export default function ResultsPodium({ riders, small = false }) {
   const ridersToDisplay = riders
     .sort((riderA, riderB) => riderA.position - riderB.position)
     .reverse();
-  console.log({ riders });
 
   if (window.screen.width <= 500 || small) {
     /* conditional statements */

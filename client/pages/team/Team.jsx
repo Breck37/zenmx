@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useUser } from "@auth0/nextjs-auth0";
+import Alert from "@material-ui/lab/Alert";
 import {
   CircularProgress,
   Select,
@@ -40,6 +41,10 @@ const Team = () => {
     activeRound.submissionStart > new Date();
 
   useEffect(() => {
+    if (success) {
+      setTimeout(() => setSuccess(""), 1500);
+    }
+
     if (!isMounted.current) return;
     if (entries && entries.length) return;
     if (!isLoading && !user) {
@@ -51,19 +56,14 @@ const Team = () => {
     //   return;
     // }
 
-    if (success) {
-      setTimeout(() => setSuccess(""), 1500);
-    }
-
     axios
       .get(`/api/check-entry-list?week=${currentRound.round}`)
       .then((res) => {
-        console.log(res);
         setLoading(false);
         setEntries(res.data.riders);
       })
       .catch((err) => console.error("ENTRY ERROR", err));
-  });
+  }, [success, entries]);
 
   const selectedRidersWithErrors = useMemo(() => {
     if (!selectedRiders || !selectedRiders?.length) return [];
@@ -99,11 +99,11 @@ const Team = () => {
     const params = JSON.stringify({
       email: user.email,
       bigBikePicks: cleanseSelectedRiders,
-      week: currentRound,
+      week: currentRound.week,
       totalPoints: 0,
       league,
     });
-
+    console.log({ params });
     axios
       .post("/api/save-picks", params, {
         headers: {
@@ -149,7 +149,7 @@ const Team = () => {
                 name="League"
                 label="League:"
                 id="league-select"
-                value={league}
+                value={league || ""}
                 onChange={(evt) => {
                   setLeague(evt.target.value);
                 }}
@@ -173,11 +173,19 @@ const Team = () => {
               <div className="button-container">
                 <Button
                   label="Save Team"
+                  small
                   onClick={saveUserPicks}
                   disabled={hasPickErrors}
                   className="team-save-button"
                 />
-                <div className="team-submit-success">{success}</div>
+
+                {success && (
+                  <div className="team-submit-success">
+                    <Alert variant="filled" severity="success">
+                      {success}
+                    </Alert>
+                  </div>
+                )}
               </div>
               {/* )} */}
             </>
