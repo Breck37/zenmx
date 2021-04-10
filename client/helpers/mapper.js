@@ -18,7 +18,8 @@ const manufacturers = [
   "KTM",
   "Yamaha",
   "Kawasaki",
-  "Yamaha",
+  "Husqvarna",
+  "GASGAS",
 ];
 
 const parseRiderName = (name) => {
@@ -48,17 +49,39 @@ const splitRiderResults = (rider, overall) => {
 const identifyRiderRaceResults = (results) => {
   let currentRider = [];
   let riderResults = [];
+  let x = false;
+  let currentPosition = 1;
+  results
+    .filter(
+      (r) =>
+        r.length === 1 ||
+        r.length === 2 ||
+        r.length === 3 ||
+        !/^\d+$/.test(r.split("X").join(""))
+    )
+    .map((c, i, arr) => {
+      if (x) {
+        x = false;
+        return;
+      }
+      if (currentRider.length == 3) {
+        riderResults.push(splitRiderResults(currentRider, currentPosition));
+        currentRider = [];
+        currentPosition += 1;
+      } else if (i === arr.length - 1) {
+        riderResults.push(
+          splitRiderResults([...currentRider, c], currentPosition)
+        );
+        currentRider = [];
+      }
+      if (c.length > 3 && c.length < 20) {
+        x = true;
+        currentRider.push((c += arr[i + 1]));
+        return;
+      }
 
-  results.map((c, i) => {
-    if (currentRider.length == 4) {
-      riderResults.push(splitRiderResults(currentRider, i / 4));
-      currentRider = [];
-    } else if (i === results.length - 1) {
-      riderResults.push(splitRiderResults([...currentRider, c], (i + 1) / 4));
-      currentRider = [];
-    }
-    currentRider.push(c);
-  });
+      currentRider.push(c);
+    });
   return riderResults;
 };
 

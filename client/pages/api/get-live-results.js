@@ -17,6 +17,17 @@ export default (req, res) => {
 
         const fastestLaps = lapsMapper([...raceResults]);
 
+        if (!res.status) {
+          console.log(hit);
+          return {
+            raceResults,
+            fastestLaps,
+            session: formattedResponse.S,
+            round: formattedResponse.T,
+            fastLapLeader: fastestLaps ? fastestLaps[0] : null,
+          };
+        }
+
         res.status(200).send({
           raceResults,
           fastestLaps,
