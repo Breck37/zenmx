@@ -1,4 +1,5 @@
 import React from "react";
+import { useCurrentMode } from "../../hooks/currentMode";
 import { RiderRowStyled } from "./styles";
 
 // Props //
@@ -14,7 +15,8 @@ import { RiderRowStyled } from "./styles";
 // }
 // row =  number
 
-const RiderRow = ({ rider, row, onClick }) => {
+const RiderRow = ({ rider, row, onClick, highlight }) => {
+  const { currentMode } = useCurrentMode();
   const {
     position,
     riderName,
@@ -30,6 +32,8 @@ const RiderRow = ({ rider, row, onClick }) => {
       onClick={onClick}
       row={row}
       bike={bike.split(" ")[0].toLowerCase()}
+      highlight={highlight}
+      currentMode={currentMode}
     >
       <div className="position">{position}</div>
       <div className="name">{riderName}</div>
