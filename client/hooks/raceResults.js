@@ -5,10 +5,12 @@ const RaceResultsContext = createContext(null);
 
 export const useRaceResults = () => {
   let raceResults = useContext(RaceResultsContext);
+
   if (raceResults) {
     raceResults = { ...raceResults, week: currentRound.week };
+  } else if (!raceResults) {
+    raceResults = { message: "Results still in progress" };
   }
-  console.log(raceResults);
 
   return raceResults;
 };
