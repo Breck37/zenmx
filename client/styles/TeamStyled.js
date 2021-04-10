@@ -12,14 +12,16 @@ export default styled.div`
   justify-content: center;
   color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
 
-  .team-submit-success {
-    height: 24px;
-    font-ize: 18px;
-    color: limegreen;
+  .team-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
   }
 
-  .team-save-button: {
-    margin-top: 8px;
+  .select-container {
+    width: 75%;
   }
 
   .unavailable {
@@ -27,5 +29,53 @@ export default styled.div`
       currentMode ? "#fff" : "#282828"};
     text-align: center;
     color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+  }
+
+  .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+    width: 100%;
+  }
+
+  @media (max-width: 500px) {
+    .MuiButton-root {
+      width: 100%;
+    }
+
+    .MuiInput-root {
+      min-width: 100%;
+    }
+
+    .team-container {
+      width: 100%;
+    }
+
+    .select-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 75%;
+
+      .MuiInputLabel-root,
+      .MuiSelect-root {
+        color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+      }
+
+      .MuiInputLabel-root {
+        align-self: flex-start;
+      }
+    }
+
+    .team-submit-success {
+      position: absolute;
+      right: 16px;
+      bottom: 32px;
+      height: 24px;
+      font-ize: 18px;
+      color: limegreen;
+    }
   }
 `;

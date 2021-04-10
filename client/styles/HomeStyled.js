@@ -17,6 +17,18 @@ export default styled.div`
     align-items: center;
   }
 
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1,
+    h2 {
+      color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+    }
+  }
+
   .marquee {
     position: relative;
     padding: 0 32px;
@@ -200,6 +212,30 @@ export default styled.div`
     height: 1em;
   }
 
+  .mobile-fast-laps {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+
+    .fast-lap {
+      flex-direction: row;
+      justify-content: space-around;
+      margin-right: 0;
+      background-color: ${({ currentMode }) =>
+        currentMode ? `${MODERN_WHITE}` : `#282828`};
+      border: ${({ currentMode }) => (currentMode ? "#282828" : "aqua")} solid
+        1px;
+      color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+
+      .rider-image {
+        height: 75%;
+        width: 100px;
+      }
+    }
+  }
+
   @media (max-width: 1490px) {
     .rider-full {
       display: none;
@@ -237,6 +273,10 @@ export default styled.div`
   }
 
   @media (max-width: 800px) {
+    overflow: scroll;
+    height: auto;
+    padding-bottom: 24px;
+
     .marquee {
       display: none;
     }
