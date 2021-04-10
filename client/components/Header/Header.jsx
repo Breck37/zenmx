@@ -18,6 +18,9 @@ const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
   const router = useRouter();
 
   const handleTabClick = (tabRoute) => {
+    if (mobileTabsVisibility) {
+      setMobileTabsVisibility(false);
+    }
     router.push(tabRoute);
   };
 
