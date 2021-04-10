@@ -1,4 +1,4 @@
 module.exports = {
-  round: "s6",
-  week: 6,
+  round: "s13",
+  week: 13,
 };
