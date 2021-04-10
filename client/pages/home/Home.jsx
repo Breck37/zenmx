@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -11,7 +11,7 @@ import { manufacturers, currentRound } from "../../constants";
 
 const Home = () => {
   const { currentMode } = useCurrentMode();
-  const { raceResults, fastestLaps } = useRaceResults();
+  const raceResults = useRaceResults();
   const [loading, setLoading] = useState(true);
   const { user, isLoading } = useUser();
   const [userWithPicks, setUserWithPicks] = useState(null);
@@ -40,12 +40,25 @@ const Home = () => {
     }
   }, [user]);
 
+  const lastRoundScore = useMemo(() => {
+    console.log(
+      Boolean(userWithPicks && userWithPicks.picks.length),
+      userWithPicks
+    );
+    if (userWithPicks && userWithPicks.picks.length) {
+      const lastRound = userWithPicks.picks[userWithPicks.picks.length - 1];
+
+      return lastRound.totalPoints;
+    }
+
+    return 0;
+  }, [userWithPicks, userWithPicks?.picks]);
+
   if (loading || isLoading) {
     return <CircularProgress />;
   }
 
   const assignPoints = () => {
-    console.log(raceResults);
     axios
       .post(`/api/assign-points?week=${currentRound.week}`, { raceResults })
       .then((res) => {
@@ -53,31 +66,64 @@ const Home = () => {
       })
       .catch((e) => console.warn("ERROR", { e }));
   };
-
+  console.log({ userWithPicks, raceResults, window });
   return (
     <HomeStyled currentMode={currentMode}>
       {user.name === process.env.ADMIN_USER && (
         <Button label="Assign Points" onClick={assignPoints} />
       )}
-      {fastestLaps && fastestLaps.length > 0 ? (
-        <div className="marquee">
-          <div className="animation-container">
-            <span>FAST LAPS</span>
-            {fastestLaps.map(({ rider, lap, bike }, index) => {
-              return (
-                <div key={`${rider}-fast-lap`} className={`fast-lap ${index}`}>
-                  <img
-                    src={manufacturers[bike.toLowerCase()].image}
-                    alt=""
-                    className="rider-image"
-                  />
-                  <div>{rider}</div>
-                  <div>{lap}</div>
-                </div>
-              );
-            })}
+      <div className="user-details">
+        <h1>{`Current Round: ${raceResults.week}`}</h1>
+        <h2>{`Last Round Score: ${lastRoundScore}`}</h2>
+      </div>
+      {raceResults.liveResults.fastestLaps &&
+      raceResults.liveResults.fastestLaps.length > 0 ? (
+        <>
+          <div className="marquee">
+            <div className="animation-container">
+              <span>FAST LAPS</span>
+              {raceResults.liveResults.fastestLaps.map(
+                ({ rider, lap, bike }, index) => {
+                  return (
+                    <div
+                      key={`${rider}-fast-lap`}
+                      className={`fast-lap ${index}`}
+                    >
+                      <img
+                        src={manufacturers[bike.toLowerCase()].image}
+                        alt=""
+                        className="rider-image"
+                      />
+                      <div>{rider}</div>
+                      <div>{lap}</div>
+                    </div>
+                  );
+                }
+              )}
+            </div>
           </div>
-        </div>
+          <div className="mobile-fast-laps">
+            <h3>Top 3 LapTimes</h3>
+            {raceResults.liveResults.fastestLaps
+              .slice(0, 3)
+              .map(({ rider, lap, bike }, index) => {
+                return (
+                  <div
+                    key={`${rider}-fast-lap`}
+                    className={`fast-lap ${index}`}
+                  >
+                    <img
+                      src={manufacturers[bike.toLowerCase()].image}
+                      alt=""
+                      className="rider-image"
+                    />
+                    <div>{rider}</div>
+                    <div>{lap}</div>
+                  </div>
+                );
+              })}
+          </div>
+        </>
       ) : null}
       <main>
         <h1 className="title"></h1>
