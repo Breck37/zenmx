@@ -6,14 +6,10 @@ export default styled.div`
     disabled && currentMode ? "rgba(0, 0, 0, 0.2)" : MODERN_PURPLE};
   border-radius: 4px;
   text-align: center;
-  width: 50%;
+  width: ${({ small }) => (small ? "75%" : "100%")};
 
   .MuiButton-root {
     color: ${MODERN_WHITE};
     padding: 9px 16px;
   }
-
-  @media (max-width: 500px) {
-    width: ${({ small }) => (small ? "75%" : "100%")};
-  } ;
 `;
