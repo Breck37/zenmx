@@ -221,17 +221,18 @@ export default styled.div`
 
     .fast-lap {
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-between;
       margin-right: 0;
       background-color: ${({ currentMode }) =>
         currentMode ? `${MODERN_WHITE}` : `#282828`};
       border: ${({ currentMode }) => (currentMode ? "#282828" : "aqua")} solid
         1px;
       color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+      padding: 8px;
 
       .rider-image {
-        height: 75%;
-        width: 100px;
+        height: 85%;
+        width: 60px;
       }
     }
   }
