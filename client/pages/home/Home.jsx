@@ -41,10 +41,6 @@ const Home = () => {
   }, [user]);
 
   const lastRoundScore = useMemo(() => {
-    console.log(
-      Boolean(userWithPicks && userWithPicks.picks.length),
-      userWithPicks
-    );
     if (userWithPicks && userWithPicks.picks.length) {
       const lastRound = userWithPicks.picks[userWithPicks.picks.length - 1];
 

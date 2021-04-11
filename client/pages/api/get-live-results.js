@@ -18,7 +18,6 @@ export default (req, res) => {
         const fastestLaps = lapsMapper([...raceResults]);
 
         if (!res.status) {
-          console.log(hit);
           return {
             raceResults,
             fastestLaps,
