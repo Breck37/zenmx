@@ -21,7 +21,7 @@ const parseSeasonStats = (stringContainingStats, index) => {
 };
 
 // TODO - Season Averages
-const splitRiderStats = (riderStats, overall) => {
+const splitRiderStats = (riderStats, position) => {
   return {
     name: parseName(riderStats[1]),
     number: riderStats[0],
@@ -29,7 +29,7 @@ const splitRiderStats = (riderStats, overall) => {
     lapsLed: parseSeasonStats(riderStats[1], 3),
     wins: parseSeasonStats(riderStats[1], 4),
     points: riderStats[2].trim(),
-    overall,
+    position,
   };
 };
 
