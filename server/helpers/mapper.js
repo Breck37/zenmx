@@ -36,12 +36,12 @@ const parseRiderName = (name) => {
   return (splitName[0] += ` ${parsedName}`);
 };
 
-const splitRiderResults = (rider, overall) => {
+const splitRiderResults = (rider, position) => {
   return {
     number: rider[0],
     name: parseRiderName(rider[1]),
     points: rider[2],
-    overall,
+    position,
   };
 };
 

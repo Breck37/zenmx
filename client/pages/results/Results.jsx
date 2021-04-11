@@ -50,7 +50,7 @@ const Results = () => {
       </ResultsStyled>
     );
   }
-  console.log({ raceResults, isLive });
+
   return (
     <ResultsStyled
       currentMode={currentMode}

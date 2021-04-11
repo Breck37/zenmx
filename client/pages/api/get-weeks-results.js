@@ -46,9 +46,6 @@ export default async (req, res) => {
     .then((response) => {
       if (response && !response.error) {
         const formattedResponse = response.text.split("\n");
-        const { session, round, fastLapLeader } = getResultDetails(
-          formattedResponse
-        );
         const raceResults = mapper(spliceResults([...formattedResponse], 14));
         const seasonResults = seasonMapper(
           spliceSeasonResults(formattedResponse)
@@ -57,8 +54,8 @@ export default async (req, res) => {
         res.status(200).send({
           raceResults,
           seasonResults,
-          session,
-          round,
+          session: liveResults.session,
+          round: liveResults.round,
           liveResults,
         });
       }
