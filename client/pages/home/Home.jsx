@@ -45,7 +45,12 @@ const Home = () => {
 
   const lastRoundDetails = useMemo(() => {
     if (userWithPicks && userWithPicks.picks.length) {
-      return userWithPicks.picks.sort((a, b) => b.week - a.week)[0];
+      const latestPick = userWithPicks.picks.sort((a, b) => b.week - a.week)[0];
+      console.log({ latestPick, currentRound });
+      if (latestPick.week === currentRound.round && latestPick.rank === null) {
+        return userWithPicks.picks.sort((a, b) => b.week - a.week)[1];
+      }
+      return latestPick;
     }
     return {};
     return 0;
@@ -76,8 +81,8 @@ const Home = () => {
       )}
       <div className="user-details">
         <h1>{`Current Round: ${currentWeekWithLiveResults.week}`}</h1>
-        <h2>{`Last Round Score: ${lastRoundDetails.totalPoints}`}</h2>
-        <h2>{`Last Round Rank: ${lastRoundDetails.rank}`}</h2>
+        <h2>{`Round ${lastRoundDetails.week} Score: ${lastRoundDetails.totalPoints}`}</h2>
+        <h2>{`Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
       </div>
       {!currentWeekWithLiveResults.message &&
       currentWeekWithLiveResults.liveResults.fastestLaps &&
