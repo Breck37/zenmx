@@ -22,6 +22,10 @@ export default styled.div`
 
   .select-container {
     width: 75%;
+
+    > h3 {
+      text-align: center;
+    }
   }
 
   .unavailable {

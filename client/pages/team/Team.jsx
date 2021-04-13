@@ -10,11 +10,12 @@ import {
   InputLabel,
 } from "@material-ui/core";
 import { Button, WeeklyPicks } from "../../components";
-import { useIsMountedRef } from "../../hooks";
-import { useCurrentMode } from "../../hooks/currentMode";
-import { useCurrentRound } from "../../hooks/currentRound";
-import { useCurrentUser } from "../../hooks/currentUser";
-import { currentRound } from "../../constants";
+import {
+  useIsMountedRef,
+  useCurrentUser,
+  useCurrentRound,
+  useCurrentMode,
+} from "../../hooks";
 import { TeamStyled } from "../../styles";
 
 // TODO create league select
@@ -25,7 +26,7 @@ const Team = () => {
   // hooks
   const { user, isLoading } = useUser();
   const isMounted = useIsMountedRef();
-  const { activeRound } = useCurrentRound();
+  const { currentRound } = useCurrentRound();
   const { currentMode } = useCurrentMode();
   const { currentUser } = useCurrentUser(user?.email);
 
@@ -34,27 +35,27 @@ const Team = () => {
   const [selectedRiders, setSelectedRiders] = useState([]);
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [canShowQualifying, setCanShowQualifying] = useState(false);
   const [success, setSuccess] = useState("");
 
   const picksUnavailable =
-    activeRound.submissionEnd < new Date() ||
-    activeRound.submissionStart > new Date();
+    currentRound.submissionEnd < new Date() ||
+    currentRound.submissionStart > new Date();
 
   useEffect(() => {
     if (success) {
       setTimeout(() => setSuccess(""), 1500);
     }
-
     if (!isMounted.current) return;
     if (entries && entries.length) return;
     if (!isLoading && !user) {
       router.push("/login");
       return;
     }
-    // if (picksUnavailable) {
-    //   setLoading(false);
-    //   return;
-    // }
+    if (picksUnavailable) {
+      setLoading(false);
+      return;
+    }
 
     axios
       .get(`/api/check-entry-list?week=${currentRound.round}`)
@@ -64,6 +65,27 @@ const Team = () => {
       })
       .catch((err) => console.error("ENTRY ERROR", err));
   }, [success, entries]);
+
+  const qualifyingCanBeShown = useCallback(async (url, callback) => {
+    return await fetch(url, { method: "get" }).then(function (status) {
+      return status.ok;
+    });
+  });
+
+  useEffect(async () => {
+    if (!canShowQualifying && loading && currentRound) {
+      try {
+        const result = await urlExists(
+          "https://results.amasupercross.com/xml/SX/events/S2165/S1QCOVR.pdf"
+        );
+        if (result) {
+          setCanShowQualifying(true);
+        }
+      } catch (e) {
+        console.log("Error getting qualifying results");
+      }
+    }
+  }, [canShowQualifying, loading, currentRound]);
 
   const selectedRidersWithErrors = useMemo(() => {
     if (!selectedRiders || !selectedRiders?.length) return [];
@@ -97,13 +119,13 @@ const Team = () => {
     const cleanseSelectedRiders = removeErrors(selectedRiders);
 
     const params = JSON.stringify({
-      email: user.email,
+      email: currentUser.username || user.email,
       bigBikePicks: cleanseSelectedRiders,
       week: currentRound.week,
       totalPoints: 0,
       league,
     });
-    console.log({ params });
+
     axios
       .post("/api/save-picks", params, {
         headers: {
@@ -121,19 +143,19 @@ const Team = () => {
     return <CircularProgress />;
   }
 
-  // if (picksUnavailable) {
-  //   const beginningText =
-  //     activeRound.submissionStart > new Date()
-  //       ? "Window to make picks is not yet open"
-  //       : null;
-  //   return (
-  //     <TeamStyled currentMode={currentMode}>
-  //       <div className="unavailable">
-  //         {beginningText || "Window to make picks has closed"}
-  //       </div>
-  //     </TeamStyled>
-  //   );
-  // }
+  if (picksUnavailable) {
+    const beginningText =
+      currentRound.submissionStart > new Date()
+        ? "Window to make picks is not yet open"
+        : null;
+    return (
+      <TeamStyled currentMode={currentMode}>
+        <div className="unavailable">
+          {beginningText || "Window to make picks has closed"}
+        </div>
+      </TeamStyled>
+    );
+  }
 
   return (
     <TeamStyled currentMode={currentMode}>
@@ -169,7 +191,6 @@ const Team = () => {
                   );
                 })}
               </Select>
-              {/* {!picksUnavailable && ( */}
               <div className="button-container">
                 <Button
                   label="Save Team"
@@ -187,7 +208,17 @@ const Team = () => {
                   </div>
                 )}
               </div>
-              {/* )} */}
+              {canShowQualifying ? (
+                <link
+                  rel="stylesheet"
+                  href={currentRound.bigBikeQualifying}
+                  target="_blank"
+                >
+                  Qualifying Results
+                </link>
+              ) : (
+                <h3>Qualifying not yet completed</h3>
+              )}
             </>
           ) : (
             <div>Loading Leagues...</div>

@@ -43,7 +43,7 @@ const spliceEntryList = (formattedResponse) => {
 export default async (req, res) => {
   try {
     const { week } = req.query;
-    const currentWeek = scheduledData[week];
+    const currentWeek = scheduledData[`s${week}`];
 
     await crawler(currentWeek.entryList).then((response) => {
       if (response && !response.error) {
@@ -63,7 +63,7 @@ export default async (req, res) => {
       });
     });
   } catch (error) {
-    console.log("ERR", { error });
+    console.log("ERR in entry list", { error });
     res.status(404).send("Entry list not yet available.");
   }
 };
