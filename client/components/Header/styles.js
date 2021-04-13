@@ -62,10 +62,17 @@ export default styled.div`
       > span {
         margin-right: 32px;
         letter-spacing: 2px;
-        text-shadow: 0 0 1px aqua, 0 1px 1px #009999, 0 2px 1px #009999,
-          1px 1px 1px #009999, 1px 2px 1px #009999, 1px 3px 1px #009999,
-          2px 1px 1px #009999, 2px 2px 1px #009999, 2px 3px 1px #009999;
+        text-shadow: 0 0 1px aqua, 0 1px 1px #520099, 0 2px 1px #520099,
+          1px 1px 1px #520099, 1px 2px 1px #520099, 1px 3px 1px #520099,
+          2px 1px 1px #520099, 2px 2px 1px #520099, 2px 3px 1px #520099;
       }
+      // > span {
+      //   margin-right: 32px;
+      //   letter-spacing: 2px;
+      //   text-shadow: 0 0 1px aqua, 0 1px 1px #009999, 0 2px 1px #009999,
+      //     1px 1px 1px #009999, 1px 2px 1px #009999, 1px 3px 1px #009999,
+      //     2px 1px 1px #009999, 2px 2px 1px #009999, 2px 3px 1px #009999;
+      // }
     }
 
     .icon-wrap {
