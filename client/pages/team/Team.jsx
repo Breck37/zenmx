@@ -123,7 +123,7 @@ const Team = () => {
     const params = JSON.stringify({
       email: currentUser.username || user.email,
       bigBikePicks: cleanseSelectedRiders,
-      week: currentRound.week,
+      week: currentRound.round,
       totalPoints: 0,
       league,
     });
