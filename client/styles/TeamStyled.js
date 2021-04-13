@@ -22,6 +22,9 @@ export default styled.div`
 
   .select-container {
     width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     > h3 {
       text-align: center;

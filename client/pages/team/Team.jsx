@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0";
 import Alert from "@material-ui/lab/Alert";
 import {
@@ -75,14 +76,15 @@ const Team = () => {
   useEffect(async () => {
     if (!canShowQualifying && loading && currentRound) {
       try {
-        const result = await urlExists(
+        const result = await qualifyingCanBeShown(
           "https://results.amasupercross.com/xml/SX/events/S2165/S1QCOVR.pdf"
         );
+
         if (result) {
           setCanShowQualifying(true);
         }
       } catch (e) {
-        console.log("Error getting qualifying results");
+        console.log("Error getting qualifying results", e);
       }
     }
   }, [canShowQualifying, loading, currentRound]);
@@ -209,13 +211,11 @@ const Team = () => {
                 )}
               </div>
               {canShowQualifying ? (
-                <link
-                  rel="stylesheet"
-                  href={currentRound.bigBikeQualifying}
-                  target="_blank"
-                >
-                  Qualifying Results
-                </link>
+                <Link href={currentRound.bigBikeQualifying} passHref>
+                  <a href="" target="_blank">
+                    Qualifying Results
+                  </a>
+                </Link>
               ) : (
                 <h3>Qualifying not yet completed</h3>
               )}
