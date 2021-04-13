@@ -125,7 +125,7 @@ const Team = () => {
       bigBikePicks: cleanseSelectedRiders,
       week: currentRound.round,
       totalPoints: 0,
-      league,
+      league: league || "League of Extraordinary Bros",
     });
 
     axios
