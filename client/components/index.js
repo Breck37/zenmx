@@ -10,3 +10,4 @@ export { default as RiderRow } from "./RiderRow/RiderRow";
 export { default as ResultsPodium } from "./ResultsPodium/ResultsPodium";
 export { default as FrontPlate } from "./FrontPlate/FrontPlate";
 export { default as FrontPlateSmall } from "./FrontPlate/FrontPlateSmall";
+export { default as UserCard } from "./UserCard/UserCard";
