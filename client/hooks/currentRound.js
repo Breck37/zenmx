@@ -7,7 +7,7 @@ export const useCurrentRound = () => {
   const currentRound = useContext(CurrentRoundContext);
   const activeRound = scheduledData[currentRound];
 
-  return { activeRound };
+  return { currentRound: activeRound };
 };
 
 export default function CurrentRoundContextProvider({
