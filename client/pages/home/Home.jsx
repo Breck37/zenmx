@@ -7,15 +7,18 @@ import { useCurrentMode } from "../../hooks/currentMode";
 import { useRaceResults } from "../../hooks/raceResults";
 import { Button } from "../../components";
 import { HomeStyled } from "../../styles";
-import { manufacturers, currentRound } from "../../constants";
+import { manufacturers } from "../../constants";
+import { useCurrentRound } from "../../hooks/currentRound";
 
 const Home = () => {
-  const { currentMode } = useCurrentMode();
-  const currentWeekWithLiveResults = useRaceResults();
-  const [loading, setLoading] = useState(true);
-  const { user, isLoading } = useUser();
-  const [userWithPicks, setUserWithPicks] = useState(null);
   const router = useRouter();
+  const { currentMode } = useCurrentMode();
+  const { currentRound } = useCurrentRound();
+  const currentWeekWithLiveResults = useRaceResults();
+  const { user, isLoading } = useUser();
+  const [loading, setLoading] = useState(true);
+  const [userWithPicks, setUserWithPicks] = useState(null);
+  const [assignedPoints, setAssignedPoints] = useState(null);
 
   useEffect(() => {
     if (!user && !isLoading) {
@@ -26,7 +29,7 @@ const Home = () => {
 
     if (user && !userWithPicks) {
       axios
-        .get(`/api/get-user/${user?.email}`)
+        .get(`/api/get-user/${user?.email}?week=${currentRound.round}`)
         .then(({ data: userData }) => {
           if (userData.success) {
             setUserWithPicks(userData.user);
@@ -40,13 +43,11 @@ const Home = () => {
     }
   }, [user]);
 
-  const lastRoundScore = useMemo(() => {
+  const lastRoundDetails = useMemo(() => {
     if (userWithPicks && userWithPicks.picks.length) {
-      const lastRound = userWithPicks.picks[userWithPicks.picks.length - 1];
-
-      return lastRound.totalPoints;
+      return userWithPicks.picks.sort((a, b) => b.week - a.week)[0];
     }
-
+    return {};
     return 0;
   }, [userWithPicks, userWithPicks?.picks]);
 
@@ -54,25 +55,20 @@ const Home = () => {
     return <CircularProgress />;
   }
 
-  if (currentWeekWithLiveResults.message) {
-    return (
-      <HomeStyled currentMode={currentMode}>
-        <div className="user-details">{currentWeekWithLiveResults.message}</div>
-      </HomeStyled>
-    );
-  }
-
   const assignPoints = () => {
     axios
-      .post(`/api/assign-points?week=${currentRound.week}`, {
+      .post(`/api/assign-points?week=${currentWeekWithLiveResults.week}`, {
         raceResults: currentWeekWithLiveResults,
       })
       .then((res) => {
         console.log({ res: res.data });
+        if (res.data.success) {
+          setAssignedPoints(res.data);
+        }
       })
       .catch((e) => console.warn("ERROR", { e }));
   };
-  console.log({ userWithPicks, currentWeekWithLiveResults, window });
+  console.log({ currentWeekWithLiveResults });
   return (
     <HomeStyled currentMode={currentMode}>
       {user.name === process.env.ADMIN_USER && (
@@ -80,9 +76,11 @@ const Home = () => {
       )}
       <div className="user-details">
         <h1>{`Current Round: ${currentWeekWithLiveResults.week}`}</h1>
-        <h2>{`Last Round Score: ${lastRoundScore}`}</h2>
+        <h2>{`Last Round Score: ${lastRoundDetails.totalPoints}`}</h2>
+        <h2>{`Last Round Rank: ${lastRoundDetails.rank}`}</h2>
       </div>
-      {currentWeekWithLiveResults.liveResults.fastestLaps &&
+      {!currentWeekWithLiveResults.message &&
+      currentWeekWithLiveResults.liveResults.fastestLaps &&
       currentWeekWithLiveResults.liveResults.fastestLaps.length > 0 ? (
         <>
           <div className="marquee">
@@ -130,7 +128,9 @@ const Home = () => {
               })}
           </div>
         </>
-      ) : null}
+      ) : (
+        <div className="user-details">{currentWeekWithLiveResults.message}</div>
+      )}
       <main>
         <h1 className="title"></h1>
       </main>
