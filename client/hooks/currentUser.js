@@ -1,6 +1,7 @@
 import { useCurrentMode } from "./currentMode";
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import currentRound from "../constants/currentRound";
 
 const CurrentUserContext = createContext({});
 
@@ -10,7 +11,7 @@ export const useCurrentUser = (user) => {
   useEffect(() => {
     if (!currentUser && user) {
       axios
-        .get(`/api/get-user/${user}`)
+        .get(`/api/get-user/${user}?week=${currentRound.week}`)
         .then(({ data }) => {
           if (data.success) {
             setCurrentUser(data.user);
