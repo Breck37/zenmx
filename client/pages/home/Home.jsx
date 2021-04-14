@@ -66,19 +66,19 @@ const Home = () => {
         raceResults: currentWeekWithLiveResults,
       })
       .then((res) => {
-        console.log({ res: res.data });
         if (res.data.success) {
           setAssignedPoints(res.data);
         }
       })
       .catch((e) => console.warn("ERROR", { e }));
   };
-  console.log({ currentWeekWithLiveResults });
+  console.log({ assignedPoints });
   return (
     <HomeStyled currentMode={currentMode}>
-      {user.name === process.env.ADMIN_USER && (
+      {user.name === process.env.ADMIN_USER &&
+      currentWeekWithLiveResults.liveResults ? (
         <Button label="Assign Points" onClick={assignPoints} />
-      )}
+      ) : null}
       <div className="user-details">
         <h1>{`Current Round: ${currentWeekWithLiveResults.week}`}</h1>
         <h2>{`Round ${lastRoundDetails.week} Score: ${lastRoundDetails.totalPoints}`}</h2>
