@@ -26,6 +26,9 @@ export default styled.div`
     flex-direction: column;
     align-items: center;
 
+    > a {
+      text-decoration: none;
+    }
     > h3 {
       text-align: center;
     }
