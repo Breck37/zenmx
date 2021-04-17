@@ -77,9 +77,9 @@ const Team = () => {
     if (!canShowQualifying && loading && currentRound) {
       try {
         const result = await qualifyingCanBeShown(
-          "https://results.amasupercross.com/xml/SX/events/S2165/S1QCOVR.pdf"
+          currentRound.bigBikeQualifying
         );
-
+        console.log({ result });
         if (result) {
           setCanShowQualifying(true);
         }
@@ -214,7 +214,7 @@ const Team = () => {
               {canShowQualifying ? (
                 <Link href={currentRound.bigBikeQualifying} passHref>
                   <a href="" target="_blank">
-                    Qualifying Results
+                    <h3>Qualifying Results</h3>
                   </a>
                 </Link>
               ) : (

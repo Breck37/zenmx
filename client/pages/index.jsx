@@ -27,7 +27,7 @@ export default function LandingPage({ setCurrentMode }) {
   const getCurrentStatus = () => {
     axios
       .get("http://localhost:3700/current-status")
-      .then((r) => console.log("RESPONSE IN CLIENT", r))
+      .then((r) => console.log("Current Status:", r))
       .catch((e) => console.log(e));
   };
 
