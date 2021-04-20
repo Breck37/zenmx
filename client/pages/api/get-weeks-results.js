@@ -10,7 +10,7 @@ import {
   lapsMapper,
 } from "../../helpers";
 
-const getLiveResults = async () => {
+export const getLiveResults = async () => {
   return crawler("https://live.amasupercross.com/xml/sx/RaceResults.json")
     .then((response) => {
       if (response && !response.error) {

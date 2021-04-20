@@ -9,7 +9,6 @@ const LeagueCard = ({ leaguePicks }) => {
   return (
     <LeagueCardStyled>
       {leaguePicks.map((pick) => {
-        console.log({ pick });
         return (
           <div className="pick">
             <h1>{pick.user}</h1>

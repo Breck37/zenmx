@@ -15,6 +15,7 @@ import { AppStyled } from "../styles";
 import { useRouter } from "next/router";
 import "../styles/fonts.css";
 import { currentRound } from "../constants";
+import { getLiveResults } from "./api/get-weeks-results";
 
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
@@ -43,7 +44,11 @@ function ModernMotoFantasy({ Component, pageProps }) {
         .then(({ data }) => {
           setRaceResults(data);
         })
-        .catch((err) => console.log("Live Results Error: ", err));
+        .catch(async (err) => {
+          console.log("Live Results Error: ", err);
+          const liveResults = await getLiveResults();
+          setRaceResults(liveResults);
+        });
     }
   }, [raceResults]);
 
