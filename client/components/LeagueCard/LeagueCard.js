@@ -19,7 +19,14 @@ const LeagueCard = ({ leaguePicks }) => {
               .map((rider) => {
                 return (
                   <div className="rider-row">
-                    <h5>{rider.riderName}</h5>
+                    <h5>
+                      <b>
+                        {rider.position === 100
+                          ? "FL: "
+                          : `${rider.position}: `}
+                      </b>
+                      {rider.riderName}
+                    </h5>
                     <h6>{rider.points}</h6>
                   </div>
                 );
