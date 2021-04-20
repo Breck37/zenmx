@@ -13,7 +13,7 @@ export default styled.div`
   }
 
   .pick {
-    flex: 1;
+    min-width: 200px;
     background-color: aqua;
     border: solid 1px black;
 
@@ -25,6 +25,14 @@ export default styled.div`
       display: flex;
       justify-content: space-around;
       align-items: center;
+    }
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+
+    .pick {
+      width: 50%;
     }
   }
 `;
