@@ -29,7 +29,7 @@ const Home = () => {
 
     if (user && !userWithPicks) {
       axios
-        .get(`/api/get-user/${user?.email}?week=${currentRound.round}`)
+        .get(`/api/get-user/${user?.email}`)
         .then(({ data: userData }) => {
           if (userData.success) {
             setUserWithPicks(userData.user);
@@ -72,7 +72,7 @@ const Home = () => {
       })
       .catch((e) => console.warn("ERROR", { e }));
   };
-  console.log({ assignedPoints });
+
   return (
     <HomeStyled currentMode={currentMode}>
       {user.name === process.env.ADMIN_USER &&
