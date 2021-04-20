@@ -6,10 +6,19 @@ export default styled.div`
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(7, 1fr);
 
-    > div {
+    .plate {
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
+      grid-row: 1;
+    }
+
+    .points {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
     }
 
     .seven {
@@ -58,7 +67,7 @@ export default styled.div`
     min-height: ${({ shouldShowSmallPlate }) =>
       shouldShowSmallPlate ? "100" : "250"}px;
     display: grid;
-    grid-template-rows: repeat(7, 1fr);
+    grid-template-rows: repeat(8, 1fr);
     grid-template-columns: repeat(7, 1fr);
 
     > div {
@@ -114,6 +123,11 @@ export default styled.div`
       grid-row: 1 / span 7;
       grid-column: 5;
       border: solid 1px black;
+    }
+
+    .total-points {
+      grid-row: 8;
+      grid-column: 1 / span 7;
     }
   }
     @media (screen and max-width: 500px) {

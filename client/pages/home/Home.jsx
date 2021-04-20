@@ -5,7 +5,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import { useCurrentMode } from "../../hooks/currentMode";
 import { useRaceResults } from "../../hooks/raceResults";
-import { Button } from "../../components";
+import { Button, LeagueCard } from "../../components";
 import { HomeStyled } from "../../styles";
 import { manufacturers } from "../../constants";
 import { useCurrentRound } from "../../hooks/currentRound";
@@ -72,7 +72,7 @@ const Home = () => {
       })
       .catch((e) => console.warn("ERROR", { e }));
   };
-  console.log({ assignedPoints });
+
   return (
     <HomeStyled currentMode={currentMode}>
       {user.name === process.env.ADMIN_USER &&
@@ -132,6 +132,9 @@ const Home = () => {
                 );
               })}
           </div>
+          <LeagueCard
+            leaguePicks={userWithPicks.leaguePicks[currentRound.round]}
+          />
         </>
       ) : (
         <div className="user-details">{currentWeekWithLiveResults.message}</div>
