@@ -7,6 +7,7 @@ export default styled.div`
   overflow: hidden;
   height: calc(100vh - 128px);
   margin-top: 128px;
+  overflow-y: scroll;
 
   main {
     margin-top: 128px;
