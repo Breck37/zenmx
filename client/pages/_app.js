@@ -52,7 +52,9 @@ function ModernMotoFantasy({ Component, pageProps }) {
         })
         .catch((err) => {
           console.log("Live Results Error: ", err);
-          getLiveResultsFallBack();
+          if (!raceResults) {
+            getLiveResultsFallBack();
+          }
         });
     }
   }, [raceResults]);

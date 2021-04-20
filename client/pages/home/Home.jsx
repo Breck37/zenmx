@@ -88,8 +88,8 @@ const Home = () => {
         leaguePicks={userWithPicks.leaguePicks[currentRound.round - 1]}
       />
       {!currentWeekWithLiveResults.message &&
-      currentWeekWithLiveResults.liveResults.fastestLaps &&
-      currentWeekWithLiveResults.liveResults.fastestLaps.length > 0 ? (
+      currentWeekWithLiveResults.liveResults &&
+      currentWeekWithLiveResults.liveResults?.fastestLaps.length > 0 ? (
         <>
           <div className="marquee">
             <div className="animation-container">
