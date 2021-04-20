@@ -84,6 +84,9 @@ const Home = () => {
         <h2>{`Round ${lastRoundDetails.week} Score: ${lastRoundDetails.totalPoints}`}</h2>
         <h2>{`Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
       </div>
+      <LeagueCard
+        leaguePicks={userWithPicks.leaguePicks[currentRound.round - 1]}
+      />
       {!currentWeekWithLiveResults.message &&
       currentWeekWithLiveResults.liveResults.fastestLaps &&
       currentWeekWithLiveResults.liveResults.fastestLaps.length > 0 ? (
@@ -132,9 +135,6 @@ const Home = () => {
                 );
               })}
           </div>
-          <LeagueCard
-            leaguePicks={userWithPicks.leaguePicks[currentRound.round]}
-          />
         </>
       ) : (
         <div className="user-details">{currentWeekWithLiveResults.message}</div>

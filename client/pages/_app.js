@@ -1,5 +1,5 @@
 // import App from 'next/app'
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Head from "next/head";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import axios from "axios";
@@ -15,7 +15,6 @@ import { AppStyled } from "../styles";
 import { useRouter } from "next/router";
 import "../styles/fonts.css";
 import { currentRound } from "../constants";
-import { getLiveResults } from "./api/get-weeks-results";
 
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
@@ -37,17 +36,23 @@ function ModernMotoFantasy({ Component, pageProps }) {
     }
   }, []);
 
+  const getLiveResultsFallBack = useCallback(() => {
+    axios.get("/api/get-live-results").then(({ data }) => {
+      setRaceResults(data);
+    });
+  }, []);
+
   useEffect(() => {
     if (!raceResults) {
       axios
         .get("/api/get-weeks-results")
         .then(({ data }) => {
+          console.log({ data });
           setRaceResults(data);
         })
-        .catch(async (err) => {
+        .catch((err) => {
           console.log("Live Results Error: ", err);
-          const liveResults = await getLiveResults();
-          setRaceResults(liveResults);
+          getLiveResultsFallBack();
         });
     }
   }, [raceResults]);
