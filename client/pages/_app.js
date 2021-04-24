@@ -47,7 +47,6 @@ function ModernMotoFantasy({ Component, pageProps }) {
       axios
         .get("/api/get-weeks-results")
         .then(({ data }) => {
-          console.log({ data });
           setRaceResults(data);
         })
         .catch((err) => {

@@ -17,7 +17,7 @@ const LeagueCard = ({ leaguePicks }) => {
               .sort((a, b) => a.position - b.position)
               .map((rider) => {
                 return (
-                  <div className="rider-row">
+                  <div className="rider-row" key={rider.position}>
                     <h5>
                       <b>
                         {rider.position === 100
