@@ -4,8 +4,10 @@ import { Button } from "@material-ui/core";
 
 const ModernButton = ({ label, onClick, disabled, small }) => {
   return (
-    <ButtonStyled disabled={disabled} onClick={onClick} small={small}>
-      <Button disabled={disabled}>{label}</Button>
+    <ButtonStyled disabled={disabled} small={small}>
+      <Button onClick={onClick} disabled={disabled} fullWidth>
+        {label}
+      </Button>
     </ButtonStyled>
   );
 };
