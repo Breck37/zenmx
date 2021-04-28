@@ -7,10 +7,22 @@ const afterCallback = (req, res, session, state) => {
   return session;
 };
 
+function getUrls(req) {
+  const host = req.headers["host"];
+  const protocol = process.env.VERCEL_URL ? "https" : "http";
+  const redirectUri = `${protocol}://${host}/api/auth/callback`;
+  const returnTo = `${protocol}://${host}`;
+  return {
+    redirectUri,
+    returnTo,
+  };
+}
+
 export default handleAuth({
   async callback(req, res) {
     try {
-      const result = await handleCallback(req, res, { redirectTo: "/" });
+      const { redirectUri } = getUrls(req);
+      const result = await handleCallback(req, res, { redirectUri });
       return result;
     } catch (error) {
       res.status(error.status || 500).end(error.message);
