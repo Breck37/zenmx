@@ -10,7 +10,7 @@ const afterCallback = (req, res, session, state) => {
 function getUrls(req) {
   const host = req.headers["host"];
   const protocol = process.env.VERCEL_URL ? "https" : "http";
-  const redirectUri = `${protocol}://${host}/api/auth/callback`;
+  const redirectUri = `${protocol}://${host}`;
   const returnTo = `${protocol}://${host}`;
   return {
     redirectUri,
