@@ -20,8 +20,10 @@ function getUrls(req) {
 
 export default handleAuth({
   async callback(req, res) {
+    console.log(req);
     try {
       const { redirectUri } = getUrls(req);
+      console.log("redirectUri------------", redirectUri);
       const result = await handleCallback(req, res, { redirectUri });
       return result;
     } catch (error) {
