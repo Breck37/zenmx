@@ -11,7 +11,6 @@ function getUrls(req) {
   const host = req.headers["host"];
   const protocol = process.env.VERCEL_URL ? "https" : "http";
   const redirectUri = `${protocol}://${host}`;
-  console.log({ redirectUri });
   const returnTo = `${protocol}://${host}`;
   return {
     redirectUri,
