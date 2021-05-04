@@ -110,7 +110,7 @@ const Team = () => {
       };
     });
   }, [selectedRiders]).sort((a, b) => a.position - b.position);
-  console.log({ selectedRiders });
+
   const isDisabled = useMemo(() => {
     if (
       !selectedRiders ||
