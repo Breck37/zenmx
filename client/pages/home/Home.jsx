@@ -13,7 +13,7 @@ import { useCurrentRound } from "../../hooks/currentRound";
 const Home = () => {
   const router = useRouter();
   const { currentMode } = useCurrentMode();
-  const { currentRound } = useCurrentRound();
+  const currentRound = useCurrentRound();
   const currentWeekWithLiveResults = useRaceResults();
   const { user, isLoading } = useUser();
   const [loading, setLoading] = useState(true);
@@ -46,7 +46,6 @@ const Home = () => {
   const lastRoundDetails = useMemo(() => {
     if (userWithPicks && userWithPicks.picks.length) {
       const latestPick = userWithPicks.picks.sort((a, b) => b.week - a.week)[0];
-      console.log({ latestPick, currentRound });
       if (latestPick.week === currentRound.round && latestPick.rank === null) {
         return userWithPicks.picks.sort((a, b) => b.week - a.week)[1];
       }
@@ -85,7 +84,7 @@ const Home = () => {
         <h2>{`Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
       </div>
       <LeagueCard
-        leaguePicks={userWithPicks.leaguePicks[currentRound.round - 1]}
+        leaguePicks={userWithPicks.leaguePicks[currentRound.leagueRoundToShow]}
       />
       {!currentWeekWithLiveResults.message &&
       currentWeekWithLiveResults.liveResults &&
