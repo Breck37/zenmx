@@ -3,9 +3,6 @@ import LeagueCardStyled from "./LeagueCardStyled";
 import { ResultsPodium } from "../";
 
 const LeagueCard = ({ leaguePicks }) => {
-  console.log({
-    leaguePicks,
-  });
   return (
     <LeagueCardStyled>
       {leaguePicks.map((pick) => {
