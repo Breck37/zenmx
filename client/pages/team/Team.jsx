@@ -85,7 +85,7 @@ const Team = () => {
         const result = await qualifyingCanBeShown(
           currentRound.bigBikeQualifying
         );
-        console.log({ result });
+
         if (result) {
           setCanShowQualifying(true);
         }
@@ -129,7 +129,6 @@ const Team = () => {
   };
 
   const saveUserPicks = () => {
-    console.log("HITT");
     const cleanseSelectedRiders = removeErrors(selectedRiders);
 
     const params = JSON.stringify({
