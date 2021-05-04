@@ -27,7 +27,7 @@ const Team = () => {
   // hooks
   const { user, isLoading } = useUser();
   const isMounted = useIsMountedRef();
-  const { currentRound } = useCurrentRound();
+  const currentRound = useCurrentRound();
   const { currentMode } = useCurrentMode();
   const { currentUser } = useCurrentUser(user?.email);
 
@@ -59,7 +59,7 @@ const Team = () => {
     }
 
     axios
-      .get(`/api/check-entry-list?week=${currentRound.round}`)
+      .get(`/api/check-entry-list?week=${currentRound.week}`)
       .then((res) => {
         setLoading(false);
         setEntries(res.data.riders);
@@ -72,14 +72,20 @@ const Team = () => {
       return status.ok;
     });
   });
-
+  console.log({
+    new: new Date(),
+    tz: new Date().getTimezoneOffset(),
+    currentRound,
+    end: currentRound.submissionEnd < new Date(),
+    start: currentRound.submissionStart > new Date(),
+  });
   useEffect(async () => {
     if (!canShowQualifying && loading && currentRound) {
       try {
         const result = await qualifyingCanBeShown(
           currentRound.bigBikeQualifying
         );
-        console.log({ result });
+
         if (result) {
           setCanShowQualifying(true);
         }
@@ -105,8 +111,13 @@ const Team = () => {
     });
   }, [selectedRiders]).sort((a, b) => a.position - b.position);
 
-  const hasPickErrors = useMemo(() => {
-    if (selectedRidersWithErrors.length !== 7) return true;
+  const isDisabled = useMemo(() => {
+    if (
+      !selectedRiders ||
+      !selectedRiders?.length ||
+      selectedRidersWithErrors.length !== 7
+    )
+      return true;
     return selectedRidersWithErrors.reduce(
       (result, currentRider) => (currentRider.error ? true : false),
       false
@@ -199,7 +210,7 @@ const Team = () => {
                   label="Save Team"
                   small
                   onClick={saveUserPicks}
-                  disabled={hasPickErrors}
+                  disabled={isDisabled}
                   className="team-save-button"
                 />
 

@@ -44,7 +44,6 @@ export default async (req, res) => {
   const liveResults = await getLiveResults();
   crawler(url)
     .then((response) => {
-      console.log({ response });
       if (response.error) {
         res.status(200).send({
           ...liveResults,
