@@ -43,6 +43,7 @@
   "resolutions": {
     "immer": "^8.0.1",
     "minimist": "^1.2.5",
-    "ssri": "^8.0.1"
+    "ssri": "^8.0.1",
+    "postcss": "^8.2.10"
   }
 }
