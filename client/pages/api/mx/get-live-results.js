@@ -6,7 +6,7 @@ import {
   spliceSeasonResults,
   resultsMapper,
   lapsMapper,
-} from "../../helpers";
+} from "../../../helpers";
 
 export default (req, res) => {
   crawler("https://live.amasupercross.com/xml/sx/RaceResults.json")

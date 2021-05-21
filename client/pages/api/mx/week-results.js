@@ -8,7 +8,7 @@ import {
   spliceSeasonResults,
   resultsMapper,
   lapsMapper,
-} from "../../helpers";
+} from "../../../helpers";
 
 export const getLiveResults = async () => {
   return crawler("https://live.amasupercross.com/xml/sx/RaceResults.json")
