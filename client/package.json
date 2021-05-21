@@ -12,7 +12,7 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
-    "@auth0/nextjs-auth0": "^1.0.0-beta.2",
+    "@auth0/nextjs-auth0": "^1.3.1",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.58",
