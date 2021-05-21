@@ -1,6 +1,5 @@
 import crawler from "crawler-request";
-import currentRound from "../../../constants/currentRound";
-import scheduledData from "../../../constants/scheduledData";
+import { currentRound, scheduledData } from "../../../constants";
 import {
   mapper,
   seasonMapper,
