@@ -1,22 +1,23 @@
-const object = {
-  RIDER: [],
-  HOMETOWN: [],
-  'AVG START': [],
-  POS: [],
-  'AVG FINISH': [],
-  'SEASON POINTS': [],
-  'SEASON HOLESHOTS': [],
-  'AVG QUAL': [],
-  'SEASON LAPS LEAD': [],
-  'SEASON WINS': [],
-};
+// // const object = {
+//   RIDER: [],
+//   HOMETOWN: [],
+//   "AVG START": [],
+//   POS: [],
+//   "AVG FINISH": [],
+//   "SEASON POINTS": [],
+//   "SEASON HOLESHOTS": [],
+//   "AVG QUAL": [],
+//   "SEASON LAPS LEAD": [],
+//   "SEASON WINS": [],
+// };
 
 const parseName = (nameString) => {
-  const split = nameString.split(' ');
-  return split.splice(0, 2).join(' ');
+  const split = nameString.split(" ");
+  return split.splice(0, 2).join(" ");
 };
 
-const parseSeasonStats = (stringContainingStats, index) => stringContainingStats.split(' ').splice(index, 1).join('');
+const parseSeasonStats = (stringContainingStats, index) =>
+  stringContainingStats.split(" ").splice(index, 1).join("");
 
 // TODO - Season Averages
 const splitRiderStats = (riderStats, position) => ({
@@ -31,8 +32,8 @@ const splitRiderStats = (riderStats, position) => ({
 
 const identifyRiderStatistics = (resultString) => {
   let currentRider = [];
-  const riderResults = [];
-  resultString.map((c, i, a) => {
+  let riderResults = [];
+  resultString.map((c, i) => {
     if (currentRider.length == 4) {
       riderResults.push(splitRiderStats(currentRider, i / 4));
       currentRider = [];

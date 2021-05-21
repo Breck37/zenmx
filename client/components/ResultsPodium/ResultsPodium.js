@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ResultsPodiumStyled from "./styles";
 import FrontPlate from "../FrontPlate/FrontPlate";
 import FrontPlateSmall from "../FrontPlate/FrontPlateSmall";

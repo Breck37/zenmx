@@ -1,5 +1,4 @@
-import { useCurrentMode } from "./currentMode";
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import currentRound from "../constants/currentRound";
 

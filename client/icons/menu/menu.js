@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function menu() {
   return (
     <svg viewBox="0 0 100 80" width="40" height="40" fill="aqua">

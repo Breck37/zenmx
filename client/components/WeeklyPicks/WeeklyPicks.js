@@ -19,9 +19,9 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
   }, [selectedRiders]);
 
   const cleanseSelectedRiders = (riderName, position) => {
-    const alreadySelectedRiderIndex = selectedRiders.find(
-      (rider) => rider.riderName === riderName
-    );
+    // const alreadySelectedRiderIndex = selectedRiders.find(
+    //   (rider) => rider.riderName === riderName
+    // );
     const selectedCopy = [...selectedRiders];
     if (!riderName) {
       return {

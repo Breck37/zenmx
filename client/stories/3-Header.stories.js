@@ -1,5 +1,4 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import { Header } from "../components";
 
 export default {
@@ -9,16 +8,16 @@ export default {
 
 const tabs = [
   {
-    title: 'Picks'
+    title: "Picks",
   },
   {
-    title: 'Results'
+    title: "Results",
   },
   {
-    title: 'Leagues'
+    title: "Leagues",
   },
   {
-    title: 'Contact'
+    title: "Contact",
   },
 ];
 

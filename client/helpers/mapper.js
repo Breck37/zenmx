@@ -1,34 +1,34 @@
-const object = {
-  POS: [],
-  number: [],
-  RIDER: [],
-  HOMETOWN: [],
-  BIKE: [],
-  QUAL: [],
-  HOLESHOT: [],
-  START: [],
-  'LAPS LED': [],
-  FINISH: [],
-  POINTS: [],
-};
+// const object = {
+//   POS: [],
+//   number: [],
+//   RIDER: [],
+//   HOMETOWN: [],
+//   BIKE: [],
+//   QUAL: [],
+//   HOLESHOT: [],
+//   START: [],
+//   "LAPS LED": [],
+//   FINISH: [],
+//   POINTS: [],
+// };
 
 const manufacturers = [
-  'Suzuki',
-  'Honda',
-  'KTM',
-  'Yamaha',
-  'Kawasaki',
-  'Husqvarna',
-  'GASGAS',
+  "Suzuki",
+  "Honda",
+  "KTM",
+  "Yamaha",
+  "Kawasaki",
+  "Husqvarna",
+  "GASGAS",
 ];
 
 const parseRiderName = (name) => {
-  const splitName = name.split(' ');
+  const splitName = name.split(" ");
   let parsedName;
   splitName.map((nameElement) => {
     manufacturers.map((m) => {
-      const reg = new RegExp(m, 'gi');
-      const replacedBike = nameElement.replace(reg, ' ');
+      const reg = new RegExp(m, "gi");
+      const replacedBike = nameElement.replace(reg, " ");
       if (nameElement.length > replacedBike.length) {
         parsedName = replacedBike;
       }
@@ -51,10 +51,11 @@ const identifyRiderRaceResults = (results) => {
   let currentPosition = 1;
   results
     .filter(
-      (r) => r.length === 1
-        || r.length === 2
-        || r.length === 3
-        || !/^\d+$/.test(r.split('X').join('')),
+      (r) =>
+        r.length === 1 ||
+        r.length === 2 ||
+        r.length === 3 ||
+        !/^\d+$/.test(r.split("X").join(""))
     )
     .map((c, i, arr) => {
       if (x) {
@@ -67,7 +68,7 @@ const identifyRiderRaceResults = (results) => {
         currentPosition += 1;
       } else if (i === arr.length - 1) {
         riderResults.push(
-          splitRiderResults([...currentRider, c], currentPosition),
+          splitRiderResults([...currentRider, c], currentPosition)
         );
         currentRider = [];
       }

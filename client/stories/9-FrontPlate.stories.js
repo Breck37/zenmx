@@ -62,7 +62,7 @@ export const DesktopFrontPlate = () => {
   return (
     <Container>
       {mockFrontPlateRiders.map((rider) => (
-        <FrontPlate rider={rider} />
+        <FrontPlate key={rider.name} rider={rider} />
       ))}
     </Container>
   );
@@ -79,7 +79,7 @@ export const MobileFrontPlate = () => {
   return (
     <MobileContainer>
       {mockFrontPlateRiders.map((rider) => (
-        <FrontPlateSmall rider={rider} small />
+        <FrontPlateSmall key={rider.name} rider={rider} small />
       ))}
     </MobileContainer>
   );
