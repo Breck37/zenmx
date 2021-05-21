@@ -103,12 +103,4 @@ function ModernMotoFantasy({ Component, pageProps }) {
   );
 }
 
-ModernMotoFantasy.getInitialProps = async ({ Component, ctx }) => {
-  const pageProps = Component.getInitialProps
-    ? await Component.getInitialProps(ctx)
-    : {};
-
-  return { pageProps };
-};
-
 export default ModernMotoFantasy;
