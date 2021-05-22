@@ -1,11 +1,11 @@
 module.exports = [
   {
-    title: "My Team",
-    route: "/team",
+    title: 'My Team',
+    route: '/team',
   },
   {
-    title: "Results",
-    route: "/results",
+    title: 'Results',
+    route: '/results',
   },
   // {
   //   title: "Leagues",

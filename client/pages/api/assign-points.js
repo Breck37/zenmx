@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async (req, res) => {
   const { week } = req.query;
@@ -11,7 +11,7 @@ export default async (req, res) => {
     .then((res) => res.data)
     .catch((e) => {
       console.log({ e });
-      return { success: false, error: "Error calculating points" };
+      return { success: false, error: 'Error calculating points' };
     });
 
   res.status(200).send(calculatedPoints);

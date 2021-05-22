@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
-import { CircularProgress } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { useCurrentMode } from "../../hooks/currentMode";
 import { LoginStyled } from "../../styles";
@@ -8,10 +7,9 @@ import ModernMotoLogo from "../../svgs/ModernMotoFlat.svg";
 import anime from "animejs";
 
 const Login = () => {
-  const [loading, setLoading] = useState(true);
+  const router = useRouter();
   const { currentMode } = useCurrentMode();
   const { user, isLoading } = useUser();
-  const router = useRouter();
 
   if (!isLoading && user) {
     router.push("/home");
@@ -36,6 +34,34 @@ const Login = () => {
     }
   }, []);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { elements } = event.target;
+
+    // Add the Magic code here
+    const did = await new Magic(
+      process.env.NEXT_PUBLIC_MAGIC_PUB_KEY
+    ).auth.loginWithMagicLink({ email: elements.email.value });
+
+    // Once we have the token from magic,
+    const authRequest = await fetch("/api/login", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${did}` },
+    });
+
+    // update our own database
+
+    // const authRequest = await fetch()
+
+    // if (authRequest.ok) {
+    // We successfully logged in, our API
+    // set authorization cookies and now we
+    // can redirect to the dashboard!
+    // router.push('/dashboard')
+    // } else { /* handle errors */ }
+  };
+
   return (
     <LoginStyled isDarkMode={currentMode}>
       <div className="svg">
@@ -48,9 +74,7 @@ const Login = () => {
       <div className="tagline">
         <i>The</i> MX fantasy app
       </div>
-      <a className="login-button" href="/api/auth/login">
-        Login
-      </a>
+      Login
     </LoginStyled>
   );
 };

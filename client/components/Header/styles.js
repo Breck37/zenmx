@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export default styled.div`
   max-width: 100vw;
@@ -15,8 +15,7 @@ export default styled.div`
   .mode-container {
     height: 32px;
     padding-right: 5%;
-    background-color: ${({ currentMode }) =>
-      currentMode ? "#fff" : "#282828"};
+    background-color: ${({ currentMode }) => (currentMode ? '#fff' : '#282828')};
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -26,7 +25,7 @@ export default styled.div`
       background: none;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: ${({ currentMode }) => (currentMode ? "#28282" : "aqua")};
+      color: ${({ currentMode }) => (currentMode ? '#28282' : 'aqua')};
       border: none;
       cursor: pointer;
       outline: inherit;
@@ -49,8 +48,7 @@ export default styled.div`
       cursor: pointer;
       width: 100%;
       color: aqua;
-      background-color: ${({ currentMode }) =>
-        currentMode ? "#fff" : "#282828"};
+      background-color: ${({ currentMode }) => (currentMode ? '#fff' : '#282828')};
       height: 128px;
       display: inherit;
       align-items: center;
@@ -76,7 +74,7 @@ export default styled.div`
     }
 
     .icon-wrap {
-      background-color: ${({ currentMode }) => (currentMode ? "#fff" : "#FFF")};
+      background-color: ${({ currentMode }) => (currentMode ? '#fff' : '#FFF')};
     }
   }
 
@@ -173,7 +171,7 @@ export default styled.div`
       animation: slide100 1.5s;
     }
     .tabs {
-      display: ${({ showMobileTabs }) => (showMobileTabs ? "block" : "none")};
+      display: ${({ showMobileTabs }) => (showMobileTabs ? 'block' : 'none')};
       flex-direction: column;
       width: 200px;
       z-index: 10000;
@@ -212,7 +210,7 @@ export default styled.div`
       position: absolute;
       right: 24px;
       top: 41%;
-      color: ${({ currentMode }) => (currentMode ? "aqua" : "#282828")};
+      color: ${({ currentMode }) => (currentMode ? 'aqua' : '#282828')};
     }
   }
 

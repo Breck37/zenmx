@@ -1,6 +1,6 @@
-import { rgbToHex } from "@material-ui/core";
-import { blue } from "@material-ui/core/colors";
-import styled from "styled-components";
+import { rgbToHex } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
+import styled from 'styled-components';
 
 // const backgroundColors = {
 //   yamaha: "rgba(0,0,207, 0.8)",
@@ -14,8 +14,7 @@ export const TableStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(
-    ${({ raceResultsLength }) =>
-      raceResultsLength ? raceResultsLength + 1 : 0},
+    ${({ raceResultsLength }) => (raceResultsLength ? raceResultsLength + 1 : 0)},
     48px
   );
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 8px rgba(0, 0, 0, 0.08);
@@ -26,8 +25,8 @@ export const TableStyled = styled.div`
   }
 
   > div:nth-child(2) {
-    border-top-left-radius: ${({ hasOverlay }) => (hasOverlay ? "8px" : 0)};
-    border-top-right-radius: ${({ hasOverlay }) => (hasOverlay ? "8px" : 0)};
+    border-top-left-radius: ${({ hasOverlay }) => (hasOverlay ? '8px' : 0)};
+    border-top-right-radius: ${({ hasOverlay }) => (hasOverlay ? '8px' : 0)};
   }
 
   > div:last-child {

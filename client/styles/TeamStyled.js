@@ -1,16 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export default styled.div`
   margin: 150px 0 0;
   width: 100vw;
   min-height: 100%;
   overflow: hidden;
-  background-color: ${({ currentMode }) => (currentMode ? "#fff" : "#282828")};
+  background-color: ${({ currentMode }) => (currentMode ? '#fff' : '#282828')};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+  color: ${({ currentMode }) => (currentMode ? '#282828' : '#fff')};
 
   .team-container {
     display: flex;
@@ -35,10 +35,9 @@ export default styled.div`
   }
 
   .unavailable {
-    background-color: ${({ currentMode }) =>
-      currentMode ? "#fff" : "#282828"};
+    background-color: ${({ currentMode }) => (currentMode ? '#fff' : '#282828')};
     text-align: center;
-    color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+    color: ${({ currentMode }) => (currentMode ? '#282828' : '#fff')};
   }
 
   .button-container {
@@ -81,7 +80,7 @@ export default styled.div`
 
       .MuiInputLabel-root,
       .MuiSelect-root {
-        color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+        color: ${({ currentMode }) => (currentMode ? '#282828' : '#fff')};
       }
 
       .MuiInputLabel-root {

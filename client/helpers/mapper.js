@@ -7,28 +7,28 @@ const object = {
   QUAL: [],
   HOLESHOT: [],
   START: [],
-  "LAPS LED": [],
+  'LAPS LED': [],
   FINISH: [],
   POINTS: [],
 };
 
 const manufacturers = [
-  "Suzuki",
-  "Honda",
-  "KTM",
-  "Yamaha",
-  "Kawasaki",
-  "Husqvarna",
-  "GASGAS",
+  'Suzuki',
+  'Honda',
+  'KTM',
+  'Yamaha',
+  'Kawasaki',
+  'Husqvarna',
+  'GASGAS',
 ];
 
 const parseRiderName = (name) => {
-  const splitName = name.split(" ");
+  const splitName = name.split(' ');
   let parsedName;
   splitName.map((nameElement) => {
     manufacturers.map((m) => {
-      const reg = new RegExp(m, "gi");
-      const replacedBike = nameElement.replace(reg, " ");
+      const reg = new RegExp(m, 'gi');
+      const replacedBike = nameElement.replace(reg, ' ');
       if (nameElement.length > replacedBike.length) {
         parsedName = replacedBike;
       }
@@ -37,27 +37,24 @@ const parseRiderName = (name) => {
   return (splitName[0] += ` ${parsedName}`);
 };
 
-const splitRiderResults = (rider, position) => {
-  return {
-    number: rider[0],
-    name: parseRiderName(rider[1]),
-    points: rider[2],
-    position,
-  };
-};
+const splitRiderResults = (rider, position) => ({
+  number: rider[0],
+  name: parseRiderName(rider[1]),
+  points: rider[2],
+  position,
+});
 
 const identifyRiderRaceResults = (results) => {
   let currentRider = [];
-  let riderResults = [];
+  const riderResults = [];
   let x = false;
   let currentPosition = 1;
   results
     .filter(
-      (r) =>
-        r.length === 1 ||
-        r.length === 2 ||
-        r.length === 3 ||
-        !/^\d+$/.test(r.split("X").join(""))
+      (r) => r.length === 1
+        || r.length === 2
+        || r.length === 3
+        || !/^\d+$/.test(r.split('X').join('')),
     )
     .map((c, i, arr) => {
       if (x) {
@@ -70,7 +67,7 @@ const identifyRiderRaceResults = (results) => {
         currentPosition += 1;
       } else if (i === arr.length - 1) {
         riderResults.push(
-          splitRiderResults([...currentRider, c], currentPosition)
+          splitRiderResults([...currentRider, c], currentPosition),
         );
         currentRider = [];
       }
@@ -85,6 +82,4 @@ const identifyRiderRaceResults = (results) => {
   return riderResults;
 };
 
-module.exports = (resultString) => {
-  return identifyRiderRaceResults(resultString);
-};
+module.exports = (resultString) => identifyRiderRaceResults(resultString);
