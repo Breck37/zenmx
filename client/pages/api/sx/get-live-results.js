@@ -1,5 +1,8 @@
 import crawler from "crawler-request";
-import { resultsMapper, lapsMapper } from "../../../helpers";
+import {
+  resultsMapper,
+  lapsMapper,
+} from "../../../helpers/sx";
 
 export default (req, res) => {
   crawler("https://live.amasupercross.com/xml/sx/RaceResults.json")

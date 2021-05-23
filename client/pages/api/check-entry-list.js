@@ -1,8 +1,8 @@
 import crawler from "crawler-request";
 import { scheduledData } from "../../constants";
 
-const riderMapper = (collectedEntryList) => {
-  return collectedEntryList.reduce((riderObjects, currentRider) => {
+const riderMapper = (collectedEntryList) =>
+  collectedEntryList.reduce((riderObjects, currentRider) => {
     const [number, name] = currentRider;
     const rider = {
       number,
@@ -14,7 +14,6 @@ const riderMapper = (collectedEntryList) => {
     riderObjects.push(rider);
     return riderObjects;
   }, []);
-};
 
 const collectEntryListData = (splicedEntryList) => {
   let currentRider = [];
@@ -63,7 +62,7 @@ export default async (req, res) => {
       });
     });
   } catch (error) {
-    console.log("ERR in entry list", { error });
-    res.status(404).send("Entry list not yet available.");
+    console.log('err check entry list', { error });
+    res.status(404).send('Entry list not yet available.');
   }
 };

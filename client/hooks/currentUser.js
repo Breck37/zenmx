@@ -16,7 +16,7 @@ export const useCurrentUser = (user) => {
             setCurrentUser(data.user);
           }
         })
-        .catch((err) => console.log({ err }));
+        .catch((err) => console.log("current user hook error:", { err }));
     }
   });
 
