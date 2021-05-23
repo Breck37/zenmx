@@ -1,5 +1,5 @@
-import crawler from "crawler-request";
-import { scheduledData } from "../../constants";
+import crawler from 'crawler-request';
+import { scheduledData } from '../../constants';
 
 const riderMapper = (collectedEntryList) =>
   collectedEntryList.reduce((riderObjects, currentRider) => {
@@ -34,7 +34,7 @@ const collectEntryListData = (splicedEntryList) => {
 };
 
 const spliceEntryList = (formattedResponse) => {
-  const startingIndex = formattedResponse.indexOf("SPONSORS");
+  const startingIndex = formattedResponse.indexOf('SPONSORS');
   const riderData = formattedResponse.splice(startingIndex + 1);
   return riderData;
 };
@@ -46,7 +46,7 @@ export default async (req, res) => {
 
     await crawler(currentWeek.entryList).then((response) => {
       if (response && !response.error) {
-        const formattedResponse = response.text.split("\n");
+        const formattedResponse = response.text.split('\n');
 
         const riders = riderMapper(
           collectEntryListData(spliceEntryList(formattedResponse))

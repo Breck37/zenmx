@@ -1,5 +1,5 @@
-import crawler from "crawler-request";
-import { currentRound, scheduledData } from "../../../constants";
+import crawler from 'crawler-request';
+import { currentRound, scheduledData } from '../../../constants';
 import {
   mapper,
   seasonMapper,
@@ -7,10 +7,10 @@ import {
   spliceSeasonResults,
   resultsMapper,
   lapsMapper,
-} from '../../../helpers/sx';
+} from '../../../helpers';
 
 export const getLiveResults = async () =>
-  crawler("https://live.amasupercross.com/xml/sx/RaceResults.json")
+  crawler('https://live.amasupercross.com/xml/sx/RaceResults.json')
     .then((response) => {
       if (response && !response.error) {
         const formattedResponse = JSON.parse(response.html);
@@ -27,13 +27,13 @@ export const getLiveResults = async () =>
         };
       }
     })
-    .catch((e) => console.error("/get-live-results", e));
+    .catch((e) => console.error('/get-live-results', e));
 
 // const getResultDetails = (results) => {
-//   const session = results[3].split(" - ")[1];
+//   const session = results[3].split(' - ')[1];
 //   const round = results[11];
 
-//   return { session, round, fastLapLeader: "" };
+//   return { session, round, fastLapLeader: '' };
 // };
 
 export default async (req, res) => {
@@ -49,7 +49,7 @@ export default async (req, res) => {
         });
       }
       if (response && !response.error) {
-        const formattedResponse = response.text.split("\n");
+        const formattedResponse = response.text.split('\n');
         const raceResults = mapper(spliceResults([...formattedResponse], 14));
         const seasonResults = seasonMapper(
           spliceSeasonResults(formattedResponse)
@@ -64,5 +64,5 @@ export default async (req, res) => {
         });
       }
     })
-    .catch((e) => console.error("/get-live-results", e));
+    .catch((e) => console.error('/get-live-results', e));
 };

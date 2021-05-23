@@ -1,5 +1,5 @@
-import crawler from "crawler-request";
-import { parseStringPromise } from "xml2js";
+import crawler from 'crawler-request';
+import { parseStringPromise } from 'xml2js';
 import {
   mapper,
   seasonMapper,
@@ -7,7 +7,7 @@ import {
   spliceSeasonResults,
   resultsMapper,
   lapsMapper,
-} from '../../../helpers/mx';
+} from '../../../helpers';
 
 export const getLiveResults = async () => {
   const result = await crawler(
@@ -53,7 +53,7 @@ export default async (req, res) => {
         });
       }
       if (response && !response.error) {
-        const formattedResponse = response.text.split("\n");
+        const formattedResponse = response.text.split('\n');
         const raceResults = mapper(spliceResults([...formattedResponse], 14));
         const seasonResults = seasonMapper(
           spliceSeasonResults(formattedResponse)

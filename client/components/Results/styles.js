@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // const backgroundColors = {
 //   yamaha: "rgba(0,0,207, 0.8)",
@@ -24,8 +24,8 @@ export const TableStyled = styled.div`
   }
 
   > div:nth-child(2) {
-    border-top-left-radius: ${({ hasOverlay }) => (hasOverlay ? "8px" : 0)};
-    border-top-right-radius: ${({ hasOverlay }) => (hasOverlay ? "8px" : 0)};
+    border-top-left-radius: ${({ hasOverlay }) => (hasOverlay ? '8px' : 0)};
+    border-top-right-radius: ${({ hasOverlay }) => (hasOverlay ? '8px' : 0)};
   }
 
   > div:last-child {

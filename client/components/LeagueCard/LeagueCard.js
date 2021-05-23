@@ -1,5 +1,5 @@
-import React from "react";
-import LeagueCardStyled from "./LeagueCardStyled";
+import React from 'react';
+import LeagueCardStyled from './LeagueCardStyled';
 
 const LeagueCard = ({ leaguePicks }) => {
   return (
@@ -17,7 +17,7 @@ const LeagueCard = ({ leaguePicks }) => {
                     <h5>
                       <b>
                         {rider.position === 100
-                          ? "FL: "
+                          ? 'FL: '
                           : `${rider.position}: `}
                       </b>
                       {rider.riderName}

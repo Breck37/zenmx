@@ -12,12 +12,12 @@
 // };
 
 const parseName = (nameString) => {
-  const split = nameString.split(" ");
-  return split.splice(0, 2).join(" ");
+  const split = nameString.split(' ');
+  return split.splice(0, 2).join(' ');
 };
 
 const parseSeasonStats = (stringContainingStats, index) =>
-  stringContainingStats.split(" ").splice(index, 1).join("");
+  stringContainingStats.split(' ').splice(index, 1).join('');
 
 // TODO - Season Averages
 const splitRiderStats = (riderStats, position) => ({

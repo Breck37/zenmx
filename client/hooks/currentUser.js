@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
-import currentRound from "../constants/currentRound";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import currentRound from '../constants/currentRound';
 
 const CurrentUserContext = createContext({});
 
@@ -16,7 +16,7 @@ export const useCurrentUser = (user) => {
             setCurrentUser(data.user);
           }
         })
-        .catch((err) => console.log("current user hook error:", { err }));
+        .catch((err) => console.log('current user hook error:', { err }));
     }
   });
 

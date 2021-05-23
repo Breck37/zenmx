@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
-import PicksStyled from "./PicksStyled";
-import RiderSelect from "../RiderSelect/RiderSelect";
+import React, { useMemo } from 'react';
+import PicksStyled from './PicksStyled';
+import RiderSelect from '../RiderSelect/RiderSelect';
 
 const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
   if (!riders) return null;

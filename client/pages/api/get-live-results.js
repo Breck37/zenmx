@@ -1,8 +1,8 @@
-import crawler from "crawler-request";
-import { resultsMapper, lapsMapper } from "../../helpers";
+import crawler from 'crawler-request';
+import { resultsMapper, lapsMapper } from '../../helpers';
 
 export default (req, res) => {
-  crawler("https://live.amasupercross.com/xml/sx/RaceResults.json")
+  crawler('https://live.amasupercross.com/xml/sx/RaceResults.json')
     .then((response) => {
       if (response && !response.error) {
         const formattedResponse = JSON.parse(response.text);
@@ -29,5 +29,5 @@ export default (req, res) => {
         });
       }
     })
-    .catch((e) => console.error("/get-live-results", e));
+    .catch((e) => console.error('/get-live-results', e));
 };

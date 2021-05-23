@@ -1,7 +1,7 @@
-import React from "react";
-import FrontPlateSmallIcon from "./FrontPlateSmall.svg";
-import { FrontPlateSmallStyled } from "./styles";
-import manufacturers from "../../constants/manufacturers";
+import React from 'react';
+import FrontPlateSmallIcon from './FrontPlateSmall.svg';
+import { FrontPlateSmallStyled } from './styles';
+import manufacturers from '../../constants/manufacturers';
 
 const FrontPlateSmall = ({ height = 32, width = 32, rider }) => {
   return (

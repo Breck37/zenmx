@@ -11,7 +11,7 @@ export default async (req, res) => {
     .then((res) => res.data)
     .catch((e) => ({
       success: false,
-      errorMessage: "Error calculating points",
+      errorMessage: 'Error calculating points',
       error: e,
     }));
 
