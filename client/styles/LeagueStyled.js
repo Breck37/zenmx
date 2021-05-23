@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { MODERN_WHITE } from "./colors";
+import styled from 'styled-components';
+import { MODERN_WHITE } from './colors';
 
 export default styled.div`
   margin: 150px 0 0;

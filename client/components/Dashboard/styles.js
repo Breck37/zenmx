@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   MODERN_AQUA,
   MODERN_PURPLE,
   MODERN_WHITE,
   MODERN_GREY,
-} from "../../styles/colors";
+} from '../../styles/colors';
 
 export default styled.div`
   width: 100%;

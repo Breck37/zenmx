@@ -1,1 +1,1 @@
-export { default as RiderRow } from "./RiderRow";
+export { default as RiderRow } from './RiderRow';

@@ -11,13 +11,13 @@ module.exports = {
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"],
+      use: ['@svgr/webpack'],
     });
     config.module.rules.push({
       test: /\.(png|jpe?g|gif)$/i,
       use: [
         {
-          loader: "file-loader",
+          loader: 'file-loader',
         },
       ],
     });

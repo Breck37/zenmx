@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MODERN_PURPLE, MODERN_AQUA, MODERN_GREY } from "./colors";
+import { MODERN_PURPLE, MODERN_GREY } from "./colors";
 
 export default styled.div`
   position: absolute;

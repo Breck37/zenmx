@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { MODERN_WHITE } from "./colors";
+import styled from 'styled-components';
+import { MODERN_WHITE } from './colors';
 
 export default styled.div`
   margin: 0;
@@ -26,7 +26,7 @@ export default styled.div`
 
     h1,
     h2 {
-      color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+      color: ${({ currentMode }) => (currentMode ? '#282828' : '#fff')};
     }
   }
 
@@ -48,7 +48,7 @@ export default styled.div`
     left: 0;
     top: 0;
     animation: scroll 75s linear infinite;
-    color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+    color: ${({ currentMode }) => (currentMode ? '#282828' : '#fff')};
 
     > span {
       width: 300px;
@@ -76,11 +76,10 @@ export default styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: ${({ currentMode }) =>
-      currentMode ? "#fff" : `${MODERN_WHITE}`};
+    background-color: ${({ currentMode }) => (currentMode ? '#fff' : `${MODERN_WHITE}`)};
     color: #282828;
-    // color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
-    border: ${({ currentMode }) => (currentMode ? "#282828" : "aqua")} solid 1px;
+    // color: ${({ currentMode }) => (currentMode ? '#282828' : '#fff')};
+    border: ${({ currentMode }) => (currentMode ? '#282828' : 'aqua')} solid 1px;
   }
 
   .placement {
@@ -218,17 +217,16 @@ export default styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+    color: ${({ currentMode }) => (currentMode ? '#282828' : '#fff')};
 
     .fast-lap {
       flex-direction: row;
       justify-content: space-between;
       margin-right: 0;
-      background-color: ${({ currentMode }) =>
-        currentMode ? `${MODERN_WHITE}` : `#282828`};
-      border: ${({ currentMode }) => (currentMode ? "#282828" : "aqua")} solid
+      background-color: ${({ currentMode }) => (currentMode ? `${MODERN_WHITE}` : '#282828')};
+      border: ${({ currentMode }) => (currentMode ? '#282828' : 'aqua')} solid
         1px;
-      color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+      color: ${({ currentMode }) => (currentMode ? '#282828' : '#fff')};
       padding: 8px;
 
       .rider-image {
