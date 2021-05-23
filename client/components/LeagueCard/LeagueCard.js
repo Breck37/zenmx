@@ -1,13 +1,12 @@
-import React from "react";
-import LeagueCardStyled from "./LeagueCardStyled";
-import { ResultsPodium } from "../";
+import React from 'react';
+import LeagueCardStyled from './LeagueCardStyled';
 
 const LeagueCard = ({ leaguePicks }) => {
   return (
     <LeagueCardStyled>
       {leaguePicks.map((pick) => {
         return (
-          <div className="pick">
+          <div key={pick.user} className="pick">
             <h1>{pick.user}</h1>
             <h4>{pick.totalPoints}</h4>
             {pick.bigBikePicks
@@ -18,7 +17,7 @@ const LeagueCard = ({ leaguePicks }) => {
                     <h5>
                       <b>
                         {rider.position === 100
-                          ? "FL: "
+                          ? 'FL: '
                           : `${rider.position}: `}
                       </b>
                       {rider.riderName}

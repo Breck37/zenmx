@@ -1,5 +1,5 @@
-import React from "react";
-import PodiumStyled from "./styles";
+import React from 'react';
+import PodiumStyled from './styles';
 
 // Props
 // firstPlace: Rider
@@ -14,7 +14,7 @@ export default function Podium({
   thirdPlace,
 }) {
   return (
-    <PodiumStyled className={responsive ? "responsive" : ""}>
+    <PodiumStyled className={responsive ? 'responsive' : ''}>
       <div className="second-user rider">{secondPlace?.name}</div>
       <div className="section two">
         <div className="second spot">2</div>

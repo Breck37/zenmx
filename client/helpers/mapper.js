@@ -1,16 +1,16 @@
-const object = {
-  POS: [],
-  number: [],
-  RIDER: [],
-  HOMETOWN: [],
-  BIKE: [],
-  QUAL: [],
-  HOLESHOT: [],
-  START: [],
-  'LAPS LED': [],
-  FINISH: [],
-  POINTS: [],
-};
+// const object = {
+//   POS: [],
+//   number: [],
+//   RIDER: [],
+//   HOMETOWN: [],
+//   BIKE: [],
+//   QUAL: [],
+//   HOLESHOT: [],
+//   START: [],
+//   "LAPS LED": [],
+//   FINISH: [],
+//   POINTS: [],
+// };
 
 const manufacturers = [
   'Suzuki',
@@ -51,10 +51,11 @@ const identifyRiderRaceResults = (results) => {
   let currentPosition = 1;
   results
     .filter(
-      (r) => r.length === 1
-        || r.length === 2
-        || r.length === 3
-        || !/^\d+$/.test(r.split('X').join('')),
+      (r) =>
+        r.length === 1 ||
+        r.length === 2 ||
+        r.length === 3 ||
+        !/^\d+$/.test(r.split('X').join(''))
     )
     .map((c, i, arr) => {
       if (x) {
@@ -67,7 +68,7 @@ const identifyRiderRaceResults = (results) => {
         currentPosition += 1;
       } else if (i === arr.length - 1) {
         riderResults.push(
-          splitRiderResults([...currentRider, c], currentPosition),
+          splitRiderResults([...currentRider, c], currentPosition)
         );
         currentRider = [];
       }

@@ -1,7 +1,7 @@
-import React from "react";
-import FrontPlateIcon from "./Exclude.svg";
-import { FrontPlateStyled } from "./styles";
-import manufacturers from "../../constants/manufacturers";
+import React from 'react';
+import FrontPlateIcon from './Exclude.svg';
+import { FrontPlateStyled } from './styles';
+import manufacturers from '../../constants/manufacturers';
 
 const FrontPlate = ({ height = 150, width = 150, rider }) => {
   return (

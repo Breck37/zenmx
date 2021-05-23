@@ -1,15 +1,8 @@
 import crawler from 'crawler-request';
-import {
-  mapper,
-  seasonMapper,
-  spliceResults,
-  spliceSeasonResults,
-  resultsMapper,
-  lapsMapper,
-} from '../../../helpers';
+import { resultsMapper, lapsMapper } from '../../../helpers';
 
 export default (req, res) => {
-  crawler('https://live.amasupercross.com/xml/sx/RaceResults.json')
+  crawler('http://americanmotocrosslive.com/xml/mx/RaceResultsWeb.xml')
     .then((response) => {
       if (response && !response.error) {
         const formattedResponse = JSON.parse(response.text);

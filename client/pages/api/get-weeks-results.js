@@ -10,31 +10,32 @@ import {
   lapsMapper,
 } from '../../helpers';
 
-export const getLiveResults = async () => crawler('https://live.amasupercross.com/xml/sx/RaceResults.json')
-  .then((response) => {
-    if (response && !response.error) {
-      const formattedResponse = JSON.parse(response.html);
-      const raceResults = resultsMapper(formattedResponse.B);
+export const getLiveResults = async () =>
+  crawler('https://live.amasupercross.com/xml/sx/RaceResults.json')
+    .then((response) => {
+      if (response && !response.error) {
+        const formattedResponse = JSON.parse(response.html);
+        const raceResults = resultsMapper(formattedResponse.B);
 
-      const fastestLaps = lapsMapper([...raceResults]);
+        const fastestLaps = lapsMapper([...raceResults]);
 
-      return {
-        raceResults,
-        fastestLaps,
-        session: formattedResponse.S,
-        round: formattedResponse.T,
-        fastLapLeader: fastestLaps ? fastestLaps[0] : null,
-      };
-    }
-  })
-  .catch((e) => console.error('/get-live-results', e));
+        return {
+          raceResults,
+          fastestLaps,
+          session: formattedResponse.S,
+          round: formattedResponse.T,
+          fastLapLeader: fastestLaps ? fastestLaps[0] : null,
+        };
+      }
+    })
+    .catch((e) => console.error('/get-live-results', e));
 
-const getResultDetails = (results) => {
-  const session = results[3].split(' - ')[1];
-  const round = results[11];
+// const getResultDetails = (results) => {
+//   const session = results[3].split(" - ")[1];
+//   const round = results[11];
 
-  return { session, round, fastLapLeader: '' };
-};
+//   return { session, round, fastLapLeader: "" };
+// };
 
 export default async (req, res) => {
   const url = scheduledData[currentRound.round]?.officialResults;
@@ -52,7 +53,7 @@ export default async (req, res) => {
         const formattedResponse = response.text.split('\n');
         const raceResults = mapper(spliceResults([...formattedResponse], 14));
         const seasonResults = seasonMapper(
-          spliceSeasonResults(formattedResponse),
+          spliceSeasonResults(formattedResponse)
         );
 
         res.status(200).send({

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { MODERN_PURPLE } from '../../styles/colors';
 
 export default styled.div`
   box-sizing: border-box;

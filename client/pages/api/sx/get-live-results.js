@@ -1,9 +1,5 @@
 import crawler from 'crawler-request';
 import {
-  mapper,
-  seasonMapper,
-  spliceResults,
-  spliceSeasonResults,
   resultsMapper,
   lapsMapper,
 } from '../../../helpers';

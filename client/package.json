@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "build-storybook": "build-storybook",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.0.0-beta.2",

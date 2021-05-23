@@ -1,5 +1,5 @@
 import crawler from 'crawler-request';
-import { currentRound, scheduledData } from '../../../constants';
+import { parseStringPromise } from 'xml2js';
 import {
   mapper,
   seasonMapper,
@@ -9,41 +9,43 @@ import {
   lapsMapper,
 } from '../../../helpers';
 
-export const getLiveResults = async () => crawler('https://live.amasupercross.com/xml/sx/RaceResults.json')
-  .then((response) => {
-    if (response && !response.error) {
-      const formattedResponse = JSON.parse(response.html);
-      const raceResults = resultsMapper(formattedResponse.B);
-
-      const fastestLaps = lapsMapper([...raceResults]);
-
-      return {
-        raceResults,
-        fastestLaps,
-        session: formattedResponse.S,
-        round: formattedResponse.T,
-        fastLapLeader: fastestLaps ? fastestLaps[0] : null,
-      };
-    }
-  })
-  .catch((e) => console.error('/get-live-results', e));
-
-const getResultDetails = (results) => {
-  const session = results[3].split(' - ')[1];
-  const round = results[11];
-
-  return { session, round, fastLapLeader: '' };
+export const getLiveResults = async () => {
+  const result = await crawler(
+    `http://americanmotocrosslive.com/xml/mx/RaceResultsWeb.xml?R=${new Date().getTime()}`
+  )
+    .then(async (response) => {
+      if (response && !response.error) {
+        const formattedResponse = await parseStringPromise(response.html);
+        const raceResults = resultsMapper(formattedResponse.A.B);
+        const fastestLaps = lapsMapper([...raceResults]);
+        return {
+          raceResults,
+          fastestLaps,
+          session: formattedResponse.A.$.S,
+          round: formattedResponse.A.$.R,
+          roundTitle: formattedResponse.A.$.T,
+          fastLapLeader: fastestLaps ? fastestLaps[0] : null,
+        };
+      }
+    })
+    .catch((e) => console.error('/get-live-results', e));
+  return result;
 };
 
-export default async (req, res) => {
-  const url = scheduledData[currentRound.round]?.officialResults;
+// const getResultDetails = (results) => {
+//   const session = results[3].split(" - ")[1];
+//   const round = results[11];
 
+//   return { session, round, fastLapLeader: "" };
+// };
+
+export default async (req, res) => {
+  // const url = scheduledData[currentRound.round]?.officialResults;
   const liveResults = await getLiveResults();
   crawler(
-    'http://americanmotocrossresults.com/xml/MX/events/M2005/M1F2PRESS.pdf',
+    'http://americanmotocrossresults.com/xml/MX/events/M2005/M1F2PRESS.pdf'
   )
     .then((response) => {
-      console.log({ MX: response });
       if (response.error) {
         res.status(200).send({
           ...liveResults,
@@ -54,14 +56,9 @@ export default async (req, res) => {
         const formattedResponse = response.text.split('\n');
         const raceResults = mapper(spliceResults([...formattedResponse], 14));
         const seasonResults = seasonMapper(
-          spliceSeasonResults(formattedResponse),
+          spliceSeasonResults(formattedResponse)
         );
-        console.log({
-          formattedResponse,
-        });
-        // console.log({
-        //   raceResults, seasonResults, formattedResponse
-        // })
+
         res.status(200).send({
           raceResults,
           seasonResults,
@@ -71,5 +68,5 @@ export default async (req, res) => {
         });
       }
     })
-    .catch((e) => console.error('/get-live-results', e));
+    .catch((e) => console.error('/get-week-results', { e }));
 };

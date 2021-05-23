@@ -4,9 +4,8 @@
 // year 21
 
 module.exports = {
-  // supercross
+  // sx
   s1: {
-    round: 1,
     title: 'Houston 1',
     city: 'Houston',
     state: 'TX',
@@ -22,7 +21,6 @@ module.exports = {
     submissionEnd: null,
   },
   s2: {
-    round: 2,
     title: 'Houston 2',
     city: 'Houston',
     state: 'TX',
@@ -38,7 +36,6 @@ module.exports = {
     submissionEnd: null,
   },
   s3: {
-    round: 3,
     title: 'Houston 3',
     city: 'Houston',
     state: 'TX',
@@ -54,7 +51,6 @@ module.exports = {
     submissionEnd: null,
   },
   s4: {
-    round: 4,
     title: 'Indianapolis 1',
     city: 'Indianapolis',
     state: 'IN',
@@ -70,7 +66,6 @@ module.exports = {
     submissionEnd: null,
   },
   s5: {
-    round: 5,
     title: 'Indianapolis 2',
     city: 'Indianapolis',
     state: 'IN',
@@ -86,7 +81,6 @@ module.exports = {
     submissionEnd: null,
   },
   s6: {
-    round: 6,
     title: 'Indianapolis 3',
     city: 'Indianapolis',
     state: 'IN',
@@ -102,7 +96,6 @@ module.exports = {
     submissionEnd: null,
   },
   s7: {
-    round: 7,
     title: 'Orlando 1',
     city: 'Orlando',
     state: 'IN',
@@ -118,7 +111,6 @@ module.exports = {
     submissionEnd: null,
   },
   s8: {
-    round: 8,
     title: 'Orlando 2',
     city: 'Orlando',
     state: 'FL',
@@ -134,7 +126,6 @@ module.exports = {
     submissionEnd: null,
   },
   s9: {
-    round: 9,
     title: 'Daytona',
     city: 'Daytona',
     state: 'FL',
@@ -150,7 +141,6 @@ module.exports = {
     submissionEnd: null,
   },
   s10: {
-    round: 10,
     title: 'Arlington 1',
     city: 'Arlington',
     state: 'TX',
@@ -166,7 +156,6 @@ module.exports = {
     submissionEnd: null,
   },
   s11: {
-    round: 11,
     title: 'Arlington 2',
     city: 'Arlington',
     state: 'TX',
@@ -182,7 +171,6 @@ module.exports = {
     submissionEnd: new Date(2021, 2, 13, 17, 0, 0, 0),
   },
   s12: {
-    round: 12,
     title: 'Arlington 3',
     city: 'Arlington',
     state: 'TX',
@@ -199,7 +187,6 @@ module.exports = {
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
   s13: {
-    round: 13,
     title: 'Atlanta 1',
     city: 'Atlanta',
     state: 'GA',
@@ -216,7 +203,6 @@ module.exports = {
     submissionEnd: new Date(2021, 3, 10, 12, 0, 0, 0),
   },
   s14: {
-    round: 14,
     title: 'Atlanta 2',
     city: 'Atlanta',
     state: 'GA',
@@ -233,7 +219,6 @@ module.exports = {
     submissionEnd: new Date(2021, 3, 13, 16, 0, 0, 0),
   },
   s15: {
-    round: 15,
     title: 'Atlanta 3',
     city: 'Atlanta',
     state: 'GA',
@@ -250,7 +235,6 @@ module.exports = {
     submissionEnd: new Date(2021, 3, 17, 16, 0, 0, 0),
   },
   s16: {
-    round: 16,
     title: 'Salt Lake City 1',
     city: 'Salt Lake City',
     state: 'UT',
@@ -267,7 +251,6 @@ module.exports = {
     submissionEnd: new Date(2021, 3, 24, 16, 0, 0, 0),
   },
   s17: {
-    round: 17,
     title: 'Salt Lake City 2',
     city: 'Salt Lake City',
     state: 'UT',
@@ -284,9 +267,8 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
 
-  // motocross
+  // mx
   m1: {
-    round: 1,
     title: '',
     city: '',
     state: '',
@@ -303,7 +285,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m2: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -320,7 +301,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m3: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -337,7 +317,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m4: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -354,7 +333,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m5: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -371,7 +349,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m6: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -388,7 +365,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m7: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -405,7 +381,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m8: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -422,7 +397,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m9: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -439,7 +413,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m10: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -456,7 +429,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m11: {
-    round: 0,
     title: '',
     city: '',
     state: '',
@@ -473,7 +445,6 @@ module.exports = {
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
   m12: {
-    round: 0,
     title: '',
     city: '',
     state: '',
