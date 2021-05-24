@@ -49,7 +49,7 @@ export default async (req, res) => {
         const formattedResponse = response.text.split('\n');
 
         const riders = riderMapper(
-          collectEntryListData(spliceEntryList(formattedResponse))
+          collectEntryListData(spliceEntryList(formattedResponse)),
         );
         return res.status(200).send({
           riders,

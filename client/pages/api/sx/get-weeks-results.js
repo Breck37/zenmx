@@ -52,7 +52,7 @@ export default async (req, res) => {
         const formattedResponse = response.text.split('\n');
         const raceResults = mapper(spliceResults([...formattedResponse], 14));
         const seasonResults = seasonMapper(
-          spliceSeasonResults(formattedResponse)
+          spliceSeasonResults(formattedResponse),
         );
 
         res.status(200).send({
