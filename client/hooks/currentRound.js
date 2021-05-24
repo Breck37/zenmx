@@ -1,13 +1,15 @@
-import React, { createContext, useContext } from 'react';
-import { scheduledData, currentRound } from '../constants';
+import React, { createContext, useContext } from "react";
+import { scheduledData } from "../constants";
+import { apiType } from "../constants";
 
 const CurrentRoundContext = createContext({ currentRound: null });
 
 export const useCurrentRound = () => {
-  const round = useContext(CurrentRoundContext);
-  const activeRound = scheduledData[round];
+  const currentRound = useContext(CurrentRoundContext);
+  const activeRound = scheduledData[currentRound.round];
+  const apiRequests = apiType[currentRound.type];
 
-  return { ...currentRound, ...activeRound };
+  return { ...currentRound, ...activeRound, apiRequests };
 };
 
 export default function CurrentRoundContextProvider({
@@ -15,7 +17,7 @@ export default function CurrentRoundContextProvider({
   currentRound,
 }) {
   return (
-    <CurrentRoundContext.Provider value={currentRound.round}>
+    <CurrentRoundContext.Provider value={currentRound}>
       {children}
     </CurrentRoundContext.Provider>
   );
