@@ -13,22 +13,22 @@
 // };
 
 const manufacturers = [
-  'Suzuki',
-  'Honda',
-  'KTM',
-  'Yamaha',
-  'Kawasaki',
-  'Husqvarna',
-  'GASGAS',
+  "Suzuki",
+  "Honda",
+  "KTM",
+  "Yamaha",
+  "Kawasaki",
+  "Husqvarna",
+  "GASGAS",
 ];
 
 const parseRiderName = (name) => {
-  const splitName = name.split(' ');
+  const splitName = name.split(" ");
   let parsedName;
   splitName.map((nameElement) => {
     manufacturers.map((m) => {
-      const reg = new RegExp(m, 'gi');
-      const replacedBike = nameElement.replace(reg, ' ');
+      const reg = new RegExp(m, "gi");
+      const replacedBike = nameElement.replace(reg, " ");
       if (nameElement.length > replacedBike.length) {
         parsedName = replacedBike;
       }
