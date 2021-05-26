@@ -49,7 +49,6 @@ export default styled.div`
     text-decoration: none;
     width: 50%;
     padding: 16px;
-    background-color: #fff;
     color: ${MODERN_PURPLE};
 
     position: absolute;
