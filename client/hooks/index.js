@@ -12,3 +12,4 @@ export {
   default as CurrentRaceResultsProvider,
   useRaceResults,
 } from './raceResults';
+export { default as useAuth } from './useAuth'
