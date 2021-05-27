@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
-import PicksStyled from "./PicksStyled";
-import RiderSelect from "../RiderSelect/RiderSelect";
+import React, { useMemo } from 'react';
+import PicksStyled from './PicksStyled';
+import RiderSelect from '../RiderSelect/RiderSelect';
 
 const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
   if (!riders) return null;
@@ -19,9 +19,9 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
   }, [selectedRiders]);
 
   const cleanseSelectedRiders = (riderName, position) => {
-    const alreadySelectedRiderIndex = selectedRiders.find(
-      (rider) => rider.riderName === riderName
-    );
+    // const alreadySelectedRiderIndex = selectedRiders.find(
+    //   (rider) => rider.riderName === riderName
+    // );
     const selectedCopy = [...selectedRiders];
     if (!riderName) {
       return {

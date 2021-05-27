@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { MODERN_PURPLE, MODERN_AQUA, MODERN_GREY } from "./colors";
+import styled from 'styled-components';
+import { MODERN_PURPLE, MODERN_GREY } from './colors';
 
 export default styled.div`
   position: absolute;
@@ -49,7 +49,6 @@ export default styled.div`
     text-decoration: none;
     width: 50%;
     padding: 16px;
-    background-color: #fff;
     color: ${MODERN_PURPLE};
 
     position: absolute;

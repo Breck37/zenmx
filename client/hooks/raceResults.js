@@ -1,6 +1,6 @@
-import { useContext, createContext } from "react";
-import currentRound from "../constants/currentRound";
-import scheduledData from "../constants/scheduledData";
+import React, { useContext, createContext } from 'react';
+import currentRound from '../constants/currentRound';
+import scheduledData from '../constants/scheduledData';
 const RaceResultsContext = createContext(null);
 
 export const useRaceResults = () => {
@@ -11,7 +11,7 @@ export const useRaceResults = () => {
   } else if (!raceResults && scheduledData[currentRound?.round]) {
     raceResults = {
       ...scheduledData[currentRound?.round],
-      message: "Results still in progress",
+      message: 'Results still in progress',
       week: currentRound.week,
     };
   }

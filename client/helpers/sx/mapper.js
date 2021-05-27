@@ -1,16 +1,16 @@
-const object = {
-  POS: [],
-  number: [],
-  RIDER: [],
-  HOMETOWN: [],
-  BIKE: [],
-  QUAL: [],
-  HOLESHOT: [],
-  START: [],
-  "LAPS LED": [],
-  FINISH: [],
-  POINTS: [],
-};
+// const object = {
+//   POS: [],
+//   number: [],
+//   RIDER: [],
+//   HOMETOWN: [],
+//   BIKE: [],
+//   QUAL: [],
+//   HOLESHOT: [],
+//   START: [],
+//   "LAPS LED": [],
+//   FINISH: [],
+//   POINTS: [],
+// };
 
 const manufacturers = [
   "Suzuki",
@@ -37,18 +37,16 @@ const parseRiderName = (name) => {
   return (splitName[0] += ` ${parsedName}`);
 };
 
-const splitRiderResults = (rider, position) => {
-  return {
-    number: rider[0],
-    name: parseRiderName(rider[1]),
-    points: rider[2],
-    position,
-  };
-};
+const splitRiderResults = (rider, position) => ({
+  number: rider[0],
+  name: parseRiderName(rider[1]),
+  points: rider[2],
+  position,
+});
 
 const identifyRiderRaceResults = (results) => {
   let currentRider = [];
-  let riderResults = [];
+  const riderResults = [];
   let x = false;
   let currentPosition = 1;
   results
@@ -57,7 +55,7 @@ const identifyRiderRaceResults = (results) => {
         r.length === 1 ||
         r.length === 2 ||
         r.length === 3 ||
-        !/^\d+$/.test(r.split("X").join(""))
+        !/^\d+$/.test(r.split('X').join(''))
     )
     .map((c, i, arr) => {
       if (x) {
@@ -85,6 +83,4 @@ const identifyRiderRaceResults = (results) => {
   return riderResults;
 };
 
-module.exports = (resultString) => {
-  return identifyRiderRaceResults(resultString);
-};
+module.exports = (resultString) => identifyRiderRaceResults(resultString);

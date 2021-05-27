@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 function iCanHasColor(value) {
-  return value || "currentColor";
+  return value || 'currentColor';
 }
 function iCanHasPixels(value) {
-  return value ? `${value}px` : "100%";
+  return value ? `${value}px` : '100%';
 }
 
 export default styled.div`

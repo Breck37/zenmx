@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import ResultsPodiumStyled from "./styles";
-import FrontPlate from "../FrontPlate/FrontPlate";
-import FrontPlateSmall from "../FrontPlate/FrontPlateSmall";
-import { useCurrentMode } from "../../hooks/currentMode";
+import React from 'react';
+import ResultsPodiumStyled from './styles';
+import FrontPlate from '../FrontPlate/FrontPlate';
+import FrontPlateSmall from '../FrontPlate/FrontPlateSmall';
+import { useCurrentMode } from '../../hooks/currentMode';
 
 export default function ResultsPodium({ riders, small = false }) {
   const { currentMode } = useCurrentMode();

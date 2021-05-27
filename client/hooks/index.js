@@ -1,14 +1,15 @@
-export { default as CurrentModeContext, useCurrentMode } from "./currentMode";
-export { default as useIsMountedRef } from "./isMountedRef";
+export { default as CurrentModeContext, useCurrentMode } from './currentMode';
+export { default as useIsMountedRef } from './isMountedRef';
 export {
   default as CurrentRoundContextProvider,
   useCurrentRound,
-} from "./currentRound";
+} from './currentRound';
 export {
   default as CurrentUserContextProvider,
   useCurrentUser,
-} from "./currentUser";
+} from './currentUser';
 export {
   default as CurrentRaceResultsProvider,
   useRaceResults,
-} from "./raceResults";
+} from './raceResults';
+export { default as useAuth } from './useAuth'

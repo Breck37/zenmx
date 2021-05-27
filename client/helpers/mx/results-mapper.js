@@ -2,18 +2,20 @@ const correctKeys = {
   A: "position",
   BL: "bestLap",
   F: "riderName",
-  H: "hometown",
   L: "currentLap",
   LL: "lastLap",
   N: "number",
-  T: "team",
+  T: "hometown",
   V: "bike",
+  D: "diff",
+  G: "gap",
+  S: "status",
 };
 
 module.exports = (riderArray) => {
   return riderArray
     .map((riderObject) => {
-      return Object.entries(riderObject).reduce((acc, curr) => {
+      return Object.entries(riderObject.$).reduce((acc, curr) => {
         if (correctKeys[curr[0]]) {
           const key = correctKeys[curr[0]];
           return {
