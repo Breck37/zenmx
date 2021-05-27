@@ -14,7 +14,5 @@ export default async (req, res) => {
   // and we could make database calls or just send back what we have
   // in the token.
 
-  console.log('USER in API', { user });
-
   res.json(user)
 }
