@@ -62,7 +62,6 @@ export default async (req, res) => {
       });
     });
   } catch (error) {
-    console.log('err check entry list', { error });
     res.status(404).send('Entry list not yet available.');
   }
 };
