@@ -6,6 +6,7 @@ const WeeklyPick = new Schema(
     week: { type: Number, default: null },
     year: { type: String, default: new Date().getFullYear() },
     user: { type: String, default: null },
+    type: { type: String, default: null },
     smallBikePicks: [
       {
         _id: false,

@@ -8,6 +8,7 @@ const User = new Schema({
     {
       week: { type: Number },
       year: { type: String },
+      type: { type: String },
       smallBikePicks: [
         {
           _id: false,
