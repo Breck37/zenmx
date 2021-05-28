@@ -1,10 +1,17 @@
 import axios from 'axios';
 
 export default (req, res) => {
-  const { email, week } = req.query;
+  const { email, week, type } = req.query;
+  if(!email) {
+    res.status(200).send({ success: false, error: 'No email provided'})
+  }
+  console.log({ query: req.query })
   let queryString = `?email=${email}`;
   if (week) {
     queryString += `&week=${week}`;
+  }
+  if (type) {
+    queryString += `${week ? '&' : '?'}type=${type}`;
   }
 
   return axios

@@ -6,11 +6,11 @@ const CurrentUserContext = createContext({});
 
 export const useCurrentUser = (user) => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-
+  console.log(user)
   useEffect(() => {
     if (!currentUser && user) {
       axios
-        .get(`/api/get-user/${user}?week=${currentRound.week}`)
+        .get(`/api/get-user/${user}?week=${currentRound.week}&type=${currentRound.type}`)
         .then(({ data }) => {
           if (data.success) {
             setCurrentUser(data.user);

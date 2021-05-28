@@ -1,47 +1,48 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { useUser } from "@auth0/nextjs-auth0";
-import { useRouter } from "next/router";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import axios from "axios";
-import { useCurrentMode } from "../../hooks/currentMode";
-import { useRaceResults } from "../../hooks/raceResults";
-import { Button, LeagueCard } from "../../components";
-import { HomeStyled } from "../../styles";
-import { manufacturers } from "../../constants";
-import { useCurrentRound } from "../../hooks/currentRound";
+import React, { useEffect, useState, useMemo } from 'react';
+// import { useUser } from '@auth0/nextjs-auth0';
+import { useRouter } from 'next/router';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import axios from 'axios';
+import { useCurrentMode, useAuth } from '../../hooks';
+import { useRaceResults } from '../../hooks/raceResults';
+import { Button, LeagueCard } from '../../components';
+import { HomeStyled } from '../../styles';
+import { manufacturers } from '../../constants';
+import { useCurrentRound } from '../../hooks/currentRound';
 
 const Home = () => {
   const router = useRouter();
   const { currentMode } = useCurrentMode();
   const currentRound = useCurrentRound();
   const currentWeekWithLiveResults = useRaceResults();
-  const { user, isLoading } = useUser();
-  const [loading, setLoading] = useState(true);
+  const { user, loading } = useAuth();
   const [userWithPicks, setUserWithPicks] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [assignedPoints, setAssignedPoints] = useState(null);
 
+  
   useEffect(() => {
-    if (!user && !isLoading) {
+    if (!user && !loading) {
       setUserWithPicks(null);
-      router.push("/login");
+      router.push('/login');
       return null;
     }
 
     if (user && !userWithPicks) {
       axios
-        .get(`/api/get-user/${user?.email}`)
+        .get(`/api/get-user/${user?.email}?type=${currentRound.type}`)
         .then(({ data: userData }) => {
           if (userData.success) {
             setUserWithPicks(userData.user);
           }
           setTimeout(() => {
-            setLoading(false);
+            setIsLoading(false);
           }, 200);
         })
-        .catch((e) => console.log("E on Results", e));
+        .catch((e) => console.log('Error getting user > Home', e));
       return;
     }
-  }, [user]);
+  }, [user, userWithPicks]);
 
   const lastRoundDetails = useMemo(() => {
     if (userWithPicks && userWithPicks.picks.length) {
@@ -52,10 +53,9 @@ const Home = () => {
       return latestPick;
     }
     return {};
-    return 0;
   }, [userWithPicks, userWithPicks?.picks]);
 
-  if (loading || isLoading || !currentWeekWithLiveResults) {
+  if (loading || isLoading || !currentWeekWithLiveResults || !user || !userWithPicks) {
     return <CircularProgress />;
   }
 
@@ -69,14 +69,18 @@ const Home = () => {
           setAssignedPoints(res.data);
         }
       })
-      .catch((e) => console.warn("ERROR", { e }));
-  };
+      .catch((e) => console.warn('ERROR', { e }));
+  };  
+
+  console.log({
+    userWithPicks
+  })
 
   return (
     <HomeStyled currentMode={currentMode}>
-      {user.name === process.env.ADMIN_USER &&
+      {user.email === process.env.ADMIN_USER &&
       currentWeekWithLiveResults.liveResults ? (
-        <Button label="Assign Points" onClick={assignPoints} />
+        <Button label="Assign Points" onClick={assignPoints} assignedPoints={assignedPoints} />
       ) : null}
       <div className="user-details">
         <h1>{`Current Round: ${currentWeekWithLiveResults.week}`}</h1>

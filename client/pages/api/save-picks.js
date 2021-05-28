@@ -23,5 +23,5 @@ export default (req, res) => {
       res.status(200).json(response.data);
       return response.data;
     })
-    .catch((error) => console.error('/get-user error', error));
+    .catch((error) => console.error('/save-picks error', error));
 };

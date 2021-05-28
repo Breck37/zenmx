@@ -1,43 +1,44 @@
 // import App from 'next/app'
-import React, { useState, useEffect, useMemo, useCallback } from "react";
-import Head from "next/head";
-import { UserProvider } from "@auth0/nextjs-auth0";
-import axios from "axios";
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import Head from 'next/head';
+import { UserProvider } from '@auth0/nextjs-auth0';
+import axios from 'axios';
 import {
   CurrentModeContext,
   CurrentRoundContextProvider,
   CurrentUserContextProvider,
   CurrentRaceResultsProvider,
-} from "../hooks";
-import { Header } from "../components";
-import defaultTabs from "../constants/defaultTabs";
-import { AppStyled } from "../styles";
-import { useRouter } from "next/router";
-import "../styles/fonts.css";
-import { currentRound } from "../constants";
+} from '../hooks';
+import { Header } from '../components';
+import defaultTabs from '../constants/defaultTabs';
+import { AppStyled } from '../styles';
+import { useRouter } from 'next/router';
+import '../styles/fonts.css';
+import { currentRound, apiType } from '../constants';
 
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
   const [raceResults, setRaceResults] = useState();
   const router = useRouter();
+  const apiRequests = apiType[currentRound.type];
 
   const isLoginOrLandingPage = useMemo(() => {
-    return Boolean(router.pathname === "/login" || router.pathname === "/");
+    return Boolean(router.pathname === '/login' || router.pathname === '/');
   }, [router.pathname]);
 
   useEffect(() => {
-    const mode = localStorage.getItem("USER_CURRENT_MODE");
+    const mode = localStorage.getItem('USER_CURRENT_MODE');
 
     if (!mode && mode !== 0 && mode !== 1) {
-      localStorage.setItem("USER_CURRENT_MODE", 1);
+      localStorage.setItem('USER_CURRENT_MODE', 1);
       setCurrentMode(1);
     } else {
-      setCurrentMode(parseInt(localStorage.getItem("USER_CURRENT_MODE")));
+      setCurrentMode(parseInt(localStorage.getItem('USER_CURRENT_MODE')));
     }
   }, []);
 
   const getLiveResultsFallBack = useCallback(() => {
-    axios.get("/api/get-live-results").then(({ data }) => {
+    axios.get(apiRequests.liveResults).then(({ data }) => {
       setRaceResults(data);
     });
   }, []);
@@ -45,13 +46,13 @@ function ModernMotoFantasy({ Component, pageProps }) {
   useEffect(() => {
     if (!raceResults) {
       axios
-        .get("/api/get-weeks-results")
+        .get(apiRequests.weekResults)
         .then(({ data }) => {
           setRaceResults(data);
         })
         .catch((err) => {
-          console.log("Live Results Error: ", err);
-          if (!raceResults) {
+          console.log('Live Results Error > _app: ', err);
+          if (!raceResults && apiRequests.liveResults) {
             getLiveResultsFallBack();
           }
         });
@@ -59,12 +60,12 @@ function ModernMotoFantasy({ Component, pageProps }) {
   }, [raceResults]);
 
   const handleCurrentModeUpdate = () => {
-    const currentMode = localStorage.getItem("USER_CURRENT_MODE");
+    const currentMode = localStorage.getItem('USER_CURRENT_MODE');
 
     const modeToSet = parseInt(currentMode) ? 0 : 1;
 
     setCurrentMode(modeToSet);
-    localStorage.setItem("USER_CURRENT_MODE", modeToSet);
+    localStorage.setItem('USER_CURRENT_MODE', modeToSet);
   };
 
   return (
@@ -90,10 +91,7 @@ function ModernMotoFantasy({ Component, pageProps }) {
             )}
             <CurrentRoundContextProvider currentRound={currentRound}>
               <CurrentRaceResultsProvider raceResults={raceResults}>
-                <Component
-                  {...pageProps}
-                  setCurrentMode={handleCurrentModeUpdate}
-                />
+                <Component {...pageProps} />
               </CurrentRaceResultsProvider>
             </CurrentRoundContextProvider>
           </CurrentModeContext.Provider>
