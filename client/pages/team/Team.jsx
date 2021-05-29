@@ -1,43 +1,41 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { useUser } from "@auth0/nextjs-auth0";
-import Alert from "@material-ui/lab/Alert";
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import axios from 'axios';
+import Link from 'next/link';
+import Alert from '@material-ui/lab/Alert';
 import {
   CircularProgress,
   Select,
   MenuItem,
   InputLabel,
-} from "@material-ui/core";
-import { Button, WeeklyPicks } from "../../components";
+} from '@material-ui/core';
+import { Button, WeeklyPicks } from '../../components';
 import {
   useIsMountedRef,
   useCurrentUser,
   useCurrentRound,
   useCurrentMode,
-} from "../../hooks";
-import { TeamStyled } from "../../styles";
+  useAuth,
+} from '../../hooks';
+import { TeamStyled } from '../../styles';
 
 // TODO create league select
 
 const Team = () => {
-  const router = useRouter();
 
   // hooks
-  const { user, isLoading } = useUser();
   const isMounted = useIsMountedRef();
   const currentRound = useCurrentRound();
   const { currentMode } = useCurrentMode();
+  const { user, loading: userLoading } = useAuth()
   const { currentUser } = useCurrentUser(user?.email);
 
   // state
-  const [league, setLeague] = useState("");
+  const [league, setLeague] = useState('');
   const [selectedRiders, setSelectedRiders] = useState([]);
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [canShowQualifying, setCanShowQualifying] = useState(false);
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState('');
 
   const picksUnavailable =
     currentRound.submissionEnd < new Date() ||
@@ -45,14 +43,11 @@ const Team = () => {
 
   useEffect(() => {
     if (success) {
-      setTimeout(() => setSuccess(""), 1500);
+      setTimeout(() => setSuccess(''), 1500);
     }
     if (!isMounted.current) return;
     if (entries && entries.length) return;
-    if (!isLoading && !user) {
-      router.push("/login");
-      return;
-    }
+
     if (picksUnavailable) {
       setLoading(false);
       return;
@@ -64,11 +59,11 @@ const Team = () => {
         setLoading(false);
         setEntries(res.data.riders);
       })
-      .catch((err) => console.error("ENTRY ERROR", err));
+      .catch((err) => console.error('ENTRY ERROR', err));
   }, [success, entries]);
 
-  const qualifyingCanBeShown = useCallback(async (url, callback) => {
-    return await fetch(url, { method: "get" }).then(function (status) {
+  const qualifyingCanBeShown = useCallback(async (url) => {
+    return await fetch(url, { method: 'get' }).then(function (status) {
       return status.ok;
     });
   });
@@ -90,7 +85,7 @@ const Team = () => {
           setCanShowQualifying(true);
         }
       } catch (e) {
-        console.log("Error getting qualifying results", e);
+        console.log('Error getting qualifying results', e);
       }
     }
   }, [canShowQualifying, loading, currentRound]);
@@ -102,7 +97,7 @@ const Team = () => {
       const indexOfRiderName = riderNames.indexOf(rider.riderName);
       if (rider.position === 100 || indexOfRiderName === -1) {
         riderNames.push(rider.riderName);
-        return { ...rider, error: "" };
+        return { ...rider, error: '' };
       }
       return {
         ...rider,
@@ -137,35 +132,35 @@ const Team = () => {
       bigBikePicks: cleanseSelectedRiders,
       week: currentRound.round,
       totalPoints: 0,
-      league: league || "League of Extraordinary Bros",
+      league: league || 'League of Extraordinary Bros',
     });
 
     axios
-      .post("/api/save-picks", params, {
+      .post('/api/save-picks', params, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       })
-      .then((res) => {
-        setSuccess("Saved picks successfully!");
+      .then(() => {
+        setSuccess('Saved picks successfully!');
         setSelectedRiders([]);
       })
       .catch((err) => console.error(err));
   };
 
-  if (loading) {
+  if (loading || userLoading) {
     return <CircularProgress />;
   }
 
   if (picksUnavailable) {
     const beginningText =
       currentRound.submissionStart > new Date()
-        ? "Window to make picks is not yet open"
+        ? 'Window to make picks is not yet open'
         : null;
     return (
       <TeamStyled currentMode={currentMode}>
         <div className="unavailable">
-          {beginningText || "Window to make picks has closed"}
+          {beginningText || 'Window to make picks has closed'}
         </div>
       </TeamStyled>
     );
@@ -185,7 +180,7 @@ const Team = () => {
                 name="League"
                 label="League:"
                 id="league-select"
-                value={league || ""}
+                value={league || ''}
                 onChange={(evt) => {
                   setLeague(evt.target.value);
                 }}

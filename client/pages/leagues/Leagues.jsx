@@ -1,23 +1,9 @@
-import React, { useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import { LeagueStyled } from "../../styles";
-import { useRouter } from "next/router";
-import { useUser } from "@auth0/nextjs-auth0";
-import { CircularProgress } from "@material-ui/core";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import { LeagueStyled } from '../../styles';
+
 
 const Leagues = () => {
-  const router = useRouter();
-  const { user, isLoading } = useUser();
-
-  useEffect(() => {
-    if (!user && !isLoading) {
-      router.push("/login");
-    }
-  }, [user, isLoading]);
-
-  if (isLoading) {
-    return <CircularProgress />;
-  }
 
   return (
     <LeagueStyled>
