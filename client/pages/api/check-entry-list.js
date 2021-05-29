@@ -41,8 +41,8 @@ const spliceEntryList = (formattedResponse) => {
 
 export default async (req, res) => {
   try {
-    const { week } = req.query;
-    const currentWeek = scheduledData[`s${week}`];
+    const { round } = req.query;
+    const currentWeek = scheduledData[round];
 
     await crawler(currentWeek.entryList).then((response) => {
       if (response && !response.error) {
