@@ -25,7 +25,7 @@ const Home = () => {
 
   
   useEffect(() => {
-    if (!user && !loading) {
+    if ((!user || !user.email) && !loading) {
       setUserWithPicks(null);
       router.push('/login');
       return null;
