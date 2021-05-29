@@ -2,20 +2,19 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useCurrentMode, useAuth } from '../../hooks';
+import { useCurrentMode, useCurrentUser } from '../../hooks';
 import { LoginStyled } from '../../styles';
 import ModernMotoLogo from '../../svgs/ModernMotoFlat.svg';
-import { Modal } from '../../components';
+import { Modal, Button } from '../../components';
 import { Magic } from 'magic-sdk';
 
 const Login = () => {
   const router = useRouter();
   const { currentMode } = useCurrentMode();
-  // const { user, isLoading } = useUser();
-  const { user, loading } = useAuth();
-  const [isEmailModalOpen] = useState(false);
-  console.log('IN LOGIN', user);
-  if (!loading && user) {
+  const { currentUser: user, loading } = useCurrentUser();
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+
+  if (!loading && user && user.email) {
     router.push('/home');
   }
 
@@ -54,22 +53,17 @@ const Login = () => {
       headers: { Authorization: `Bearer ${did}` },
     });
 
-    console.log('auth request', authRequest);
-    // update our own database
     if (authRequest.ok) {
-      // We successfully logged in, our API
-      // set authorization cookies and now we
-      // can redirect to the dashboard!
-      // router.push('/dashboard')
-      console.log('HIT OKAY');
+      router.push('/home')
     } else {
       /* handle errors */
+      console.log('User Does not have access!', { authRequest })
     }
   };
 
-  // const toggleModal = () => {
-  //   setIsEmailModalOpen(!isEmailModalOpen);
-  // };
+  const toggleModal = () => {
+    setIsEmailModalOpen(!isEmailModalOpen);
+  };
 
   if (loading) {
     <CircularProgress />;
@@ -103,14 +97,12 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <label htmlFor="email">Email</label>
             <input name="email" type="email" />
-            <button>Log in</button>
-            {/* <Button label='Submit' /> */}
+            <button>Submit</button>
           </form>
         </Modal>
-        Log In
-        {/* <div className="login-button">
+        <div className="login-button">
           <Button label="Log In" onClick={toggleModal} />
-        </div> */}
+        </div>
       </LoginStyled>
     </>
   );

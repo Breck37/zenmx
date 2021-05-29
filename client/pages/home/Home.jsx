@@ -5,9 +5,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import { useCurrentMode, useAuth } from '../../hooks';
 import { useRaceResults } from '../../hooks/raceResults';
-import { Button, LeagueCard } from '../../components';
+import { 
+  Button, 
+  // LeagueCard
+} from '../../components';
 import { HomeStyled } from '../../styles';
-import { manufacturers } from '../../constants';
+// import { manufacturers } from '../../constants';
 import { useCurrentRound } from '../../hooks/currentRound';
 
 const Home = () => {
@@ -28,7 +31,7 @@ const Home = () => {
       return null;
     }
 
-    if (user && !userWithPicks) {
+    if (user && user?.email && !userWithPicks) {
       axios
         .get(`/api/get-user/${user?.email}?type=${currentRound.type}`)
         .then(({ data: userData }) => {
@@ -84,13 +87,13 @@ const Home = () => {
       ) : null}
       <div className="user-details">
         <h1>{`Current Round: ${currentWeekWithLiveResults.week}`}</h1>
-        <h2>{`Round ${lastRoundDetails.week} Score: ${lastRoundDetails.totalPoints}`}</h2>
-        <h2>{`Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
+        <h2>{`${lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]} Score: ${lastRoundDetails.totalPoints}`}</h2>
+        <h2>{`${lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]} Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
       </div>
-      <LeagueCard
+      {/* <LeagueCard
         leaguePicks={userWithPicks.leaguePicks[currentRound.leagueRoundToShow]}
-      />
-      {!currentWeekWithLiveResults.message &&
+      /> */}
+      {/* {!currentWeekWithLiveResults.message &&
       currentWeekWithLiveResults.liveResults &&
       currentWeekWithLiveResults.liveResults?.fastestLaps.length > 0 ? (
         <>
@@ -141,7 +144,7 @@ const Home = () => {
         </>
       ) : (
         <div className="user-details">{currentWeekWithLiveResults.message}</div>
-      )}
+      )} */}
       <main>
         <h1 className="title"></h1>
       </main>

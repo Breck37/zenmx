@@ -1,6 +1,6 @@
 module.exports = {
-  type: 'sx',
-  round: 's17',
-  week: 17,
-  leagueRoundToShow: 17,
+  type: 'mx',
+  round: 'm1',
+  week: 1,
+  leagueRoundToShow: null,
 };
