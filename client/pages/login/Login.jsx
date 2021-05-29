@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useCurrentMode, useCurrentUser } from '../../hooks';
 import { LoginStyled } from '../../styles';
@@ -11,10 +12,10 @@ import { Magic } from 'magic-sdk';
 const Login = () => {
   const router = useRouter();
   const { currentMode } = useCurrentMode();
-  const { currentUser: user, loading } = useCurrentUser();
+  const { currentUser, loading } = useCurrentUser();
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 
-  if (!loading && user && user.email) {
+  if (!loading && currentUser && currentUser.email) {
     router.push('/home');
   }
 
@@ -48,16 +49,17 @@ const Login = () => {
     ).auth.loginWithMagicLink({ email: elements.email.value });
 
     // Once we have the token from magic,
-    const authRequest = await fetch('/api/login', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${did}` },
-    });
+    const authRequest = await axios.post(
+      '/api/login', 
+      null, 
+      { headers: { Authorization: `Bearer ${did}` }}
+    ).then(response => response);
 
-    if (authRequest.ok) {
+    if (authRequest.statusText.toLowerCase() === 'ok' || authRequest.status === 200) {
       router.push('/home')
     } else {
       /* handle errors */
-      console.log('User Does not have access!', { authRequest })
+      console.log('User Does not have access!', { authRequest, currentUser })
     }
   };
 
