@@ -1,45 +1,33 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useUser } from "@auth0/nextjs-auth0";
-import { manufacturers } from "../../constants";
-import { Table, RiderRow } from "../../components";
-import { ResultsStyled } from "../../styles";
-import { useRouter } from "next/router";
-import { CircularProgress } from "@material-ui/core";
-import { useRaceResults } from "../../hooks/raceResults";
-import { useCurrentMode } from "../../hooks/currentMode";
+import React, { useState } from 'react';
+import { manufacturers } from '../../constants';
+import { Table, RiderRow } from '../../components';
+import { ResultsStyled } from '../../styles';
+import { CircularProgress } from '@material-ui/core';
+import { useRaceResults } from '../../hooks/raceResults';
+import { useCurrentMode } from '../../hooks/currentMode';
 
 const Results = () => {
   const [currentRider, setCurrentRider] = useState(null);
-  const [isLive, setIsLive] = useState(true);
-  const { user, isLoading } = useUser();
-  const router = useRouter();
   const raceResults = useRaceResults();
   const { currentMode } = useCurrentMode();
 
-  useEffect(() => {
-    if (!isLoading && !user) {
-      router.push("/login");
-      return;
-    }
-  }, [raceResults]);
 
   const handleClickedRider = (rider) => {
     setCurrentRider(rider);
   };
 
   const TableHeaderRow = {
-    position: "Pos",
-    riderName: "Rider Name",
-    team: "Team",
-    bestLap: "Best Lap",
-    lastLap: "Last Lap",
-    number: "#",
-    currentLap: "Lap",
-    bike: "Bike",
+    position: 'Pos',
+    riderName: 'Rider Name',
+    team: 'Team',
+    bestLap: 'Best Lap',
+    lastLap: 'Last Lap',
+    number: '#',
+    currentLap: 'Lap',
+    bike: 'Bike',
   };
 
-  if (isLoading || !raceResults) {
+  if (!raceResults) {
     return <CircularProgress />;
   }
 
@@ -63,7 +51,7 @@ const Results = () => {
         <div className="round-details">
           <h1>{raceResults.liveResults.round}</h1>
           <h2>{`Week: ${raceResults.week}`}</h2>
-          <h4>{raceResults.liveResults.session.split(" - ")[0]}</h4>
+          <h4>{raceResults.liveResults.session.split(' - ')[0]}</h4>
         </div>
         <div className="fastest-key">
           <div className="color-sample" />

@@ -17,6 +17,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/prop-types': 'off',
-    'quotes': [2, 'single', { 'avoidEscape': true }]
+    'quotes': [2, 'single', { 'avoidEscape': true }],
+    'no-unused-vars': ['error', { 'ignoreRestSiblings': true }]
   },
 };
