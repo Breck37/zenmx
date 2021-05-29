@@ -54,7 +54,7 @@ const Team = () => {
     }
 
     axios
-      .get(`/api/check-entry-list?week=${currentRound.week}`)
+      .get(`/api/check-entry-list?round=${currentRound.round}`)
       .then((res) => {
         setLoading(false);
         setEntries(res.data.riders);
@@ -67,13 +67,7 @@ const Team = () => {
       return status.ok;
     });
   });
-  console.log({
-    new: new Date(),
-    tz: new Date().getTimezoneOffset(),
-    currentRound,
-    end: currentRound.submissionEnd < new Date(),
-    start: currentRound.submissionStart > new Date(),
-  });
+
   useEffect(async () => {
     if (!canShowQualifying && loading && currentRound) {
       try {
@@ -127,12 +121,15 @@ const Team = () => {
     const cleanseSelectedRiders = removeErrors(selectedRiders);
 
     const params = JSON.stringify({
+      week: currentRound.week,
+      round: currentRound.round,
       email: user.email,
       user: currentUser.username,
       bigBikePicks: cleanseSelectedRiders,
-      week: currentRound.round,
       totalPoints: 0,
       league: league || 'League of Extraordinary Bros',
+      type: currentRound.type,
+      season: currentRound.season,
     });
 
     axios

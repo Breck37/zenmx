@@ -2,15 +2,18 @@ import axios from 'axios';
 
 export default (req, res) => {
   const {
-    email, bigBikePicks, week, totalPoints, league, user,
+    email, bigBikePicks, week, totalPoints, league, user, type, season, round
   } = req.body;
   const userPick = JSON.stringify({
     week,
+    round,
     email,
     user,
     bigBikePicks,
     totalPoints,
     league,
+    type,
+    season
   });
 
   return axios
