@@ -6,8 +6,8 @@ import {
   spliceResults,
   spliceSeasonResults,
   resultsMapper,
-  lapsMapper,
 } from '../../../helpers/mx';
+import { lapsMapper } from '../../../helpers';
 
 export const getLiveResults = async () => {
   const result = await crawler(

@@ -1,5 +1,6 @@
 import crawler from 'crawler-request';
-import { resultsMapper, lapsMapper } from '../../../helpers/mx';
+import { resultsMapper } from '../../../helpers/mx';
+import { lapsMapper } from '../../../helpers';
 
 export default (req, res) => {
   crawler('http://americanmotocrosslive.com/xml/mx/RaceResultsWeb.xml')
