@@ -3,5 +3,5 @@ module.exports = {
   round: 'm1',
   week: 1,
   leagueRoundToShow: null,
-  season: '2021'
+  year: '2021'
 };

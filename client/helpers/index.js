@@ -1,0 +1,1 @@
+export { default as lapsMapper } from './laps-mapper';
