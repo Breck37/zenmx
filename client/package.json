@@ -23,7 +23,7 @@
     "axios": "^0.21.1",
     "cookie": "^0.4.1",
     "crawler-request": "^1.2.2",
-    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react": "^7.24.0",
     "file-loader": "^6.2.0",
     "fontsource-roboto": "^4.0.0",
     "http-proxy-middleware": "^2.0.0",
