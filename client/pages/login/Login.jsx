@@ -3,19 +3,19 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useCurrentMode, useCurrentUser } from '../../hooks';
+import { useCurrentMode } from '../../hooks';
 import { LoginStyled } from '../../styles';
 import ModernMotoLogo from '../../svgs/ModernMotoFlat.svg';
 import { Modal, Button } from '../../components';
 import { Magic } from 'magic-sdk';
 
-const Login = () => {
+const Login = ({ user, loading }) => {
   const router = useRouter();
   const { currentMode } = useCurrentMode();
-  const { currentUser, loading } = useCurrentUser();
+  const [submitIsLoading, setSubmitIsLoading] = useState(false);
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 
-  if (!loading && currentUser && currentUser.email) {
+  if (!loading && user && user.email) {
     router.push('/home');
   }
 
@@ -40,6 +40,7 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setSubmitIsLoading(true);
 
     const { elements } = event.target;
 
@@ -56,10 +57,13 @@ const Login = () => {
     ).then(response => response);
 
     if (authRequest.statusText.toLowerCase() === 'ok' || authRequest.status === 200) {
+      setSubmitIsLoading(false);
       router.push('/home')
     } else {
       /* handle errors */
-      console.log('User Does not have access!', { authRequest, currentUser })
+      setSubmitIsLoading(false)
+      console.log('User Does not have access!', { authRequest, user })
+      router.push('/no_access')
     }
   };
 
@@ -67,14 +71,14 @@ const Login = () => {
     setIsEmailModalOpen(!isEmailModalOpen);
   };
 
-  if (loading) {
+  if (loading || submitIsLoading) {
     <CircularProgress />;
   }
 
   return (
     <>
       <Head>
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
           if (document.cookie && document.cookie.includes('authed')) {
@@ -82,9 +86,9 @@ const Login = () => {
           }
         `,
           }}
-        />
+        /> */}
       </Head>
-      <LoginStyled isDarkMode={currentMode}>
+      <LoginStyled isDarkMode={currentMode} isEmailModalOpen={isEmailModalOpen}>
         <div className="svg">
           <ModernMotoLogo />
         </div>
@@ -95,9 +99,12 @@ const Login = () => {
         <div className="tagline">
           <i>The</i> MX fantasy app
         </div>
-        <Modal size="normal" isOpen={isEmailModalOpen}>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Email</label>
+        <Modal size="normal" isOpen={isEmailModalOpen} onClose={setIsEmailModalOpen}>
+          <form className="login-modal-form" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email">Enter Email</label>
+              <label className="subtitle">(Trust us, its magic)</label>
+            </div>
             <input name="email" type="email" />
             <button>Submit</button>
           </form>

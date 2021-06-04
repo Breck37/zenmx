@@ -6,5 +6,12 @@ export default styled.div`
     top: 0;
     left: 0;
     bottom: 0;
-    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    > div {
+        margin-top: 48px;
+    }
 `;
