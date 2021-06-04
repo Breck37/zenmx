@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
-import { useCurrentMode, useAuth } from '../../hooks';
+import { useCurrentMode, useCurrentUser } from '../../hooks';
 import { useRaceResults } from '../../hooks/raceResults';
 import { 
   Button, 
@@ -12,84 +12,96 @@ import {
 import { HomeStyled } from '../../styles';
 // import { manufacturers } from '../../constants';
 import { useCurrentRound } from '../../hooks/currentRound';
+import NoAccess from '../no-access/NoAccess';
 
-const Home = () => {
+const Home = ({ user, loading }) => {
   const router = useRouter();
   const { currentMode } = useCurrentMode();
   const currentRound = useCurrentRound();
   const currentWeekWithLiveResults = useRaceResults();
-  const { user, loading } = useAuth();
-  const [userWithPicks, setUserWithPicks] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const { currentUser } = useCurrentUser(user?.email);
+  // const [userWithPicks, setUserWithPicks] = useState(null);
+  const [shouldShowNoAccessWithReason, setShouldShowNoAccessWithReason] = useState(null);
   const [assignedPoints, setAssignedPoints] = useState(null);
 
-  
+  console.log({ user })
   useEffect(() => {
-    if ((!user || !user.email) && !loading) {
-      setUserWithPicks(null);
+    if ((!currentUser || !currentUser.email) && !loading) {
+      // setUserWithPicks(null);
       router.push('/login');
       return null;
     }
 
-    if (user && user?.email && !userWithPicks) {
-      axios
-        .get(`/api/get-user/${user?.email}?type=${currentRound.type}`)
-        .then(({ data: userData }) => {
-          if (userData.success) {
-            setUserWithPicks(userData.user);
-          }
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 200);
-        })
-        .catch((e) => console.log('Error getting user > Home', e));
-      return;
-    }
-  }, [user, userWithPicks]);
+    // if (user && user?.email && !userWithPicks) {
+    //   axios
+    //     .get(`/api/get-user/${user?.email}?type=${currentRound.type}`)
+    //     .then(({ data: userData }) => {
+    //       setTimeout(() => {
+    //         setIsLoading(false);
+    //       }, 200);
+
+    //       if (userData.success) {
+    //         setUserWithPicks(userData.user);
+    //         return;
+    //       }
+
+    //       setShouldShowNoAccessWithReason(userData)
+    //     })
+    //     .catch((e) => console.log('Error getting user > Home', e));
+    //   return;
+    // }
+  }, [user, currentUser]);
 
   const lastRoundDetails = useMemo(() => {
-    if (userWithPicks && userWithPicks.picks.length) {
-      const latestPick = userWithPicks.picks.sort((a, b) => b.week - a.week)[0];
+    if (currentUser && currentUser.picks && currentUser.picks.length) {
+      const latestPick = currentUser.picks.sort((a, b) => b.week - a.week)[0];
       if (latestPick.week === currentRound.round && latestPick.rank === null) {
-        return userWithPicks.picks.sort((a, b) => b.week - a.week)[1];
+        return currentUser.picks.sort((a, b) => b.week - a.week)[1];
       }
       return latestPick;
     }
-    return {};
-  }, [userWithPicks, userWithPicks?.picks]);
+    return null;
+  }, [currentUser, currentUser?.picks]);
+  
+    const assignPoints = () => {
+      axios
+        .post(`/api/assign-points?week=${currentWeekWithLiveResults.week}&type=${currentRound.type}`, {
+          raceResults: currentWeekWithLiveResults,
+        })
+        .then((res) => {
+          if (res.data.success) {
+            setAssignedPoints(res.data);
+          }
+        })
+        .catch((e) => console.warn('ERROR', { e }));
+    };  
 
-  if (loading || isLoading || !currentWeekWithLiveResults || !user || !userWithPicks) {
-    return <CircularProgress />;
+  if(shouldShowNoAccessWithReason) {
+    return <NoAccess data={shouldShowNoAccessWithReason} />
   }
 
-  const assignPoints = () => {
-    axios
-      .post(`/api/assign-points?week=${currentWeekWithLiveResults.week}`, {
-        raceResults: currentWeekWithLiveResults,
-      })
-      .then((res) => {
-        if (res.data.success) {
-          setAssignedPoints(res.data);
-        }
-      })
-      .catch((e) => console.warn('ERROR', { e }));
-  };  
+  if (loading || !currentWeekWithLiveResults || !currentUser || !user) {
+    return <CircularProgress />;
+  }
 
   console.log({
     userWithPicks
   })
-
+  console.log({
+    currentWeekWithLiveResults,
+    lastRoundDetails
+  })
   return (
     <HomeStyled currentMode={currentMode}>
       {user.email === process.env.ADMIN_USER &&
       currentWeekWithLiveResults.liveResults ? (
         <Button label="Assign Points" onClick={assignPoints} assignedPoints={assignedPoints} />
       ) : null}
-      <div className="user-details">
+      {lastRoundDetails ? <div className="user-details">
         <h1>{`Current Round: ${currentWeekWithLiveResults.week}`}</h1>
         <h2>{`${lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]} Score: ${lastRoundDetails.totalPoints}`}</h2>
         <h2>{`${lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]} Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
-      </div>
+      </div> : null}
       {/* <LeagueCard
         leaguePicks={userWithPicks.leaguePicks[currentRound.leagueRoundToShow]}
       /> */}
