@@ -7,7 +7,7 @@ const NoAccess = ({ data }) => {
   const router = useRouter()
 
   const productAccessMessage = () => {
-    if (!data.message) {
+    if (!data || data.message) {
       return {
         variant: null,
         title: 'Unexpected Error',
