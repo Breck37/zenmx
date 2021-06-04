@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MODERN_PURPLE } from '../../styles/colors';
 
 export const ModalStyled = styled.div`
     border-radius: 8px;
@@ -8,6 +9,8 @@ export const ModalStyled = styled.div`
     align-items: center;
     justify-content: center;
     background-color: #fff;
+    z-index: 10000;
+
   ${(size) => {
     switch (size) {
       case 'normal':
@@ -26,8 +29,17 @@ export const ModalContainer = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(59,63,78,0.8);;
+  background-color: ${MODERN_PURPLE};
   display: flex;
   align-items: center;
   justify-content: center;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(59,63,78,0.6);
+  }
 `

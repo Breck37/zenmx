@@ -6,11 +6,11 @@
 // Mobile Icon
 // Tabs with animations
 
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import HeaderStyled from "./styles";
-import { Tab } from "../";
-import Icon from "../../icons/Icon";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import HeaderStyled from './styles';
+import { Tab } from '../';
+import Icon from '../../icons/Icon';
 
 const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
   const [mobileTabsVisibility, setMobileTabsVisibility] = useState(false);
@@ -35,12 +35,12 @@ const Header = ({ tabs = [], currentMode, setCurrentMode }) => {
     >
       <div className="mode-container">
         <button onClick={() => setCurrentMode(modeToSet)}>
-          Go {currentMode ? "Dark" : "Bright"}
+          Go {currentMode ? 'Dark' : 'Bright'}
         </button>
       </div>
       <div className="logo-container">
         <div className="logo-wrap">
-          <span onClick={() => router.push("/home")}>ModernMoto</span>
+          <span onClick={() => router.push('/home')}>ModernMoto</span>
           <span className="icon-wrap" onClick={handleSetVisibility}>
             <Icon
               name="menu"
