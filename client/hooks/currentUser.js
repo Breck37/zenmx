@@ -6,11 +6,11 @@ const CurrentUserContext = createContext({});
 
 export const useCurrentUser = (user) => {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-  console.log(user)
+
   useEffect(() => {
     if (!currentUser && user) {
       axios
-        .get(`/api/get-user/${user}?week=${currentRound.week}&type=${currentRound.type}`)
+        .get(`/api/get-user/${user ? user.email : currentUser.email}?week=${currentRound.week}&type=${currentRound.type}`)
         .then(({ data }) => {
           if (data.success) {
             setCurrentUser(data.user);
@@ -20,7 +20,7 @@ export const useCurrentUser = (user) => {
     }
   });
 
-  return { currentUser };
+  return { currentUser, setCurrentUser };
 };
 
 const CurrentUserContextProvider = ({ children }) => {

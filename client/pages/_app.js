@@ -8,6 +8,7 @@ import {
   CurrentRoundContextProvider,
   CurrentUserContextProvider,
   CurrentRaceResultsProvider,
+  useAuth,
 } from '../hooks';
 import { Header } from '../components';
 import defaultTabs from '../constants/defaultTabs';
@@ -19,6 +20,7 @@ import { currentRound, apiType } from '../constants';
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
   const [raceResults, setRaceResults] = useState();
+  const { user, loading } = useAuth();
   const router = useRouter();
   const apiRequests = apiType[currentRound.type];
 
@@ -27,6 +29,8 @@ function ModernMotoFantasy({ Component, pageProps }) {
   }, [router.pathname]);
 
   useEffect(() => {
+    if ((!user || !user.email) && !loading) null;
+
     const mode = localStorage.getItem('USER_CURRENT_MODE');
 
     if (!mode && mode !== 0 && mode !== 1) {
@@ -82,16 +86,17 @@ function ModernMotoFantasy({ Component, pageProps }) {
         </Head>
         <CurrentUserContextProvider>
           <CurrentModeContext.Provider value={currentMode}>
-            {!isLoginOrLandingPage && (
-              <Header
-                tabs={defaultTabs}
-                currentMode={currentMode}
-                setCurrentMode={handleCurrentModeUpdate}
-              />
-            )}
             <CurrentRoundContextProvider currentRound={currentRound}>
               <CurrentRaceResultsProvider raceResults={raceResults}>
-                <Component {...pageProps} />
+                {!isLoginOrLandingPage && (
+                  <Header
+                    tabs={defaultTabs}
+                    currentMode={currentMode}
+                    setCurrentMode={handleCurrentModeUpdate}
+                    user={user}
+                  />
+                )}
+                <Component {...pageProps} user={user} loading={loading} />
               </CurrentRaceResultsProvider>
             </CurrentRoundContextProvider>
           </CurrentModeContext.Provider>

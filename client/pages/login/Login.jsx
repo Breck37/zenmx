@@ -84,7 +84,7 @@ const Login = () => {
           }}
         />
       </Head>
-      <LoginStyled isDarkMode={currentMode}>
+      <LoginStyled isDarkMode={currentMode} isEmailModalOpen={isEmailModalOpen}>
         <div className="svg">
           <ModernMotoLogo />
         </div>
@@ -95,9 +95,12 @@ const Login = () => {
         <div className="tagline">
           <i>The</i> MX fantasy app
         </div>
-        <Modal size="normal" isOpen={isEmailModalOpen}>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Email</label>
+        <Modal size="normal" isOpen={isEmailModalOpen} onClose={setIsEmailModalOpen}>
+          <form className="login-modal-form" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email">Enter Email</label>
+              <label className="subtitle">(Trust us, its magic)</label>
+            </div>
             <input name="email" type="email" />
             <button>Submit</button>
           </form>
