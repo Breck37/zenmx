@@ -14,7 +14,7 @@ const Login = ({ user, loading }) => {
   const { currentMode } = useCurrentMode();
   const [submitIsLoading, setSubmitIsLoading] = useState(false);
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
-
+  console.log({ user })
   if (!loading && user && user.email) {
     router.push('/home');
   }
@@ -38,6 +38,11 @@ const Login = ({ user, loading }) => {
   //   }
   // }, []);
 
+  const navigatewHome = () => {
+    setSubmitIsLoading(false);
+    router.push('/home');
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setSubmitIsLoading(true);
@@ -55,10 +60,10 @@ const Login = ({ user, loading }) => {
       null, 
       { headers: { Authorization: `Bearer ${did}` }}
     ).then(response => response);
-
+    console.log({ authRequest})
     if (authRequest.statusText.toLowerCase() === 'ok' || authRequest.status === 200) {
-      setSubmitIsLoading(false);
-      router.push('/home')
+      navigatewHome()
+      return;
     } else {
       /* handle errors */
       setSubmitIsLoading(false)
