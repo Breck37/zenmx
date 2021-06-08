@@ -72,9 +72,11 @@ const Home = () => {
   }
 
   console.log({
+    currentWeekWithLiveResults,
+    user,
+    userWithNoAccess,
     userWithPicks
-  })
-
+  });
   return (
     <HomeStyled currentMode={currentMode}>
       <div className="user-details">
