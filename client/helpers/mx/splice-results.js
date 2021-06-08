@@ -1,10 +1,23 @@
 module.exports = (array, index) => {
-  const raceResults = array.splice(index);
+  let raceResults = array.splice(index);
+  let cleanedResults;
+  let cutResults;
+  const indexToClean = raceResults.findIndex(i => i.includes('BOX SCORE'));
+  let indexToCut = raceResults.indexOf('SEASON STATISTICS');
 
-  const indexToCut = raceResults.indexOf('SEASON STATISTICS');
+  if (indexToClean !== -1) {
+    cleanedResults = raceResults.splice(indexToClean + 1);
+    indexToCut -= indexToClean;
+  }
+  console.log({ indexToCut })
 
   if (indexToCut !== -1) {
-    return raceResults.splice(0, indexToCut);
+    if (cleanedResults) {
+      cutResults = cleanedResults.splice(0, indexToCut);
+    } else {
+      cutResults = raceResults.splice(0, indexToCut);
+    }
   }
-  return raceResults;
+
+  return cutResults;
 };

@@ -7,7 +7,7 @@ import {
   spliceSeasonResults,
   resultsMapper,
 } from '../../../helpers/mx';
-import { lapsMapper } from '../../../helpers';
+import { lapsMapper } from '../../../helpers/mx';
 
 export const getLiveResults = async () => {
   const result = await crawler(
@@ -51,8 +51,9 @@ export default async (req, res) => {
           ...liveResults,
           liveResults,
         });
+        return;
       }
-      if (response && !response.error) {
+      if (response) {
         const formattedResponse = response.text.split('\n');
         const raceResults = mapper(spliceResults([...formattedResponse], 14));
         const seasonResults = seasonMapper(
@@ -60,11 +61,13 @@ export default async (req, res) => {
         );
 
         res.status(200).send({
-          raceResults,
-          seasonResults,
+          pdfResults: {
+            raceResults,
+            seasonResults,
+          },
           session: liveResults.session,
           round: liveResults.round,
-          liveResults,
+          ...liveResults,
         });
       }
     })
