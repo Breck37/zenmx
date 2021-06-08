@@ -13,13 +13,13 @@
 // };
 
 const manufacturers = [
-  'Suzuki',
-  'Honda',
+  'SUZ',
+  'HON',
   'KTM',
-  'Yamaha',
-  'Kawasaki',
-  'Husqvarna',
-  'GASGAS',
+  'YAM',
+  'KAW',
+  'HQV',
+  'GAS',
 ];
 
 const parseRiderName = (name) => {
@@ -49,6 +49,7 @@ const identifyRiderRaceResults = (results) => {
   const riderResults = [];
   let x = false;
   let currentPosition = 1;
+  let finalize = false;
   results
     .filter(
       (r) => r.length === 1
@@ -57,21 +58,34 @@ const identifyRiderRaceResults = (results) => {
         || !/^\d+$/.test(r.split('X').join('')),
     )
     .map((c, i, arr) => {
+      if (riderResults.length >= 40) {
+        finalize = true;
+      }
+      if (finalize) {
+        return;
+      }
       if (x) {
         x = false;
         return;
       }
-      if (currentRider.length == 3) {
+      if (currentRider[3] && i === currentRider[3]) {
         riderResults.push(splitRiderResults(currentRider, currentPosition));
         currentRider = [];
         currentPosition += 1;
+      }
+      if (currentRider.length == 3) {
+        currentRider.push(i + 4)
+        return;
+      } else if (currentRider[3]) {
+        return;
       } else if (i === arr.length - 1) {
         riderResults.push(
           splitRiderResults([...currentRider, c], currentPosition),
         );
         currentRider = [];
+        return;
       }
-      if (c.length > 3 && c.length < 20) {
+      if (c.length > 3 && c.length < 20 && !c.includes(' ')) {
         x = true;
         currentRider.push((c += arr[i + 1]));
         return;
@@ -79,7 +93,8 @@ const identifyRiderRaceResults = (results) => {
 
       currentRider.push(c);
     });
-  return riderResults;
+
+  return riderResults.filter(rider => (rider.points !== '0' && !isNaN(rider.points)) || (Number(rider.points) !== 0 && !isNaN(rider.points)));
 };
 
 module.exports = (resultString) => identifyRiderRaceResults(resultString);

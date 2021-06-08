@@ -1,15 +1,15 @@
 const correctKeys = {
-  A: "position",
-  BL: "bestLap",
-  F: "riderName",
-  L: "currentLap",
-  LL: "lastLap",
-  N: "number",
-  T: "hometown",
-  V: "bike",
-  D: "diff",
-  G: "gap",
-  S: "status",
+  A: 'position',
+  BL: 'bestLap',
+  F: 'riderName',
+  L: 'currentLap',
+  LL: 'lastLap',
+  N: 'number',
+  T: 'hometown',
+  V: 'bike',
+  D: 'diff',
+  G: 'gap',
+  S: 'status',
 };
 
 module.exports = (riderArray) => {
