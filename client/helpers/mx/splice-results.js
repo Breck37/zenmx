@@ -9,7 +9,6 @@ module.exports = (array, index) => {
     cleanedResults = raceResults.splice(indexToClean + 1);
     indexToCut -= indexToClean;
   }
-  console.log({ indexToCut })
 
   if (indexToCut !== -1) {
     if (cleanedResults) {
