@@ -70,13 +70,6 @@ const Home = () => {
   if (loading || isLoading || !currentWeekWithLiveResults || !user || !userWithPicks) {
     return <CircularProgress />;
   }
-
-  console.log({
-    currentWeekWithLiveResults,
-    user,
-    userWithNoAccess,
-    userWithPicks
-  });
   return (
     <HomeStyled currentMode={currentMode}>
       <div className="user-details">
@@ -85,20 +78,23 @@ const Home = () => {
         <h2>{`${lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]} Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
       </div>
       <LeagueCard
-        leaguePicks={userWithPicks.leaguePicks[currentRound.leagueRoundToShow]}
+        leaguePicks={userWithPicks.leaguePicks[currentRound.year][currentRound.type][`week${currentRound.week}`]}
       /> 
        {!currentWeekWithLiveResults.message &&
-      currentWeekWithLiveResults.liveResults &&
-      currentWeekWithLiveResults.liveResults?.fastestLaps.length > 0 ? (
+      currentWeekWithLiveResults &&
+      currentWeekWithLiveResults?.fastestLaps.length > 0 ? (
         <>
-          <div className="marquee">
+          {/* <div className="marquee">
             <div className="animation-container">
               <span>FAST LAPS</span>
-              {currentWeekWithLiveResults.liveResults.fastestLaps.map(
-                ({ rider, lap, bike }, index) => {
+              {currentWeekWithLiveResults.fastestLaps.map(
+                ({ riderName, bestLap, bike }, index) => {
+                  console.log({
+                    riderName, bestLap
+                  })
                   return (
                     <div
-                      key={`${rider}-fast-lap`}
+                      key={`${riderName}-fast-lap`}
                       className={`fast-lap ${index}`}
                     >
                       <img
@@ -106,22 +102,22 @@ const Home = () => {
                         alt=""
                         className="rider-image"
                       />
-                      <div>{rider}</div>
-                      <div>{lap}</div>
+                      <div>{riderName}</div>
+                      <div>{bestLap}</div>
                     </div>
                   );
                 }
               )}
             </div>
-          </div>
+          </div> */}
           <div className="mobile-fast-laps">
             <h3>Top 3 LapTimes</h3>
-            {currentWeekWithLiveResults.liveResults.fastestLaps
+            {currentWeekWithLiveResults.fastestLaps
               .slice(0, 3)
-              .map(({ rider, lap, bike }, index) => {
+              .map(({ riderName, bestLap, bike }, index) => {
                 return (
                   <div
-                    key={`${rider}-fast-lap`}
+                    key={`${riderName}-fast-lap`}
                     className={`fast-lap ${index}`}
                   >
                     <img
@@ -129,8 +125,8 @@ const Home = () => {
                       alt=""
                       className="rider-image"
                     />
-                    <div>{rider}</div>
-                    <div>{lap}</div>
+                    <div>{riderName}</div>
+                    <div>{bestLap}</div>
                   </div>
                 );
               })}

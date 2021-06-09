@@ -22,7 +22,6 @@ export const getLiveResults = async () => {
           raceResults,
           fastestLaps,
           session: formattedResponse.A.$.S,
-          round: formattedResponse.A.$.R,
           roundTitle: formattedResponse.A.$.T,
           fastLapLeader: fastestLaps ? fastestLaps[0] : null,
         };
@@ -65,8 +64,6 @@ export default async (req, res) => {
             raceResults,
             seasonResults,
           },
-          session: liveResults.session,
-          round: liveResults.round,
           ...liveResults,
         });
       }
