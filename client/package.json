@@ -27,7 +27,7 @@
     "file-loader": "^6.2.0",
     "fontsource-roboto": "^4.0.0",
     "http-proxy-middleware": "^2.0.0",
-    "immer": "^9.0.2",
+    "immer": "^9.0.3",
     "magic-sdk": "^4.3.0",
     "minimist": "^1.2.5",
     "next": "10.0.7",
