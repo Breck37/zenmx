@@ -12,3 +12,4 @@ export { default as FrontPlate } from './FrontPlate/FrontPlate';
 export { default as FrontPlateSmall } from './FrontPlate/FrontPlateSmall';
 export { default as LeagueCard } from './LeagueCard/LeagueCard';
 export { default as Modal } from './Modal/Modal';
+export { default as NoAccess } from './NoAccess';

@@ -29,7 +29,7 @@ module.exports = (riderArray) => {
     .sort((a, b) => {
       return a.position - b.position;
     })
-    .map((r) => ({ ...r, riderName: r.riderName.trim() }));
+    .map((r) => ({ ...r, riderName: r.riderName.trim(), bike: r.bike.split(' ')[0] }));
 };
 
 ////////// EXAMPLE RESPONSE //////////////////////
