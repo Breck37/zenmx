@@ -8,7 +8,6 @@ module.exports = {
     TEST_MAGIC_SECRET_KEY: process.env.TEST_MAGIC_SECRET_KEY,
     TOKEN_NAME: process.env.TOKEN_NAME,
     ENCRYPTION_SECRET: process.env.ENCRYPTION_SECRET,
-    NODE_ENV: process.env.NODE_ENV,
   },
   webpack(config) {
     config.module.rules.push({
