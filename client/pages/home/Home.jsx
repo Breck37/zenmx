@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from 'react';
-// import { useUser } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
