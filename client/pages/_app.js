@@ -1,7 +1,6 @@
 // import App from 'next/app'
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import Head from 'next/head';
-import { UserProvider } from '@auth0/nextjs-auth0';
 import axios from 'axios';
 import {
   CurrentModeContext,
@@ -73,36 +72,34 @@ function ModernMotoFantasy({ Component, pageProps }) {
   };
 
   return (
-    <UserProvider>
-      <AppStyled currentMode={currentMode}>
-        <Head>
-          <title>ModernMotoFantasy</title>
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bangers&family=Cinzel:wght@700&family=Kaushan+Script&family=Permanent+Marker&family=Righteous&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
-        <CurrentUserContextProvider>
-          <CurrentModeContext.Provider value={currentMode}>
-            <CurrentRoundContextProvider currentRound={currentRound}>
-              <CurrentRaceResultsProvider raceResults={raceResults}>
-                {!isLoginOrLandingPage && (
-                  <Header
-                    tabs={defaultTabs}
-                    currentMode={currentMode}
-                    setCurrentMode={handleCurrentModeUpdate}
-                    user={user}
-                  />
-                )}
-                <Component {...pageProps} user={user} loading={loading} />
-              </CurrentRaceResultsProvider>
-            </CurrentRoundContextProvider>
-          </CurrentModeContext.Provider>
-        </CurrentUserContextProvider>
-      </AppStyled>
-    </UserProvider>
+    <AppStyled currentMode={currentMode}>
+      <Head>
+        <title>ModernMotoFantasy</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bangers&family=Cinzel:wght@700&family=Kaushan+Script&family=Permanent+Marker&family=Righteous&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <CurrentUserContextProvider>
+        <CurrentModeContext.Provider value={currentMode}>
+          <CurrentRoundContextProvider currentRound={currentRound}>
+            <CurrentRaceResultsProvider raceResults={raceResults}>
+              {!isLoginOrLandingPage && (
+                <Header
+                  tabs={defaultTabs}
+                  currentMode={currentMode}
+                  setCurrentMode={handleCurrentModeUpdate}
+                  user={user}
+                />
+              )}
+              <Component {...pageProps} user={user} loading={loading} />
+            </CurrentRaceResultsProvider>
+          </CurrentRoundContextProvider>
+        </CurrentModeContext.Provider>
+      </CurrentUserContextProvider>
+    </AppStyled>
   );
 }
 
