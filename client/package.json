@@ -31,7 +31,7 @@
     "immer": "^9.0.3",
     "magic-sdk": "^4.3.0",
     "minimist": "^1.2.5",
-    "next": "10.0.7",
+    "next": "10.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "socket.io": "^4.1.2",
@@ -45,11 +45,14 @@
     "@storybook/addon-links": "^6.2.9",
     "@storybook/addons": "^6.1.16",
     "@storybook/react": "^6.2.9",
+    "add": "^2.0.6",
     "animejs": "^3.2.1",
     "babel-loader": "^8.1.0",
     "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4"
+    "eslint-config-next": "^11.0.0",
+    "eslint-plugin-import": "^2.23.4",
+    "yarn": "^1.22.10"
   },
   "resolutions": {
     "immer": "^8.0.1",
