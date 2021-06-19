@@ -1,5 +1,7 @@
 import crawler from 'crawler-request';
 import { parseStringPromise } from 'xml2js';
+import currentRound from '../../../constants/currentRound';
+import scheduledData from '../../../constants/scheduledData';
 import {
   mapper,
   seasonMapper,
@@ -39,11 +41,10 @@ export const getLiveResults = async () => {
 // };
 
 export default async (req, res) => {
-  // const url = scheduledData[currentRound.round]?.officialResults;
+  const url = scheduledData[currentRound.round]?.officialResults;
+
   const liveResults = await getLiveResults();
-  crawler(
-    'http://americanmotocrossresults.com/xml/MX/events/M2005/M1F2PRESS.pdf'
-  )
+  crawler(url)
     .then((response) => {
       if (response.error) {
         res.status(200).send({
@@ -61,6 +62,7 @@ export default async (req, res) => {
 
         res.status(200).send({
           pdfResults: {
+            ...scheduledData[currentRound.round],
             raceResults,
             seasonResults,
           },
