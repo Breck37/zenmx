@@ -7,12 +7,12 @@ export const useRaceResults = () => {
   let raceResults = useContext(RaceResultsContext);
 
   if (raceResults) {
-    raceResults = { ...raceResults, week: currentRound.week };
+    raceResults = { ...raceResults, ...currentRound };
   } else if (!raceResults && scheduledData[currentRound?.round]) {
     raceResults = {
       ...scheduledData[currentRound?.round],
       message: 'Results still in progress',
-      week: currentRound.week,
+      ...currentRound,
     };
   }
 
