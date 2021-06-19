@@ -34,12 +34,12 @@ const parseRiderName = (name) => {
       }
     });
   });
-  return (splitName[0] += ` ${parsedName}`);
+  return (splitName[0] += ` ${parsedName}`).trim();
 };
 
 const splitRiderResults = (rider, position) => ({
   number: rider[0],
-  name: parseRiderName(rider[1]),
+  riderName: parseRiderName(rider[1]),
   points: rider[2],
   position,
 });
