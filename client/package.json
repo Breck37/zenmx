@@ -48,7 +48,7 @@
     "add": "^2.0.6",
     "animejs": "^3.2.1",
     "babel-loader": "^8.1.0",
-    "eslint": "^7.28.0",
+    "eslint": "^7.29.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-next": "^11.0.0",
     "eslint-plugin-import": "^2.23.4",
