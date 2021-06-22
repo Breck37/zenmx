@@ -19,10 +19,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const apiRequests = apiType[currentWeekWithLiveResults.type];
 
-  console.log(
-    { apiRequests, user, currentWeekWithLiveResults },
-    process.env.ADMIN_USER === user?.email
-  );
   useEffect(() => {
     if ((!user || !user.email) && !loading) {
       setUserWithPicks(null);
@@ -100,11 +96,7 @@ const Home = () => {
   ) {
     return <CircularProgress />;
   }
-  console.log({ userWithPicks, leaguePicks: userWithPicks.leaguePicks[currentWeekWithLiveResults.year][
-    currentWeekWithLiveResults.type
-  ][`week${currentWeekWithLiveResults.leagueRoundToShow}`] })
 
-  console.log({ user: userWithPicks.leaguePicks, currentWeekWithLiveResults })
   return (
     <HomeStyled currentMode={currentMode}>
       {user.email === process.env.ADMIN_USER &&
