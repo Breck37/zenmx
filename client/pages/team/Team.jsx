@@ -27,7 +27,7 @@ const Team = () => {
   const currentRound = useCurrentRound();
   const { currentMode } = useCurrentMode();
   const { user, loading: userLoading } = useAuth()
-  const { currentUser } = useCurrentUser(user?.email);
+  const { currentUser } = useCurrentUser(user);
 
   // state
   const [league, setLeague] = useState('');
@@ -129,7 +129,6 @@ const Team = () => {
       totalPoints: 0,
       league: league || 'League of Extraordinary Bros',
       type: currentRound.type,
-      season: currentRound.season,
     });
 
     axios

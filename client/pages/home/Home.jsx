@@ -4,25 +4,21 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import { useCurrentMode, useAuth } from '../../hooks';
 import { useRaceResults } from '../../hooks/raceResults';
-import { 
-  NoAccess,
-  LeagueCard
-} from '../../components';
+import { NoAccess, LeagueCard } from '../../components';
 import { HomeStyled } from '../../styles';
-import { manufacturers } from '../../constants';
-import { useCurrentRound } from '../../hooks/currentRound';
+import { manufacturers, apiType } from '../../constants';
+import ModernButton from '../../components/Button/Button';
 
 const Home = () => {
   const router = useRouter();
   const { currentMode } = useCurrentMode();
-  const currentRound = useCurrentRound();
   const currentWeekWithLiveResults = useRaceResults();
   const { user, loading } = useAuth();
   const [userWithPicks, setUserWithPicks] = useState(null);
   const [userWithNoAccess, setUserWithNoSuccess] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const apiRequests = apiType[currentWeekWithLiveResults.type];
 
-  
   useEffect(() => {
     if ((!user || !user.email) && !loading) {
       setUserWithPicks(null);
@@ -32,7 +28,9 @@ const Home = () => {
 
     if (user && user?.email && !userWithPicks) {
       axios
-        .get(`/api/get-user/${user?.email}?type=${currentRound.type}`)
+        .get(
+          `${apiRequests.getUser}/${user?.email}?type=${currentWeekWithLiveResults.type}`
+        )
         .then(({ data: userData }) => {
           setTimeout(() => {
             setIsLoading(false);
@@ -43,7 +41,7 @@ const Home = () => {
             return;
           }
 
-          setUserWithNoSuccess(userData)
+          setUserWithNoSuccess(userData);
         })
         .catch((e) => console.log('Error getting user > Home', e));
       return;
@@ -52,34 +50,77 @@ const Home = () => {
 
   const lastRoundDetails = useMemo(() => {
     if (userWithPicks && userWithPicks.picks.length) {
-      const latestPick = userWithPicks.picks.sort((a, b) => b.week - a.week)[0];
-      if (latestPick.week === currentRound.round && latestPick.rank === null) {
-        return userWithPicks.picks.sort((a, b) => b.week - a.week)[1];
+      const roundToShow = userWithPicks.leaguePicks[currentWeekWithLiveResults.year][
+        currentWeekWithLiveResults.type
+      ][`week${currentWeekWithLiveResults.leagueRoundToShow}`];
+
+      if(!roundToShow) {
+        return userWithPicks.picks.filter(pick => pick.type === currentWeekWithLiveResults.type).sort((a, b) => b.week - a.week)[1];
       }
-      return latestPick;
+
+      return roundToShow.find(pick => pick.email === userWithPicks.email);
     }
+
     return null;
   }, [userWithPicks]);
-  
 
-  if(userWithNoAccess) {
-    <NoAccess data={userWithNoAccess} />
+  const assignPoints = () => {
+    axios
+      .post(
+        `${apiRequests.assignPoints}?week=${currentWeekWithLiveResults.week}&type=${currentWeekWithLiveResults.type}&year=${currentWeekWithLiveResults.year}`,
+        {
+          raceResults: {
+            ...currentWeekWithLiveResults.pdfResults,
+          },
+        }
+      )
+      .then((res) => {
+        console.log('ASSIGN POINTS RESPONSE', { res });
+        // if (res.data.success) {
+        //   setAssignedPoints(res.data);
+        // }
+      })
+      .catch((e) => console.warn('ERROR', { e }));
+  };
+
+  if (userWithNoAccess) {
+    <NoAccess data={userWithNoAccess} />;
   }
 
-  if (loading || isLoading || !currentWeekWithLiveResults || !user || !userWithPicks) {
+  if (
+    loading ||
+    isLoading ||
+    !currentWeekWithLiveResults ||
+    !user ||
+    !userWithPicks
+  ) {
     return <CircularProgress />;
   }
+
   return (
     <HomeStyled currentMode={currentMode}>
-      <div className="user-details">
+      {user.email === process.env.ADMIN_USER &&
+      currentWeekWithLiveResults.raceResults ? (
+        <ModernButton label="Assign Points" onClick={assignPoints} />
+      ) : null}
+      {lastRoundDetails && <div className="user-details">
         <h1>{`Current Round: ${currentWeekWithLiveResults.week}`}</h1>
-        <h2>{`${lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]} Score: ${lastRoundDetails.totalPoints}`}</h2>
-        <h2>{`${lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]} Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
-      </div>
+        <h2>{`Season: ${currentWeekWithLiveResults.year}`}</h2>
+        <h2>{`${
+          lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]
+        }  Round ${lastRoundDetails.week} Score: ${lastRoundDetails.totalPoints}`}</h2>
+        <h2>{`${
+          lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]
+        } Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
+      </div>}
       <LeagueCard
-        leaguePicks={userWithPicks.leaguePicks[currentRound.year][currentRound.type][`week${currentRound.week}`]}
-      /> 
-       {!currentWeekWithLiveResults.message &&
+        leaguePicks={
+          userWithPicks.leaguePicks[currentWeekWithLiveResults.year][
+            currentWeekWithLiveResults.type
+          ][`week${currentWeekWithLiveResults.leagueRoundToShow}`]
+        }
+      />
+      {!currentWeekWithLiveResults.message &&
       currentWeekWithLiveResults &&
       currentWeekWithLiveResults?.fastestLaps.length > 0 ? (
         <>
