@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useCurrentMode } from "../../hooks/currentMode";
-import { Overlay } from "../Overlay";
-import { TableStyled } from "./styles";
+import React, { useState, useEffect } from 'react';
+import { useCurrentMode } from '../../hooks/currentMode';
+import { Overlay } from '../Overlay';
+import { TableStyled } from './styles';
 
 const Table = ({ rows, children, hasOverlay, currentRow, setCurrentRow }) => {
   const [showOverlay, setShowOverlay] = useState(false);

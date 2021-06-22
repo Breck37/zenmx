@@ -1,5 +1,5 @@
-import React from "react";
-import TabStyled from "./styles";
+import React from 'react';
+import TabStyled from './styles';
 
 const Tab = ({ title, onClick, className }) => {
   return (

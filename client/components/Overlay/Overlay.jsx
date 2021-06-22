@@ -1,5 +1,5 @@
-import React from "react";
-import Icon from "../../icons/Icon";
+import React from 'react';
+import Icon from '../../icons/Icon';
 
 const Overlay = ({ showOverlay, currentRider, handleClick }) => {
   if (!showOverlay) return null;

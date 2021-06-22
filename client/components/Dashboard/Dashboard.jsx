@@ -1,5 +1,5 @@
-import React from "react";
-import DashboardStyled from "./styles";
+import React from 'react';
+import DashboardStyled from './styles';
 
 const Dashboard = () => {
   return (

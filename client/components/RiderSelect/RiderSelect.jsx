@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React, { useState, useEffect } from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
   Select,
   InputLabel,
   MenuItem,
   FormControl,
   FormHelperText,
-  Typography,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: "100%",
-    maxWidth: "100%",
+    minWidth: '100%',
+    maxWidth: '100%',
   },
 }));
 
@@ -21,7 +20,7 @@ function getStyles(name, personName, theme) {
   if (!name || !personName) {
     return {
       fontWeight: theme.typography.fontWeightMedium,
-      fontStyle: "italics",
+      fontStyle: 'italics',
     };
   }
   return {
@@ -39,21 +38,21 @@ const RiderSelect = ({
   riderPosition,
   value,
 }) => {
-  const [riderName, setRiderName] = useState("");
+  const [riderName, setRiderName] = useState('');
   const classes = useStyles();
   const theme = useTheme();
 
   useEffect(() => {
     if (!value && riderName) {
-      setRiderName("");
+      setRiderName('');
     }
   }, [value]);
 
   const handleRiderSelection = (riderEvent) => {
     const riderName = riderEvent.target.value;
     if (!riderName) {
-      setRiderName("");
-      onChange("", riderPosition);
+      setRiderName('');
+      onChange('', riderPosition);
     }
     setRiderName(riderName);
     onChange(riderName, riderPosition);
