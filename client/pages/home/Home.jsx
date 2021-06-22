@@ -103,6 +103,8 @@ const Home = () => {
   console.log({ userWithPicks, leaguePicks: userWithPicks.leaguePicks[currentWeekWithLiveResults.year][
     currentWeekWithLiveResults.type
   ][`week${currentWeekWithLiveResults.leagueRoundToShow}`] })
+
+  console.log({ user: userWithPicks.leaguePicks, currentWeekWithLiveResults })
   return (
     <HomeStyled currentMode={currentMode}>
       {user.email === process.env.ADMIN_USER &&
