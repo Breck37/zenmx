@@ -11,8 +11,15 @@ module.exports = {
   },
   webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      test: [/\.svg$/],
+      use: [
+        {
+          loader: require.resolve('@svgr/webpack'),
+          options: {
+            svgo: false,
+          },
+        },
+      ],
     });
     config.module.rules.push({
       test: /\.(png|jpe?g|gif)$/i,
