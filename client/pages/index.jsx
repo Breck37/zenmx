@@ -12,11 +12,11 @@ export default function LandingPage({ user, loading: isLoading }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (!isLoading && (!user || !user.email)) {
       router.push('/login');
     }
 
-    if (!isLoading && user) {
+    if (!isLoading && user && user.email) {
       router.push('/home');
     }
   }, [isLoading]);
