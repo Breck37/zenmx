@@ -10,7 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 export default function LandingPage({ user, loading: isLoading }) {
   const { currentMode } = useCurrentMode();
   const router = useRouter();
-  console.log('landing', { user })
+
   useEffect(() => {
     if (!isLoading && (!user || !user.email)) {
       router.push('/login');
