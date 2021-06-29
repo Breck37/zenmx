@@ -18,18 +18,19 @@ export default styled.div`
     align-items: center;
     justify-content: center;
     width: 75%;
+    margin-top: 32px;
   }
 
   .select-container {
     width: 75%;
+    min-height: 182px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 
     > a {
       text-decoration: none;
     }
-    > h3 {
+    h3 {
       text-align: center;
     }
   }
@@ -44,7 +45,7 @@ export default styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 16px 0;
+    margin: 1.5rem 0 1rem;
     width: 100%;
   }
 
