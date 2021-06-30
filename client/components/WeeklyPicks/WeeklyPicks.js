@@ -3,7 +3,12 @@ import PicksStyled from './PicksStyled';
 import RiderSelect from '../RiderSelect/RiderSelect';
 import currentRound from '../../constants/currentRound';
 
-const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders, classType }) => {
+const WeeklyPicks = ({
+  riders,
+  selectedRiders,
+  setSelectedRiders,
+  classType,
+}) => {
   if (!riders) return null;
   if (Array.isArray(riders) && !riders.length) return null;
 
@@ -17,7 +22,7 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders, classType }) =
         fifth: null,
         tenth: null,
         fast: null,
-      }
+      };
     }
     return {
       first: selectedRiders[classType].find((rider) => rider.position === 1),
@@ -46,14 +51,15 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders, classType }) =
         sanitizedRider: null,
       };
     }
-    console.log('SELECTING', !selectedRiders[classType], selectedRiders[classType])
+
     const sanitizedRider = { riderName, position, points: 0 };
     if (!selectedRiders[classType]) {
       return {
         selected: selectedCopy,
-        sanitizedRider
-      }
+        sanitizedRider,
+      };
     }
+
     // const alreadySelectedRiderIndex = selectedRiders.find(
     //   (rider) => rider.riderName === riderName
     // );
@@ -71,35 +77,26 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders, classType }) =
 
   const handleRiderSelection = (rider, position) => {
     const { selected, sanitizedRider } = cleanseSelectedRiders(rider, position);
-    console.log({ selected, classType, sanitizedRider })
+
     if (!sanitizedRider) {
-      console.warn('HIT 1')
-      // setSelectedRiders(selected);
+      setSelectedRiders(selected);
       return;
     }
+
     if (!selected || !selected[classType] || !selected[classType].length) {
-      console.warn('HIT 2')
       setSelectedRiders({
         ...selected,
-        [classType]: [sanitizedRider]
+        [classType]: [sanitizedRider],
       });
       return;
     }
-    console.warn('HIT 3')
+
     setSelectedRiders({
       ...selected,
-      [classType]: [...selected[classType], sanitizedRider]
+      [classType]: [...selected[classType], sanitizedRider],
     });
   };
 
-  // if (picksUnavailable) {
-  //   return (
-  //     <PicksStyled>
-  //       <div className="unavailable">Window to make picks has closed</div>
-  //     </PicksStyled>
-  //   );
-  // }
-  console.log({ riders, riderPositions })
   return (
     <PicksStyled>
       <RiderSelect
@@ -144,7 +141,7 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders, classType }) =
         riderPosition={10}
         value={riderPositions.tenth}
       />
-      {currentRound.type === 'sx' ?
+      {currentRound.type === 'sx' ? (
         <RiderSelect
           onChange={handleRiderSelection}
           options={riders}
@@ -152,25 +149,24 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders, classType }) =
           riderPosition={100}
           value={riderPositions.fast}
         />
-        : (
-          <>
-            <RiderSelect
-              onChange={handleRiderSelection}
-              options={riders}
-              selectLabel="Fastest Lap Moto 1"
-              riderPosition={101}
-              value={riderPositions.fast1}
-            />
-            <RiderSelect
-              onChange={handleRiderSelection}
-              options={riders}
-              selectLabel="Fastest Lap Moto 2"
-              riderPosition={102}
-              value={riderPositions.fast2}
-            />
-          </>
-
-        )}
+      ) : (
+        <>
+          <RiderSelect
+            onChange={handleRiderSelection}
+            options={riders}
+            selectLabel="Fastest Lap Moto 1"
+            riderPosition={101}
+            value={riderPositions.fast1}
+          />
+          <RiderSelect
+            onChange={handleRiderSelection}
+            options={riders}
+            selectLabel="Fastest Lap Moto 2"
+            riderPosition={102}
+            value={riderPositions.fast2}
+          />
+        </>
+      )}
     </PicksStyled>
   );
 };
