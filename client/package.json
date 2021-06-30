@@ -42,10 +42,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",
-    "@storybook/addon-actions": "^6.3.0",
+    "@storybook/addon-actions": "^6.3.1",
     "@storybook/addon-links": "^6.3.0",
-    "@storybook/addons": "^6.1.16",
-    "@storybook/react": "^6.3.0",
+    "@storybook/addons": "^6.3.1",
+    "@storybook/react": "^6.3.1",
     "add": "^2.0.6",
     "animejs": "^3.2.1",
     "babel-loader": "^8.1.0",
