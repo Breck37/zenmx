@@ -1,40 +1,77 @@
 import React, { useMemo } from 'react';
 import PicksStyled from './PicksStyled';
 import RiderSelect from '../RiderSelect/RiderSelect';
+import currentRound from '../../constants/currentRound';
 
-const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
+const WeeklyPicks = ({
+  riders,
+  selectedRiders,
+  setSelectedRiders,
+  classType,
+}) => {
   if (!riders) return null;
   if (Array.isArray(riders) && !riders.length) return null;
 
   const riderPositions = useMemo(() => {
+    if (!selectedRiders[classType]) {
+      return {
+        first: null,
+        second: null,
+        third: null,
+        fourth: null,
+        fifth: null,
+        tenth: null,
+        fast: null,
+      };
+    }
     return {
-      first: selectedRiders.find((rider) => rider.position === 1),
-      second: selectedRiders.find((rider) => rider.position === 2),
-      third: selectedRiders.find((rider) => rider.position === 3),
-      fourth: selectedRiders.find((rider) => rider.position === 4),
-      fifth: selectedRiders.find((rider) => rider.position === 5),
-      tenth: selectedRiders.find((rider) => rider.position === 10),
-      fast: selectedRiders.find((rider) => rider.position === 100),
+      first: selectedRiders[classType].find((rider) => rider.position === 1),
+      second: selectedRiders[classType].find((rider) => rider.position === 2),
+      third: selectedRiders[classType].find((rider) => rider.position === 3),
+      fourth: selectedRiders[classType].find((rider) => rider.position === 4),
+      fifth: selectedRiders[classType].find((rider) => rider.position === 5),
+      tenth: selectedRiders[classType].find((rider) => rider.position === 10),
+      fast: selectedRiders[classType].find((rider) => rider.position === 100),
+      fast1: selectedRiders[classType].find((rider) => rider.position === 101),
+      fast2: selectedRiders[classType].find((rider) => rider.position === 102),
     };
   }, [selectedRiders]);
 
   const cleanseSelectedRiders = (riderName, position) => {
-    // const alreadySelectedRiderIndex = selectedRiders.find(
-    //   (rider) => rider.riderName === riderName
-    // );
-    const selectedCopy = [...selectedRiders];
+    const selectedCopy = { ...selectedRiders };
+
     if (!riderName) {
       return {
-        selected: selectedCopy
-          .filter((rider) => rider.position !== position)
-          .sort((a, b) => a.position - b.position),
+        selected: {
+          ...selectedCopy,
+          [classType]: selectedCopy[classType]
+            .filter((rider) => rider.position !== position)
+            .sort((a, b) => a.position - b.position),
+        },
         sanitizedRider: null,
       };
     }
 
+    const sanitizedRider = { riderName, position, points: 0 };
+    if (!selectedRiders[classType]) {
+      return {
+        selected: selectedCopy,
+        sanitizedRider,
+      };
+    }
+
+    // const alreadySelectedRiderIndex = selectedRiders.find(
+    //   (rider) => rider.riderName === riderName
+    // );
+
     return {
-      selected: selectedCopy.filter((rider) => rider.position !== position),
-      sanitizedRider: { riderName, position, points: 0 },
+      selected: {
+        ...selectedCopy,
+        [classType]: selectedCopy[classType]
+          .filter((rider) => rider.position !== position)
+          .sort((a, b) => a.position - b.position),
+      },
+      sanitizedRider,
     };
   };
 
@@ -45,17 +82,20 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
       setSelectedRiders(selected);
       return;
     }
-    const sortedSelectedRiders = [...selected, sanitizedRider];
-    setSelectedRiders(sortedSelectedRiders);
-  };
 
-  // if (picksUnavailable) {
-  //   return (
-  //     <PicksStyled>
-  //       <div className="unavailable">Window to make picks has closed</div>
-  //     </PicksStyled>
-  //   );
-  // }
+    if (!selected || !selected[classType] || !selected[classType].length) {
+      setSelectedRiders({
+        ...selected,
+        [classType]: [sanitizedRider],
+      });
+      return;
+    }
+
+    setSelectedRiders({
+      ...selected,
+      [classType]: [...selected[classType], sanitizedRider],
+    });
+  };
 
   return (
     <PicksStyled>
@@ -101,13 +141,32 @@ const WeeklyPicks = ({ riders, selectedRiders, setSelectedRiders }) => {
         riderPosition={10}
         value={riderPositions.tenth}
       />
-      <RiderSelect
-        onChange={handleRiderSelection}
-        options={riders}
-        selectLabel="Fastest lap"
-        riderPosition={100}
-        value={riderPositions.fast}
-      />
+      {currentRound.type === 'sx' ? (
+        <RiderSelect
+          onChange={handleRiderSelection}
+          options={riders}
+          selectLabel="Fastest lap"
+          riderPosition={100}
+          value={riderPositions.fast}
+        />
+      ) : (
+        <>
+          <RiderSelect
+            onChange={handleRiderSelection}
+            options={riders}
+            selectLabel="Fastest Lap Moto 1"
+            riderPosition={101}
+            value={riderPositions.fast1}
+          />
+          <RiderSelect
+            onChange={handleRiderSelection}
+            options={riders}
+            selectLabel="Fastest Lap Moto 2"
+            riderPosition={102}
+            value={riderPositions.fast2}
+          />
+        </>
+      )}
     </PicksStyled>
   );
 };

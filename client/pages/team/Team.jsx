@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import Alert from '@material-ui/lab/Alert';
+import { Alert } from '@material-ui/lab';
 import {
   CircularProgress,
   Select,
   MenuItem,
   InputLabel,
+  Tabs,
+  Tab,
+  Paper,
+  FormControl,
 } from '@material-ui/core';
 import { Button, WeeklyPicks } from '../../components';
 import {
@@ -20,19 +24,29 @@ import { TeamStyled } from '../../styles';
 
 // TODO create league select
 
-const Team = () => {
+const WeeklyPicksController = ({ isActive, children }) => {
+  if(!isActive) return null;
 
+  return (
+    <>
+      {children}
+    </>
+  )
+}
+
+const Team = () => {
   // hooks
   const isMounted = useIsMountedRef();
   const currentRound = useCurrentRound();
   const { currentMode } = useCurrentMode();
-  const { user, loading: userLoading } = useAuth()
+  const { user, loading: userLoading } = useAuth();
   const { currentUser } = useCurrentUser(user);
 
   // state
   const [league, setLeague] = useState('');
-  const [selectedRiders, setSelectedRiders] = useState([]);
+  const [selectedRiders, setSelectedRiders] = useState();
   const [entries, setEntries] = useState([]);
+  const [currentTab, setCurrentTab] = useState(0);
   const [loading, setLoading] = useState(true);
   const [canShowQualifying, setCanShowQualifying] = useState(false);
   const [success, setSuccess] = useState('');
@@ -46,7 +60,7 @@ const Team = () => {
       setTimeout(() => setSuccess(''), 1500);
     }
     if (!isMounted.current) return;
-    if (entries && entries.length) return;
+    if (entries && Object.keys(entries).length) return;
 
     if (picksUnavailable) {
       setLoading(false);
@@ -84,10 +98,10 @@ const Team = () => {
     }
   }, [canShowQualifying, loading, currentRound]);
 
-  const selectedRidersWithErrors = useMemo(() => {
-    if (!selectedRiders || !selectedRiders?.length) return [];
+  const selectedBigBikeRiders = useMemo(() => {
+    if (!selectedRiders || !selectedRiders.big) return null;
     const riderNames = [];
-    return selectedRiders.map((rider) => {
+    return selectedRiders.big.map((rider) => {
       const indexOfRiderName = riderNames.indexOf(rider.riderName);
       if (rider.position === 100 || indexOfRiderName === -1) {
         riderNames.push(rider.riderName);
@@ -97,35 +111,69 @@ const Team = () => {
         ...rider,
         error: `Please change pick #${indexOfRiderName + 1}`,
       };
-    });
-  }, [selectedRiders]).sort((a, b) => a.position - b.position);
+    }).sort((a, b) => a.position - b.position);
+  }, [selectedRiders])
+
+  const selectedSmallBikeRiders = useMemo(() => {
+    if (!selectedRiders || !selectedRiders.small) return null;
+    const riderNames = [];
+    return selectedRiders.small.map((rider) => {
+      const indexOfRiderName = riderNames.indexOf(rider.riderName);
+      if (rider.position === 100 || indexOfRiderName === -1) {
+        riderNames.push(rider.riderName);
+        return { ...rider, error: '' };
+      }
+      return {
+        ...rider,
+        error: `Please change pick #${indexOfRiderName + 1}`,
+      };
+    }).sort((a, b) => a.position - b.position);
+  }, [selectedRiders])
 
   const isDisabled = useMemo(() => {
-    if (
-      !selectedRiders ||
-      !selectedRiders?.length ||
-      selectedRidersWithErrors.length !== 7
-    )
-      return true;
-    return selectedRidersWithErrors.reduce(
-      (result, currentRider) => (currentRider.error ? true : false),
-      false
-    );
-  });
+    const classTeamIsSet = currentRound.type === 'sx' ? 7 : 8;
+    return selectedBigBikeRiders?.length !== classTeamIsSet && selectedSmallBikeRiders?.length !== classTeamIsSet;
+  }, [selectedSmallBikeRiders, selectedBigBikeRiders]);
+
+  const qualifyingContent = useMemo(() => {
+    const classSize = currentTab === 0 ? '250' : '450';
+    if(!canShowQualifying) {
+      return {
+        label: `${classSize} Qualifying Not yet Completed`,
+        link: ''
+      }
+    }
+    switch(currentTab) {
+      case 1:
+        return {
+          label: `${classSize} Qualfying Results`,
+          link: currentRound.bigBikeQualifying,
+        }
+      case 0:
+      default:
+        return {
+          label: `${classSize} Qualfying Results`,
+          link: currentRound.smallBikeQualifying,
+        }
+      
+    }
+  }, [currentTab, canShowQualifying]);
 
   const removeErrors = (riders) => {
     return riders.map(({ error, ...rest }) => ({ ...rest }));
   };
 
   const saveUserPicks = () => {
-    const cleanseSelectedRiders = removeErrors(selectedRiders);
+    const cleansedBigBikeSelectedRiders = removeErrors(selectedRiders.big);
+    const cleansedSmallBikeSelectedRiders = removeErrors(selectedRiders.small);
 
     const params = JSON.stringify({
       week: currentRound.week,
       round: currentRound.round,
       email: user.email,
       user: currentUser.username,
-      bigBikePicks: cleanseSelectedRiders,
+      bigBikePicks: cleansedBigBikeSelectedRiders,
+      smallBikePicks: cleansedSmallBikeSelectedRiders,
       totalPoints: 0,
       league: league || 'League of Extraordinary Bros',
       type: currentRound.type,
@@ -143,6 +191,10 @@ const Team = () => {
       })
       .catch((err) => console.error(err));
   };
+
+  const handleTabChange = (event, newValue) => {
+    setCurrentTab(newValue)
+  }
 
   if (loading || userLoading) {
     return <CircularProgress />;
@@ -164,12 +216,19 @@ const Team = () => {
 
   return (
     <TeamStyled currentMode={currentMode}>
+        <Paper square>
+          <Tabs onChange={handleTabChange} value={currentTab} indicatorColor="primary">
+            <Tab label="250" />
+            <Tab label="450" />
+          </Tabs>
+        </Paper>
       <div className="team-container">
         <div className="select-container">
           {currentUser &&
           Array.isArray(currentUser.leagues) &&
           currentUser.leagues.length ? (
             <>
+              <FormControl>
               <InputLabel id="League">League:</InputLabel>
               <Select
                 labelId="League"
@@ -196,6 +255,7 @@ const Team = () => {
                   );
                 })}
               </Select>
+              </FormControl>
               <div className="button-container">
                 <Button
                   label="Save Team"
@@ -213,25 +273,42 @@ const Team = () => {
                   </div>
                 )}
               </div>
-              {canShowQualifying ? (
-                <Link href={currentRound.bigBikeQualifying} passHref>
-                  <a href="" target="_blank">
-                    <h3>Qualifying Results</h3>
-                  </a>
-                </Link>
-              ) : (
-                <h3>Qualifying not yet completed</h3>
-              )}
             </>
           ) : (
             <div>Loading Leagues...</div>
           )}
+          {canShowQualifying ? (
+            <Link href={qualifyingContent.link} passHref>
+              <a href="" target="_blank">
+                <h3>{qualifyingContent.label}</h3>
+              </a>
+            </Link>
+          ) : (
+            <h3>{qualifyingContent.label}</h3>
+          )}
         </div>
-        <WeeklyPicks
-          riders={entries}
-          selectedRiders={selectedRidersWithErrors}
-          setSelectedRiders={setSelectedRiders}
-        />
+        <WeeklyPicksController isActive={currentTab == 0} >
+          <WeeklyPicks
+              classType="small"
+              riders={entries.smallBike}
+              selectedRiders={{
+                big: selectedBigBikeRiders,
+                small: selectedSmallBikeRiders,
+              }}
+              setSelectedRiders={setSelectedRiders}
+            />
+        </WeeklyPicksController>
+        <WeeklyPicksController isActive={currentTab == 1} >
+          <WeeklyPicks
+              classType="big"
+              riders={entries.bigBike}
+              selectedRiders={{
+                big: selectedBigBikeRiders,
+                small: selectedSmallBikeRiders,
+              }}
+              setSelectedRiders={setSelectedRiders}
+            />
+        </WeeklyPicksController>
       </div>
     </TeamStyled>
   );

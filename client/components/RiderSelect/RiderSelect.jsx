@@ -45,7 +45,13 @@ const RiderSelect = ({
   useEffect(() => {
     if (!value && riderName) {
       setRiderName('');
+      return;
     }
+
+    if(value && value.riderName) {
+      setRiderName(value.riderName);
+    }
+
   }, [value]);
 
   const handleRiderSelection = (riderEvent) => {
