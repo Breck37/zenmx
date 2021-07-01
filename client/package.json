@@ -30,6 +30,7 @@
     "http-proxy-middleware": "^2.0.0",
     "immer": "^9.0.3",
     "magic-sdk": "^4.3.0",
+    "migrate-mongo": "^8.2.2",
     "minimist": "^1.2.5",
     "next": "10.2.0",
     "react": "17.0.2",
