@@ -63,7 +63,7 @@ const Home = () => {
 
     return null;
   }, [userWithPicks]);
-
+  console.log({ currentWeekWithLiveResults })
   const assignPoints = () => {
     axios
       .post(
