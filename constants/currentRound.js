@@ -1,7 +1,7 @@
 module.exports = {
   type: 'mx',
-  round: 'm2',
-  week: 2,
-  leagueRoundToShow: 1,
+  round: 'm3',
+  week: 3,
+  leagueRoundToShow: 2,
   year: '2021'
 };
