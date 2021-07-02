@@ -32,7 +32,7 @@
     "magic-sdk": "^4.3.0",
     "migrate-mongo": "^8.2.2",
     "minimist": "^1.2.5",
-    "next": "10.2.0",
+    "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "socket.io": "^4.1.2",
