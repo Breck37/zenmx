@@ -478,10 +478,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2120/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2120/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2120/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2120/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2120/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2120/M2F2RID.pdf',
     submissionStart: new Date(2021, 5, 24, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 5, 26, 11, 0, 0, 0),
   },
