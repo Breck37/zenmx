@@ -7,6 +7,7 @@ export default styled.div`
   flex-wrap: wrap;
 
   h1,
+  h2,
   h4 {
     text-align: center;
   }
