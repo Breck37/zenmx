@@ -24,6 +24,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2105/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2105/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2105/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2105/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -46,6 +50,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2110/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2110/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2110/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2110/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -68,6 +76,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2115/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2115/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2115/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2115/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -90,6 +102,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2120/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2120/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2120/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2120/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -112,6 +128,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2125/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2125/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2125/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2125/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -134,6 +154,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2130/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2130/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2130/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2130/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -156,6 +180,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2135/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2135/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2135/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2135/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -178,6 +206,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2140/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2140/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2140/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2140/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -200,6 +232,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2145/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2145/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2145/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2145/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -222,6 +258,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2150/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2150/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2150/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2150/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -244,6 +284,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2155/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2155/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2155/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2155/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -266,6 +310,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2160/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2160/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2160/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2160/S1F1RID.pdf',
     submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
   },
@@ -288,6 +336,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2165/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2165/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2165/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2165/S1F1RID.pdf',
     submissionStart: new Date(2021, 3, 9, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 3, 10, 12, 0, 0, 0),
   },
@@ -310,6 +362,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2170/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2170/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2170/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2170/S1F1RID.pdf',
     submissionStart: new Date(2021, 3, 12, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 3, 13, 16, 0, 0, 0),
   },
@@ -332,6 +388,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2175/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2175/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2175/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2175/S1F1RID.pdf',
     submissionStart: new Date(2021, 3, 16, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 3, 17, 16, 0, 0, 0),
   },
@@ -354,6 +414,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2180/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2180/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2180/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2180/S1F1RID.pdf',
     submissionStart: new Date(2021, 3, 23, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 3, 24, 16, 0, 0, 0),
   },
@@ -376,6 +440,10 @@ module.exports = {
       'https://results.amasupercross.com/xml/SX/events/S2185/S1QCOVR.pdf',
     smallBikeQualifying:
       'https://results.amasupercross.com/xml/SX/events/S2185/S2QCOVR.pdf',
+    smallBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2185/S2F1RID.pdf',
+    bigBikeLapTimes:
+      'https://results.amasupercross.com/xml/SX/events/S2185/S1F1RID.pdf',
     submissionStart: new Date(2021, 3, 30, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
   },
@@ -400,10 +468,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2105/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2105/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2105/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2105/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2105/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2105/M2F2RID.pdf',
     submissionStart: new Date(2021, 4, 28, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 4, 29, 14, 0, 0, 0),
   },
@@ -426,10 +498,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2110/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2110/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2110/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2110/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2110/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2110/M2F2RID.pdf',
     submissionStart: new Date(2021, 5, 3, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 5, 5, 13, 0, 0, 0),
   },
@@ -452,10 +528,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2115/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2115/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2115/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2115/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2115/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2115/M2F2RID.pdf',
     submissionStart: new Date(2021, 5, 17, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 5, 19, 11, 0, 0, 0),
   },
@@ -478,10 +558,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2120/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2120/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2120/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2120/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2120/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2120/M2F2RID.pdf',
     submissionStart: new Date(2021, 5, 24, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 5, 26, 11, 0, 0, 0),
   },
@@ -504,10 +588,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2125/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2125/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2125/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2125/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2125/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2125/M2F2RID.pdf',
     submissionStart: new Date(2021, 6, 8, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 6, 10, 11, 0, 0, 0),
   },
@@ -530,10 +618,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2130/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2130/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2130/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2130/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2130/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2130/M2F2RID.pdf',
     submissionStart: new Date(2021, 6, 15, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 6, 17, 11, 0, 0, 0),
   },
@@ -556,10 +648,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2135/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2135/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2135/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2135/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2135/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2135/M2F2RID.pdf',
     submissionStart: new Date(2021, 6, 22, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 6, 24, 14, 0, 0, 0),
   },
@@ -582,10 +678,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2140/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2140/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2140/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2140/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2140/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2140/M2F2RID.pdf',
     submissionStart: new Date(2021, 7, 12, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 7, 14, 11, 0, 0, 0),
   },
@@ -608,10 +708,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2145/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2145/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2145/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2145/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2145/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2145/M2F2RID.pdf',
     submissionStart: new Date(2021, 7, 19, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 7, 21, 11, 0, 0, 0),
   },
@@ -634,10 +738,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2150/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2150/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2150/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2150/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2150/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2150/M2F2RID.pdf',
     submissionStart: new Date(2021, 7, 26, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 7, 28, 11, 0, 0, 0),
   },
@@ -660,10 +768,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2155/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2155/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2155/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2155/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2155/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2155/M2F2RID.pdf',
     submissionStart: new Date(2021, 8, 2, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 8, 4, 14, 0, 0, 0),
   },
@@ -686,10 +798,14 @@ module.exports = {
       'http://americanmotocrossresults.com/xml/MX/events/M2160/M1QCOVR.pdf',
     smallBikeQualifying:
       'http://americanmotocrossresults.com/xml/MX/events/M2160/M2QCOVR.pdf',
-    lapTimesMoto1:
+    bigBikeLapTimesMoto1:
       'http://americanmotocrossresults.com/xml/MX/events/M2160/M1F1RID.pdf',
-    lapTimesMoto2:
+    bigBikeLapTimesMoto2:
       'http://americanmotocrossresults.com/xml/MX/events/M2160/M1F2RID.pdf',
+    smallBikeLapTimesMoto1:
+      'http://americanmotocrossresults.com/xml/MX/events/M2160/M1F1RID.pdf',
+    smallBikeLapTimesMoto2:
+      'http://americanmotocrossresults.com/xml/MX/events/M2160/M2F2RID.pdf',
     submissionStart: new Date(2021, 8, 9, 12, 0, 0, 0),
     submissionEnd: new Date(2021, 8, 11, 14, 0, 0, 0),
   },
