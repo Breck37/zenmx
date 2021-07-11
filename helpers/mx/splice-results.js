@@ -2,7 +2,7 @@ module.exports = (array, index) => {
   let raceResults = array.splice(index);
   let cleanedResults;
   let cutResults;
-  const indexToClean = raceResults.findIndex(i => i.includes('BOX SCORE'));
+  const indexToClean = raceResults.findIndex((i) => i.includes('BOX SCORE'));
   let indexToCut = raceResults.indexOf('SEASON STATISTICS');
 
   if (indexToClean !== -1) {

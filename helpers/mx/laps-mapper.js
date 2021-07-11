@@ -1,22 +1,21 @@
 const sanitizeBestLaps = (raceResults) => {
-
-  return raceResults.map(result => {
+  return raceResults.map((result) => {
     const bestLapToSort = result.bestLap.replace(/([.:])/g, '');
 
     return {
       ...result,
-      bestLapToSort
-    }
-  })
-}
+      bestLapToSort,
+    };
+  });
+};
 
 const stripSortedTimeFromObject = (riderObject) => {
   const { bestLapToSort, ...rest } = riderObject;
 
   return {
-    ...rest
-  }
-}
+    ...rest,
+  };
+};
 
 const sortRidersByLapTimes = (a, b) => {
   if (Number(a.bestLapToSort) == 0) {
@@ -33,5 +32,7 @@ const sortRidersByLapTimes = (a, b) => {
 module.exports = (raceResults) => {
   if (!raceResults || !raceResults.length) return [];
 
-  return sanitizeBestLaps(raceResults).sort(sortRidersByLapTimes).map(stripSortedTimeFromObject);
+  return sanitizeBestLaps(raceResults)
+    .sort(sortRidersByLapTimes)
+    .map(stripSortedTimeFromObject);
 };
