@@ -4,6 +4,7 @@ const spliceSeasonResults = require('./splice-season-results');
 const seasonMapper = require('./season-mapper');
 const resultsMapper = require('./results-mapper');
 const lapsMapper = require('./laps-mapper');
+const spliceLaps = require('./splice-laps');
 
 module.exports = {
   mapper,
@@ -12,4 +13,5 @@ module.exports = {
   seasonMapper,
   resultsMapper,
   lapsMapper,
+  spliceLaps,
 };
